@@ -1,0 +1,27 @@
+color:
+  palette:
+    white: "#FFFFFF"
+    black: "#000000"
+    green: "#00876C"
+    blue: "#4664AA"
+    gray: "#404040"
+    yellow: "#fce700"
+    orange: "#df9a1b"
+    lime: "#77A200"
+    red: "#a22223"
+    purple: "#A3107C"
+    brown: "#A7822E"
+    cyan: "#079EDE"
+
+
+  foreground: black
+  background: white
+  primary: green
+  secondary: blue
+  tertiary: gray
+  success: lime
+  info: teal
+  warning: orange
+  danger: red
+  light: white
+  dark: "#404041"

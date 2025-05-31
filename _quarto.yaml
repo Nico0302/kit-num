@@ -1,0 +1,32 @@
+project:
+  type: book
+
+lang: de
+
+book:
+  title: "Vorlesungsnotizen zu Numerik für Informatiker"
+  author: "Nicolas Gres"
+  date: "2025"
+  chapters:
+    - index.qmd
+    - 01-arithmetik.ipynb
+    - 02-lgs.ipynb
+    - appendix.qmd
+    - references.qmd
+  sidebar: 
+    title: 🧮 KIT NUM
+  repo-url: https://github.com/nico0302/kit-num
+  comments: 
+    utterances:
+      repo: nico0302/kit-num
+  
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+  epub:
+    cover-image: cover.png

@@ -1,0 +1,15 @@
+# Appendix {.unnumbered}
+
+::: {.callout-note}
+
+Für alle reellen $q \neq 1$ und für alle $n \in \mathbb{N}_0$ ist:
+
+$$
+\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}
+$$
+
+:::
+
+$$
+\sum_{k=0}^{\infty} r^k=\frac{1}{1-r}
+$$
