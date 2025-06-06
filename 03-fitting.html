@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Arithmetik – Vorlesungsnotizen zu Numerik für Informatiker</title>
+<title>3&nbsp; Lineare Ausgleichsrechnung – Vorlesungsnotizen zu Numerik für Informatiker</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -65,8 +30,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-lgs.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./appendix.html" rel="next">
+<link href="./02-lgs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -105,35 +70,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -147,7 +83,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-arithmetik.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arithmetik</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-fitting.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -183,7 +119,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-arithmetik.html" class="sidebar-item-text sidebar-link active">
+  <a href="./01-arithmetik.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arithmetik</span></span></a>
   </div>
 </li>
@@ -195,7 +131,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-fitting.html" class="sidebar-item-text sidebar-link">
+  <a href="./03-fitting.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></span></a>
   </div>
 </li>
@@ -221,10 +157,7 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#gleitkommazahlen" id="toc-gleitkommazahlen" class="nav-link active" data-scroll-target="#gleitkommazahlen"><span class="header-section-number">1.1</span> Gleitkommazahlen</a></li>
-  <li><a href="#auslöschung" id="toc-auslöschung" class="nav-link" data-scroll-target="#auslöschung"><span class="header-section-number">1.2</span> Auslöschung</a></li>
-  <li><a href="#kondition-und-stabilität" id="toc-kondition-und-stabilität" class="nav-link" data-scroll-target="#kondition-und-stabilität"><span class="header-section-number">1.3</span> Kondition und Stabilität</a></li>
-  <li><a href="#vektor--und-matrixnormen" id="toc-vektor--und-matrixnormen" class="nav-link" data-scroll-target="#vektor--und-matrixnormen"><span class="header-section-number">1.4</span> Vektor- und Matrixnormen</a></li>
+  <li><a href="#normalengleichung" id="toc-normalengleichung" class="nav-link active" data-scroll-target="#normalengleichung"><span class="header-section-number">3.1</span> Normalengleichung</a></li>
   </ul>
 </nav>
     </div>
@@ -233,7 +166,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arithmetik</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></h1>
 </div>
 
 
@@ -250,140 +183,8 @@ window.Quarto = {
 </header>
 
 
-<section id="gleitkommazahlen" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="gleitkommazahlen"><span class="header-section-number">1.1</span> Gleitkommazahlen</h2>
-<p>Wir betrachten für eine gegebene Basis <span class="math inline">\(B \geq 2\)</span>, einen minimalen Exponent <span class="math inline">\(E^{-}\)</span> und Längen <span class="math inline">\(M\)</span> und <span class="math inline">\(E\)</span> die endliche Menge der normalisierten Gleitpunktzahlen <span class="math inline">\(\mathrm{FL}\)</span>.</p>
-<p><span class="math display">\[
-\mathrm{FL}:=\{ \pm B^e \underbrace{\sum_{l=1}^M a_l B^{-l}}_{=m} \; | \; e=E^{-}+\sum_{k=0}^{E-1} c_k B^k, \  a_l, c_k \in\{0, \ldots, B-1\}, \ a_1 \neq 0\} \cup\{0\}
-\]</span></p>
-<p><strong>Maschienengenauigkeit</strong></p>
-<p><span class="math display">\[
-\text{eps} := \sup \left\{ \frac{|x - fl(x)|}{|x|} \ | \ 1 &lt; x &lt; 2 \right\} = \frac{B^{1-M}}{2}
-\]</span></p>
-</section>
-<section id="auslöschung" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="auslöschung"><span class="header-section-number">1.2</span> Auslöschung</h2>
-<div id="2b90978f" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">10</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exp(x):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Compute the exponential function using Taylor series expansion.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>([x<span class="op">**</span>n <span class="op">/</span> math.factorial(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(N)], axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>z_bad <span class="op">=</span> exp(<span class="op">-</span>x)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>z_good <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> exp(x)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.exp(<span class="op">-</span>x) <span class="co"># reference</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">abs</span>(z_bad <span class="op">-</span> r) <span class="op">/</span> r, np.<span class="bu">abs</span>(z_good <span class="op">-</span> r) <span class="op">/</span> r</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>(np.float64(6.529424994681785e-09), np.float64(1.4925713791816933e-16))</code></pre>
-</div>
-</div>
-<p><strong>Quadratische Gleichung</strong></p>
-<p>Anstatt <span class="math inline">\(x_2=p-\sqrt{p^2-q}\)</span>, verwenden wir</p>
-<p><span class="math display">\[
-x_2=p-\sqrt{p^2-q} \cdot \frac{p+\sqrt{p^2+q}}{p+\sqrt{p^2+q}} = \frac{q}{p+\sqrt{p^2-q}}=\frac{q}{x_1}
-\]</span></p>
-<p>(Satz von Vieta) um die Auslöschung zwischen <span class="math inline">\(p\)</span> und <span class="math inline">\(\sqrt{p^2-q}\)</span> zu vermeiden.</p>
-<div id="b766f5f1" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">1e10</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="fl">1e2</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.roots([<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span><span class="op">*</span>p, q])) <span class="co"># reference</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> p <span class="op">+</span> math.sqrt(p<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> q)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>x2_bad <span class="op">=</span> p <span class="op">-</span> math.sqrt(p<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> q)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>x2_good <span class="op">=</span> q <span class="op">/</span> x1</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>x2_bad, x2_good</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[2.e+10 5.e-09]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>(0.0, 5e-09)</code></pre>
-</div>
-</div>
-</section>
-<section id="kondition-und-stabilität" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="kondition-und-stabilität"><span class="header-section-number">1.3</span> Kondition und Stabilität</h2>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/2_Eb-MPUMd8?start=157" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Die <strong>Kondition</strong> eines Problems ist ein Maß dafür, wie stark die Abhängigkeit der Lösung von den Daten ist.</p>
-<p><strong>Absolute Konditionszahl</strong></p>
-<p><span class="math display">\[
-\kappa_\text{abs}(x) = | f'(x) |
-\]</span></p>
-<p><strong>Relative Konditionszahl</strong></p>
-<p><span class="math display">\[
-\kappa_\text{rel}(x) = \frac{| f'(x) |}{|f(x)|} \cdot |x|
-\]</span></p>
-<p><strong>Matrix Kondition</strong></p>
-<p><span class="math display">\[
-\kappa_p(A) = ||A||_p \cdot ||A^{-1}||_p \quad \text{für } p = 1,2,\infty
-\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hinweis
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Für <strong>symmetrische</strong> Matrizen (<span class="math inline">\(A=A^\top\)</span>) gilt:</p>
-<ul>
-<li><span class="math inline">\(\sigma(A) \subset \mathbb{R}\)</span> (<em>Spektrum</em> bzw. alle Eigenwerte sind reell)</li>
-<li><span class="math inline">\(\|A\|_2=\rho(A)\)</span> (<em>Septralradius</em> bzw. größter Eigenwert im Betrag)</li>
-<li><span class="math inline">\(\kappa_2(A)=\frac{\max _{\lambda \in \sigma(A)}|\lambda|}{\min _{\lambda \in \sigma(A)}|\lambda|}\)</span> (Verhältnis der größten zur kleinsten Eigenwerte im Betrag)</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="vektor--und-matrixnormen" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="vektor--und-matrixnormen"><span class="header-section-number">1.4</span> Vektor- und Matrixnormen</h2>
-<p>Definition 2.1 Eine Norm auf <span class="math inline">\(\mathbb{R}^n\)</span> ist eine Abbildung <span class="math inline">\(\|\cdot\|: \mathbb{R}^n \rightarrow \mathbb{R}_{\geq 0}\)</span> mit den folgenden Eigenschaften:</p>
-<ol type="1">
-<li><span class="math inline">\(\|x\|=0 \Longrightarrow x=0\)</span> für alle <span class="math inline">\(x \in \mathbb{R}^n\)</span> (Definitheit);</li>
-<li><span class="math inline">\(\|x+y\| \leq\|x\|+\|y\|\)</span> für alle <span class="math inline">\(x, y \in \mathbb{R}^n\)</span> (Dreiecksungleichung);</li>
-<li><span class="math inline">\(\|\lambda x\|=|\lambda|\|x\|\)</span> für alle <span class="math inline">\(\lambda \in \mathbb{R}\)</span> und <span class="math inline">\(x \in \mathbb{R}^n\)</span> (Homogenität).</li>
-</ol>
-<p>Wir verwenden für <span class="math inline">\(x \in \mathbb{R}^N\)</span> und <span class="math inline">\(A \in \mathbb{R}^{M \times N}\)</span></p>
-<p><span class="math display">\[
-\begin{array}{ll}
-|x|_1=\sum_{n=1}^N\left|x_n\right| &amp; \text { 1-Norm } \\
-|x|_2=\sqrt{x^T x}=\left(\sum_{n=1}^N\left|x_n\right|^2\right)^{\frac{1}{2}} &amp; \text { Euklidische Norm } \\
-|x|_{\infty}=\max _{n=1, \ldots, N}\left|x_n\right| &amp; \text { Supremumsnorm }
-\end{array}
-\]</span></p>
-<p>Für Matrizen <span class="math inline">\(A \in \mathbb{R}^{M \times N}\)</span> definieren wir eine allgemeine Norm mit:</p>
-<p><span class="math display">\[\|A\|_{o p}=\sup _{x \in \mathbb{R}^n,\|x\|=1}\|A x\|=\inf \left\{c \geq 0: \forall x \in \mathbb{R}^n\|A x\| \leq c\|x\|\right\}\]</span></p>
-<p><span class="math display">\[
-\begin{array}{ll}
-\|A\|_1=\max _{n=1, \ldots, N} \sum_{m=1}^M|A[m, n]| &amp; \text { Spaltensummennorm, } \\
-\|A\|_2=\sqrt{\rho\left(A^T A\right)} &amp; \text { Spektralnorm, } \\
-\|A\|_{\infty}=\max _{m=1, \ldots, M} \sum_{n=1}^N|A[m, n]| &amp; \text { Zeilensummennorm, } \\
-\|A\|_F=\left(\sum_{m=1}^M \sum_{n=1}^N A[m, n]^2\right)^{\frac{1}{2}} &amp; \text { Frobeniusnorm. }
-\end{array}
-\]</span></p>
-<p>Dabei ist</p>
-<p><span class="math display">\[
-\begin{aligned}
-&amp; \rho(A)=\max \{|\lambda|: \lambda \in \sigma(A)\}  \text { Spektralradius, }  \\
-&amp; \sigma(A)=\left\{\lambda \in \mathbb{C}: \operatorname{det}\left(A-\lambda I_N\right)=0\right\}  \text { Spektrum. }
-\end{aligned}
-\]</span></p>
-<p><mark>Es gilt immer</mark></p>
-<p><span class="math display">\[|A x|_p \leq\|A\|_p|x|_p\]</span></p>
-<p>für alle <span class="math inline">\(x \in \mathbb{R}^N\)</span> und wegen <span class="math inline">\(\|A\|_2 \leq\|A\|_F\)</span> auch</p>
-<p><span class="math display">\[
-|A x|_2 \leq\|A\|_2|x|_2 \leq\|A\|_F|x|_2
-\]</span></p>
+<section id="normalengleichung" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="normalengleichung"><span class="header-section-number">3.1</span> Normalengleichung</h2>
 
 
 </section>
@@ -814,13 +615,13 @@ Hinweis
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Einführung">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Einführung</span>
+      <a href="./02-lgs.html" class="pagination-link" aria-label="Direkte Lösungsverfahren für lineare Gleichungen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Direkte Lösungsverfahren für lineare Gleichungen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-lgs.html" class="pagination-link" aria-label="Direkte Lösungsverfahren für lineare Gleichungen">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Direkte Lösungsverfahren für lineare Gleichungen</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./appendix.html" class="pagination-link" aria-label="Appendix">
+        <span class="nav-page-text">Appendix</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

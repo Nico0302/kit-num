@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix.html" rel="next">
+<link href="./03-fitting.html" rel="next">
 <link href="./01-arithmetik.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -195,6 +195,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./03-fitting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
@@ -250,7 +256,16 @@ window.Quarto = {
 
 <section id="vorwärts-substitution" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="vorwärts-substitution"><span class="header-section-number">2.1</span> Vorwärts-Substitution</h2>
-<p>Die <em>Vorwärts-Substitution</em> löst <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span>, indem wir über die Zeilen iterieren und dabei die Lösungen der vorheringen <span class="math inline">\(\mathbf{x}_j\)</span> für die Berechung des aktuellen <span class="math inline">\(\mathbf{x}_i\)</span> verwenden (<span class="math inline">\(\mathbf{x}_1 = \mathbf{b}_1\)</span>).<br>
+<p><span class="math display">\[
+L = \begin{pmatrix}
+1      \\
+l_{21} &amp; 1      \\
+l_{31} &amp; l_{32} &amp; 1      \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots \\
+l_{n1} &amp; l_{n2} &amp; l_{n3} &amp; \dots  &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>Die <em>Vorwärts-Substitution</em> löst <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span> (normierte untere Dreiecksmatrix), indem wir über die Zeilen iterieren und dabei die Lösungen der vorheringen <span class="math inline">\(\mathbf{x}_j\)</span> für die Berechung des aktuellen <span class="math inline">\(\mathbf{x}_i\)</span> verwenden (<span class="math inline">\(\mathbf{x}_1 = \mathbf{b}_1\)</span>).<br>
 Die Laufzeit liegt somit in <span class="math inline">\(O(n^2)\)</span>.</p>
 <div id="a2aa38b5" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_sub(lower, rhs):</span>
@@ -276,6 +291,15 @@ Die Laufzeit liegt somit in <span class="math inline">\(O(n^2)\)</span>.</p>
 </section>
 <section id="rückwärts-substitution" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="rückwärts-substitution"><span class="header-section-number">2.2</span> Rückwärts-Substitution</h2>
+<p><span class="math display">\[
+R = \begin{pmatrix}
+r_{11} &amp; r_{12} &amp; r_{13} &amp; \dots  &amp; r_{1n} \\
+    &amp; r_{22} &amp; r_{23} &amp; \dots  &amp; r_{2n} \\
+    &amp;        &amp; r_{33} &amp; \dots  &amp; r_{3n} \\
+    &amp;        &amp;        &amp; \ddots &amp; \vdots \\
+    &amp;        &amp;        &amp;        &amp; r_{nn}
+\end{pmatrix}
+\]</span></p>
 <p>Die <em>Rückwärts-Substitution</em> löst <span class="math inline">\(R \cdot \mathbf{x}=\mathbf{y}\)</span>, indem wir von der letzten Zeile aus das verfahren der Vorwärts-Substitution anwenden.<br>
 Die Laufzeit liegt somit ebenfalls in <span class="math inline">\(O(n^2)\)</span>.</p>
 <div id="194d3599" class="cell" data-execution_count="30">
@@ -940,8 +964,8 @@ test  [-0.41421356  1.29289322]</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix.html" class="pagination-link" aria-label="Appendix">
-        <span class="nav-page-text">Appendix</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03-fitting.html" class="pagination-link" aria-label="Lineare Ausgleichsrechnung">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
