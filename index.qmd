@@ -1,1 +1,5 @@
 # Einführung {.unnumbered}
+
+Es handelt sich hierbei um meine Vorlesungsnotizen, basierend auf den Übungsaufzeichnungen, dem offiziellen Skript [@wienersEinfuhrungNumerischeMathematik2025], sowie Passagen aus @bartelsNumerik3x9Drei2016.
+
+Die Notizen sind nicht vollständig und dienen lediglich als Ergänzung zu den Vorlesungsunterlagen. 

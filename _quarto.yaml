@@ -5,8 +5,13 @@ lang: de
 
 book:
   title: "Vorlesungsnotizen zu Numerik für Informatiker"
-  author: "Nicolas Gres"
-  date: "2025"
+  author:
+    - name: Nicolas Gres
+      affiliation:
+        name: Karlsruher Institut für Technologie
+        url: https://www.kit.edu
+      email: nicolas.gres@student.kit.edu
+  date: today
   chapters:
     - index.qmd
     - 01-arithmetik.ipynb
@@ -20,6 +25,8 @@ book:
     utterances:
       repo: nico0302/kit-num
   
+execute:
+  freeze: auto
 
 bibliography: references.bib
 
@@ -28,5 +35,3 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
-  epub:
-    cover-image: cover.png

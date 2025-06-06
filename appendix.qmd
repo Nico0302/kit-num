@@ -1,6 +1,11 @@
 # Appendix {.unnumbered}
 
-::: {.callout-note}
+## Mathematische Grundlagen
+
+
+### Reihen und Summen
+
+#### Analysis
 
 Für alle reellen $q \neq 1$ und für alle $n \in \mathbb{N}_0$ ist:
 
@@ -8,8 +13,22 @@ $$
 \sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}
 $$
 
-:::
+Der Grenzwert ist dementsprechend:
 
 $$
-\sum_{k=0}^{\infty} r^k=\frac{1}{1-r}
+\sum_{k=0}^{\infty} q^k=\frac{1}{1-q}
+$$
+
+### Lineare Algebra
+
+#### $2\times2$-Matrix invertieren
+
+$$
+A=\left(\begin{array}{ll}
+a & b \\
+c & d
+\end{array}\right) \quad \text { then } \quad A^{-1}=\frac{1}{a d-b c}\left(\begin{array}{cc}
+d & -b \\
+-c & a
+\end{array}\right)
 $$

@@ -199,3 +199,5 @@ cython_debug/
 *_files/
 /.quarto/
 /_book/
+/_site/
+.DS_Store
