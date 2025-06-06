@@ -135,6 +135,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -214,9 +215,14 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#lr-zerlegung" id="toc-lr-zerlegung" class="nav-link active" data-scroll-target="#lr-zerlegung"><span class="header-section-number">2.1</span> LR-Zerlegung</a></li>
-  <li><a href="#choelsky-zerlegung" id="toc-choelsky-zerlegung" class="nav-link" data-scroll-target="#choelsky-zerlegung"><span class="header-section-number">2.2</span> Choelsky-Zerlegung</a></li>
-  <li><a href="#qr-zerlegung" id="toc-qr-zerlegung" class="nav-link" data-scroll-target="#qr-zerlegung"><span class="header-section-number">2.3</span> QR-Zerlegung</a></li>
+  <li><a href="#vorwärts-substitution" id="toc-vorwärts-substitution" class="nav-link active" data-scroll-target="#vorwärts-substitution"><span class="header-section-number">2.1</span> Vorwärts-Substitution</a></li>
+  <li><a href="#rückwärts-substitution" id="toc-rückwärts-substitution" class="nav-link" data-scroll-target="#rückwärts-substitution"><span class="header-section-number">2.2</span> Rückwärts-Substitution</a></li>
+  <li><a href="#lr-zerlegung" id="toc-lr-zerlegung" class="nav-link" data-scroll-target="#lr-zerlegung"><span class="header-section-number">2.3</span> LR-Zerlegung</a></li>
+  <li><a href="#choelsky-zerlegung" id="toc-choelsky-zerlegung" class="nav-link" data-scroll-target="#choelsky-zerlegung"><span class="header-section-number">2.4</span> Choelsky-Zerlegung</a>
+  <ul class="collapse">
+  <li><a href="#berechnung" id="toc-berechnung" class="nav-link" data-scroll-target="#berechnung"><span class="header-section-number">2.4.1</span> Berechnung</a></li>
+  </ul></li>
+  <li><a href="#qr-zerlegung" id="toc-qr-zerlegung" class="nav-link" data-scroll-target="#qr-zerlegung"><span class="header-section-number">2.5</span> QR-Zerlegung</a></li>
   </ul>
 </nav>
     </div>
@@ -242,25 +248,11 @@ window.Quarto = {
 </header>
 
 
-<section id="lr-zerlegung" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="lr-zerlegung"><span class="header-section-number">2.1</span> LR-Zerlegung</h2>
-<p><em>(en. LU-Decomposition)</em></p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/BFYFkn-eOQk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warnung
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Die <span class="math inline">\(1\)</span>-en auf der Diagonalen der <span class="math inline">\(L\)</span>-Matrix bleiben beim Zeilentauschen <strong>unverändert</strong></p>
-</div>
-</div>
-<p>Die <em>Vorwärts-Substitution</em> löst <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span>, indem wir über die Zeilen iterieren und dabei die Lösungen der vorheringen <span class="math inline">\(\mathbf{x}_j\)</span> für die Berechung des aktuellen <span class="math inline">\(\mathbf{x}_i\)</span> verwenden (<span class="math inline">\(\mathbf{x}_1 = \mathbf{b}_1\)</span>). Die Laufzeit liegt somit in <span class="math inline">\(O(n^2)\)</span>.</p>
-<div id="a2aa38b5" class="cell" data-execution_count="24">
+<section id="vorwärts-substitution" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="vorwärts-substitution"><span class="header-section-number">2.1</span> Vorwärts-Substitution</h2>
+<p>Die <em>Vorwärts-Substitution</em> löst <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span>, indem wir über die Zeilen iterieren und dabei die Lösungen der vorheringen <span class="math inline">\(\mathbf{x}_j\)</span> für die Berechung des aktuellen <span class="math inline">\(\mathbf{x}_i\)</span> verwenden (<span class="math inline">\(\mathbf{x}_1 = \mathbf{b}_1\)</span>).<br>
+Die Laufzeit liegt somit in <span class="math inline">\(O(n^2)\)</span>.</p>
+<div id="a2aa38b5" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_sub(lower, rhs):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> lower.shape[<span class="dv">0</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> np.zeros(n)</span>
@@ -271,18 +263,22 @@ Warnung
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            solution[i] <span class="op">=</span> solution[i] <span class="op">/</span> lower[i, i]</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> solution</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b3465d3b" class="cell" data-execution_count="25">
+<div id="b3465d3b" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>forward_sub(np.array([</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>], </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>], </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>]]</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>), np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>array([1., 0., 0.])</code></pre>
 </div>
 </div>
-<p>Die <em>Rückwärts-Substitution</em> löst <span class="math inline">\(R \cdot \mathbf{x}=\mathbf{y}\)</span>, indem wir von der letzten Zeile aus das verfahren der Vorwärts-Substitution anwenden. Die Laufzeit liegt somit ebenfalls in <span class="math inline">\(O(n^2)\)</span>.</p>
-<div id="194d3599" class="cell">
+</section>
+<section id="rückwärts-substitution" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="rückwärts-substitution"><span class="header-section-number">2.2</span> Rückwärts-Substitution</h2>
+<p>Die <em>Rückwärts-Substitution</em> löst <span class="math inline">\(R \cdot \mathbf{x}=\mathbf{y}\)</span>, indem wir von der letzten Zeile aus das verfahren der Vorwärts-Substitution anwenden.<br>
+Die Laufzeit liegt somit ebenfalls in <span class="math inline">\(O(n^2)\)</span>.</p>
+<div id="194d3599" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward_sub(upper, rhs):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> upper.shape[<span class="dv">0</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> np.zeros(n)</span>
@@ -300,7 +296,25 @@ Warnung
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]]</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>), np.array([<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
-<pre><code>array([0.25, 0.  , 0.  ])</code></pre>
+<pre><code>array([0.5, 0. , 0. ])</code></pre>
+</div>
+</div>
+</section>
+<section id="lr-zerlegung" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="lr-zerlegung"><span class="header-section-number">2.3</span> LR-Zerlegung</h2>
+<p><em>(en. LU-Decomposition)</em></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/BFYFkn-eOQk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warnung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die <span class="math inline">\(1\)</span>-en auf der Diagonalen der <span class="math inline">\(L\)</span>-Matrix bleiben beim Zeilentauschen <strong>unverändert</strong></p>
 </div>
 </div>
 <p>Die <span class="math inline">\(LR\)</span>-Zerlegung lässt sich mittels des Gauß-Algorithmus bestimmen, indem wir <span class="math inline">\(A\)</span> auf eine untere Dreiecksmatrix <span class="math inline">\(R\)</span> gaußen und uns die Operationen in <span class="math inline">\(L\)</span> “merken”. Sie ist eindeutig und benötigt <span class="math inline">\(O(n^3)\)</span> Operationen.</p>
@@ -337,7 +351,7 @@ Hinweis
 </div>
 </div>
 <p>Falls diese Bedingungen nicht gegeben sind, können wir mittels <strong>Zeilenvertauschung</strong> (Permutationsmatrix <span class="math inline">\(P\)</span>) eine LR-zerlegbare Matrix <span class="math inline">\(PA\)</span> in <span class="math inline">\(O(n^3)\)</span> erzeugen.</p>
-<div id="b7dca541" class="cell">
+<div id="b7dca541" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lu_decomposition(matrix):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> matrix.shape[<span class="dv">0</span>]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> np.zeros(shape<span class="op">=</span>matrix.shape)</span>
@@ -357,7 +371,7 @@ Hinweis
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> forward_sub(lower, rhs)</span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> backward_sub(upper, y)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="33940135" class="cell">
+<div id="33940135" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.0</span>],</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.0</span>, <span class="fl">4.0</span>]])</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
@@ -371,8 +385,8 @@ test  [0.  1.5]</code></pre>
 </div>
 </div>
 </section>
-<section id="choelsky-zerlegung" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="choelsky-zerlegung"><span class="header-section-number">2.2</span> Choelsky-Zerlegung</h2>
+<section id="choelsky-zerlegung" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="choelsky-zerlegung"><span class="header-section-number">2.4</span> Choelsky-Zerlegung</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -387,7 +401,37 @@ test  [0.  1.5]</code></pre>
 </div>
 </div>
 <p>Es handelt sich somit um eine Spezialisierung der LR-Zerlegung für symmetrisch, positiv definite Matrizen.</p>
-<div id="f05eb606" class="cell">
+<p><span class="math inline">\(\renewcommand{\b}[1]{\color{teal}{#1}\color{black}}\renewcommand{\o}[1]{\color{orange}{#1}\color{black}}\)</span></p>
+<p><span class="math display">\[\begin{align}
+A &amp;=
+\begin{pmatrix}
+   a_{11} &amp; a_{21} &amp; a_{31}\\
+   a_{21} &amp; a_{22} &amp; a_{32}\\
+   a_{31} &amp; a_{32} &amp; a_{33}\\
+\end{pmatrix}\\
+&amp; =
+\begin{pmatrix}
+   l_{11} &amp; 0 &amp; 0 \\
+   l_{21} &amp; l_{22} &amp; 0 \\
+   l_{31} &amp; l_{32} &amp; l_{33}\\
+\end{pmatrix}
+\begin{pmatrix}
+   l_{11} &amp; l_{21} &amp; l_{31} \\
+   0 &amp; l_{22} &amp; l_{32} \\
+   0 &amp; 0 &amp; l_{33}
+\end{pmatrix} \equiv L L^T \\
+&amp;= \begin{pmatrix}
+   l_{11}^2     &amp; l_{21}l_{11} &amp; l_{31}l_{11} \\
+   l_{21}l_{11} &amp; l_{21}^2 + l_{22}^2&amp; l_{31}l_{21}+l_{32}l_{22} \\
+   l_{31}l_{11} &amp; l_{31}l_{21}+l_{32}l_{22} &amp; l_{31}^2 + l_{32}^2+l_{33}^2
+\end{pmatrix}\end{align}\]</span></p>
+<section id="berechnung" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="berechnung"><span class="header-section-number">2.4.1</span> Berechnung</h3>
+<p>Diagonalelemente:</p>
+<p><span class="math display">\[l_{kk} = \sqrt{a_{kk} - \sum_{\b{j}=1}^{k-1} l_{k\b{j}}^2}\]</span></p>
+<p>Rest:</p>
+<p><span class="math display">\[l_{\o{i}k} = \frac{1}{l_{kk}} \left ( a_{ik} - \sum_{\b{j}=1}^{k-1} l_{\o{i}\b{j}}l_{k\b{j}} \right )\]</span></p>
+<div id="f05eb606" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cholesky_decomposition(A):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> matrix.shape[<span class="dv">0</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> np.zeros(matrix.shape)</span>
@@ -403,7 +447,7 @@ test  [0.  1.5]</code></pre>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> forward_sub(lower, rhs)</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> backward_sub(lower.transpose(), y)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b1f95a62" class="cell" data-execution_count="59">
+<div id="b1f95a62" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.0</span>],</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.0</span>, <span class="fl">4.0</span>]])</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
@@ -413,24 +457,25 @@ test  [0.  1.5]</code></pre>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> rhs <span class="op">-</span> np.dot(matrix, solution)</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"test "</span>,test)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>solution [0.29885849 0.57735027]
-test  [-0.17506725 -0.60825957]</code></pre>
+<pre><code>solution [0.70710678 0.        ]
+test  [-0.41421356  1.29289322]</code></pre>
 </div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="assets/bandmatrix.png" class="img-fluid figure-img"></p>
-<figcaption>Schematische Darstellung einer Bandmatrix</figcaption>
-</figure>
 </div>
 <ul>
 <li>Die Cholesky-Zerlegung ist stabil: Es gilt <span class="math inline">\(\kappa_2(L)^2=\kappa(A)\)</span></li>
 <li>Die Berechnung der Cholesky-Zerlegung benötigt nur halbsoviele Operationen wie die Berechnung einer LR-Zerlegung.</li>
 <li>Matrizen mit einer geeigneten Hüllenstruktur (viele Nullelemente wie bei der Bandmatrix) können effizienter gelöst werden (Bandmatrix in <span class="math inline">\(O(NM^2)\)</span>)</li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/bandmatrix.png" class="img-fluid figure-img" width="200"></p>
+<figcaption>Schematische Darstellung einer Bandmatrix</figcaption>
+</figure>
+</div>
 </section>
-<section id="qr-zerlegung" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="qr-zerlegung"><span class="header-section-number">2.3</span> QR-Zerlegung</h2>
+</section>
+<section id="qr-zerlegung" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="qr-zerlegung"><span class="header-section-number">2.5</span> QR-Zerlegung</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -864,8 +909,30 @@ test  [-0.17506725 -0.60825957]</code></pre>
     }
   });
   </script>
-<script src="https://utteranc.es/client.js" repo="nico0302/kit-num" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+<script src="https://giscus.app/client.js" data-repo="nico0302/kit-num" data-repo-id="R_kgDOOzkFPw" data-category="General" data-category-id="DIC_kwDOOzkFP84CrG3_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./01-arithmetik.html" class="pagination-link" aria-label="Arithmetik">
