@@ -1,0 +1,52 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Vorlesungsnotizen zu Numerik für Informatiker",
+    "section": "",
+    "text": "Einführung",
+    "crumbs": [
+      "Einführung"
+    ]
+  },
+  {
+    "objectID": "01-arithmetik.html",
+    "href": "01-arithmetik.html",
+    "title": "1  Arithmetik",
+    "section": "",
+    "text": "1.1 Gleitkommazahlen\nWir betrachten für eine gegebene Basis \\(B \\geq 2\\), einen minimalen Exponent \\(E^{-}\\) und Längen \\(M\\) und \\(E\\) die endliche Menge der normalisierten Gleitpunktzahlen \\(\\mathrm{FL}\\).\n\\[\n\\mathrm{FL}:=\\{ \\pm B^e \\underbrace{\\sum_{l=1}^M a_l B^{-l}}_{=m} \\; | \\; e=E^{-}+\\sum_{k=0}^{E-1} c_k B^k, \\  a_l, c_k \\in\\{0, \\ldots, B-1\\}, \\ a_1 \\neq 0\\} \\cup\\{0\\}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Arithmetik</span>"
+    ]
+  },
+  {
+    "objectID": "01-arithmetik.html#auslöschung",
+    "href": "01-arithmetik.html#auslöschung",
+    "title": "1  Arithmetik",
+    "section": "1.2 Auslöschung",
+    "text": "1.2 Auslöschung\n\nN = 2**10\n\ndef exp(x):\n    \"\"\"\n    Compute the exponential function using Taylor series expansion.\n    \"\"\"\n    return np.sum([x**n / math.factorial(n) for n in range(N)], axis=0)\n\nx = 10\n\nz_bad = exp(-x)\nz_good = 1 / exp(x)\n\nr = np.exp(-x) # reference\n\nnp.abs(z_bad - r) / r, np.abs(z_good - r) / r\n\n(np.float64(6.529424994681785e-09), np.float64(1.4925713791816933e-16))\n\n\nQuadratische Gleichung\nAnstatt \\(x_2=p-\\sqrt{p^2-q}\\), verwenden wir\n\\[\nx_2=p-\\sqrt{p^2-q} \\cdot \\frac{p+\\sqrt{p^2+q}}{p+\\sqrt{p^2+q}} = \\frac{q}{p+\\sqrt{p^2-q}}=\\frac{q}{x_1}\n\\]\n(Satz von Vieta) um die Auslöschung zwischen \\(p\\) und \\(\\sqrt{p^2-q}\\) zu vermeiden.\n\np = 1e10\nq = 1e2\n\nprint(np.roots([1, -2*p, q])) # reference\n\nx1 = p + math.sqrt(p**2 - q)\n\nx2_bad = p - math.sqrt(p**2 - q)\nx2_good = q / x1\n\nx2_bad, x2_good\n\n[2.e+10 5.e-09]\n\n\n(0.0, 5e-09)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Arithmetik</span>"
+    ]
+  },
+  {
+    "objectID": "02-lgs.html",
+    "href": "02-lgs.html",
+    "title": "2  Direkte Lösungsverfahren für lineare Gleichungen",
+    "section": "",
+    "text": "2.1 LR-Zerlegung\n(en. LU-Decomposition)\ndef lu_decomposition(matrix):\n    n = matrix.shape[0]\n    lower = np.zeros(shape=matrix.shape)\n    upper = np.zeros(shape=matrix.shape)\n    for j in range(n):\n        lower[j][j] = 1.0\n        for i in range(j + 1):\n            first_sum = sum(upper[k][j] * lower[i][k] for k in range(i))\n            upper[i][j] = matrix[i][j] - first_sum\n        for i in range(j, n):\n            second_sum = sum(upper[k][j] * lower[i][k] for k in range(j))\n            lower[i][j] = (matrix[i][j] - second_sum) / upper[j][j]\n    return lower, upper\n\ndef forward_sub(lower, rhs):\n    n = lower.shape[0]\n    solution = np.zeros(n)\n    for i in range(n):\n        solution[i] = rhs[i]\n        for j in range(i):\n            solution[i] = solution[i] - (lower[i, j] * solution[j])\n            solution[i] = solution[i] / lower[i, i]\n    return solution\n\ndef backward_sub(upper, rhs):\n    n = upper.shape[0]\n    solution = np.zeros(n)\n    for i in range(n - 1, -1, -1):\n        tmp = rhs[i]\n        for j in range(i + 1, n):\n            tmp -= upper[i, j] * solution[j]\n            solution[i] = tmp / upper[i, i]\n    return solution\n\ndef solve_with_lu(matrix, rhs):\n    lower, upper = lu_decomposition(matrix)\n    y = forward_sub(lower, rhs)\n    return backward_sub(upper, y)\n\n\nAbbildung 2.1\nmatrix = np.array([[2.0, 1.0],\n[1.0, 4.0]])\nrhs = np.array([1.0, 2.0])\nsolution = solve_with_lu(matrix, rhs)\nprint(\"solution\",solution)\ntest = rhs - np.dot(matrix,solution)\nprint(\"test \",test)\n\nsolution [0.5 0. ]\ntest  [0.  1.5]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Direkte Lösungsverfahren für lineare Gleichungen</span>"
+    ]
+  },
+  {
+    "objectID": "appendix.html",
+    "href": "appendix.html",
+    "title": "Appendix",
+    "section": "",
+    "text": "Hinweis\n\n\n\nFür alle reellen \\(q \\neq 1\\) und für alle \\(n \\in \\mathbb{N}_0\\) ist:\n\\[\n\\sum_{k=0}^n q^k=\\frac{1-q^{n+1}}{1-q}\n\\]\n\n\n\\[\n\\sum_{k=0}^{\\infty} r^k=\\frac{1}{1-r}\n\\]",
+    "crumbs": [
+      "Appendix"
+    ]
+  }
+]
