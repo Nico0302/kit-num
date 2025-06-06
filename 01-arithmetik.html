@@ -216,6 +216,7 @@ window.Quarto = {
   <ul>
   <li><a href="#gleitkommazahlen" id="toc-gleitkommazahlen" class="nav-link active" data-scroll-target="#gleitkommazahlen"><span class="header-section-number">1.1</span> Gleitkommazahlen</a></li>
   <li><a href="#auslöschung" id="toc-auslöschung" class="nav-link" data-scroll-target="#auslöschung"><span class="header-section-number">1.2</span> Auslöschung</a></li>
+  <li><a href="#vektor--und-matrixnormen" id="toc-vektor--und-matrixnormen" class="nav-link" data-scroll-target="#vektor--und-matrixnormen"><span class="header-section-number">1.3</span> Vektor- und Matrixnormen</a></li>
   </ul>
 </nav>
     </div>
@@ -296,6 +297,36 @@ x_2=p-\sqrt{p^2-q} \cdot \frac{p+\sqrt{p^2+q}}{p+\sqrt{p^2+q}} = \frac{q}{p+\sqr
 <pre><code>(0.0, 5e-09)</code></pre>
 </div>
 </div>
+</section>
+<section id="vektor--und-matrixnormen" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="vektor--und-matrixnormen"><span class="header-section-number">1.3</span> Vektor- und Matrixnormen</h2>
+<p>Wir verwenden für <span class="math inline">\(x \in \mathbb{R}^N\)</span> und <span class="math inline">\(A \in \mathbb{R}^{M \times N}\)</span></p>
+<p><span class="math display">\[
+\begin{array}{ll}
+|x|_1=\sum_{n=1}^N\left|x_n\right| &amp; \text { 1-Norm } \\
+|x|_2=\sqrt{x^T x}=\left(\sum_{n=1}^N\left|x_n\right|^2\right)^{\frac{1}{2}} &amp; \text { Euklidische Norm } \\
+|x|_{\infty}=\max _{n=1, \ldots, N}\left|x_n\right| &amp; \text { Supremumsnorm }
+\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{ll}
+\|A\|_1=\max _{n=1, \ldots, N} \sum_{m=1}^M|A[m, n]| &amp; \text { Spaltensummennorm, } \\
+\|A\|_2=\sqrt{\rho\left(A^T A\right)} &amp; \text { Spektralnorm, } \\
+\|A\|_{\infty}=\max _{m=1, \ldots, M} \sum_{n=1}^N|A[m, n]| &amp; \text { Zeilensummennorm, } \\
+\|A\|_F=\left(\sum_{m=1}^M \sum_{n=1}^N A[m, n]^2\right)^{\frac{1}{2}} &amp; \text { Frobeniusnorm. }
+\end{array}
+\]</span></p>
+<p>Dabei ist</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \rho(A)=\max \{|\lambda|: \lambda \in \sigma(A)\}  \text { Spektralradius, }  \\
+&amp; \sigma(A)=\left\{\lambda \in \mathbb{C}: \operatorname{det}\left(A-\lambda I_N\right)=0\right\}  \text { Spektrum. }
+\end{aligned}
+\]</span></p>
+<p>Es gilt immer <span class="math inline">\(|A x|_p \leq\|A\|_p|x|_p\)</span> für alle <span class="math inline">\(x \in \mathbb{R}^N\)</span> und wegen <span class="math inline">\(\|A\|_2 \leq\|A\|_F\)</span> auch</p>
+<p><span class="math display">\[
+|A x|_2 \leq\|A\|_2|x|_2 \leq\|A\|_F|x|_2
+\]</span></p>
 
 
 </section>

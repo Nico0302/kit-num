@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -163,20 +183,29 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autor:in</div>
+  <div class="quarto-title-meta-heading">Zugehörigkeit</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Nicolas Gres <a href="mailto:nicolas.gres@student.kit.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.kit.edu">
+            Karlsruher Institut für Technologie
+            </a>
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor:in</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicolas Gres </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">1. Januar 2025</p>
+      <p class="date">6. Juni 2025</p>
     </div>
   </div>
   
@@ -190,8 +219,18 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="einführung" class="level1 unnumbered">
 <h1 class="unnumbered">Einführung</h1>
+<p>Es handelt sich hierbei um meine Vorlesungsnotizen, basierend auf den Übungsaufzeichnungen, dem offiziellen Skript <span class="citation" data-cites="wienersEinfuhrungNumerischeMathematik2025">(<a href="references.html#ref-wienersEinfuhrungNumerischeMathematik2025" role="doc-biblioref">Wieners 2025</a>)</span>, sowie Passagen aus <span class="citation" data-cites="bartelsNumerik3x9Drei2016">Bartels (<a href="references.html#ref-bartelsNumerik3x9Drei2016" role="doc-biblioref">2016</a>)</span>.</p>
+<p>Die Notizen sind nicht vollständig und dienen lediglich als Ergänzung zu den Vorlesungsunterlagen.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-bartelsNumerik3x9Drei2016" class="csl-entry" role="listitem">
+Bartels, Sören. 2016. <em><span>Numerik 3x9: Drei Themengebiete in jeweils neun kurzen Kapiteln</span></em>. 1. Aufl. 2016. <span>Springer-Lehrbuch</span>. Berlin Heidelberg: Springer Spektrum. <a href="https://doi.org/10.1007/978-3-662-48203-2">https://doi.org/10.1007/978-3-662-48203-2</a>.
+</div>
+<div id="ref-wienersEinfuhrungNumerischeMathematik2025" class="csl-entry" role="listitem">
+Wieners, Christian. 2025. <span>„Einf<span>ü</span>hrung in Die <span>Numerische Mathematik</span>“</span>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

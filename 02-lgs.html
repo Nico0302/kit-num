@@ -105,6 +105,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -186,6 +215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#lr-zerlegung" id="toc-lr-zerlegung" class="nav-link active" data-scroll-target="#lr-zerlegung"><span class="header-section-number">2.1</span> LR-Zerlegung</a></li>
+  <li><a href="#choelsky-zerlegung" id="toc-choelsky-zerlegung" class="nav-link" data-scroll-target="#choelsky-zerlegung"><span class="header-section-number">2.2</span> Choelsky-Zerlegung</a></li>
+  <li><a href="#qr-zerlegung" id="toc-qr-zerlegung" class="nav-link" data-scroll-target="#qr-zerlegung"><span class="header-section-number">2.3</span> QR-Zerlegung</a></li>
   </ul>
 </nav>
     </div>
@@ -215,65 +246,219 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.1" class="anchored" data-anchor-id="lr-zerlegung"><span class="header-section-number">2.1</span> LR-Zerlegung</h2>
 <p><em>(en. LU-Decomposition)</em></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/BFYFkn-eOQk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<div id="fig-lu-decomposition" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="12">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-lu-decomposition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lu_decomposition(matrix):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> matrix.shape[<span class="dv">0</span>]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> np.zeros(shape<span class="op">=</span>matrix.shape)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    upper <span class="op">=</span> np.zeros(shape<span class="op">=</span>matrix.shape)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        lower[j][j] <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(j <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            first_sum <span class="op">=</span> <span class="bu">sum</span>(upper[k][j] <span class="op">*</span> lower[i][k] <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(i))</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            upper[i][j] <span class="op">=</span> matrix[i][j] <span class="op">-</span> first_sum</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(j, n):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            second_sum <span class="op">=</span> <span class="bu">sum</span>(upper[k][j] <span class="op">*</span> lower[i][k] <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(j))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            lower[i][j] <span class="op">=</span> (matrix[i][j] <span class="op">-</span> second_sum) <span class="op">/</span> upper[j][j]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lower, upper</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_sub(lower, rhs):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> lower.shape[<span class="dv">0</span>]</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> np.zeros(n)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        solution[i] <span class="op">=</span> rhs[i]</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            solution[i] <span class="op">=</span> solution[i] <span class="op">-</span> (lower[i, j] <span class="op">*</span> solution[j])</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            solution[i] <span class="op">=</span> solution[i] <span class="op">/</span> lower[i, i]</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> solution</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward_sub(upper, rhs):</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> upper.shape[<span class="dv">0</span>]</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> np.zeros(n)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        tmp <span class="op">=</span> rhs[i]</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n):</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            tmp <span class="op">-=</span> upper[i, j] <span class="op">*</span> solution[j]</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            solution[i] <span class="op">=</span> tmp <span class="op">/</span> upper[i, i]</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> solution</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_with_lu(matrix, rhs):</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    lower, upper <span class="op">=</span> lu_decomposition(matrix)</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> forward_sub(lower, rhs)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> backward_sub(upper, y)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-lu-decomposition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;2.1
-</figcaption>
+<div class="callout-title-container flex-fill">
+Warnung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die <span class="math inline">\(1\)</span>-en auf der Diagonalen der <span class="math inline">\(L\)</span>-Matrix bleiben beim Zeilentauschen <strong>unverändert</strong></p>
+</div>
+</div>
+<p>Die <em>Vorwärts-Substitution</em> löst <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span>, indem wir über die Zeilen iterieren und dabei die Lösungen der vorheringen <span class="math inline">\(\mathbf{x}_j\)</span> für die Berechung des aktuellen <span class="math inline">\(\mathbf{x}_i\)</span> verwenden (<span class="math inline">\(\mathbf{x}_1 = \mathbf{b}_1\)</span>). Die Laufzeit liegt somit in <span class="math inline">\(O(n^2)\)</span>.</p>
+<div id="a2aa38b5" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_sub(lower, rhs):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> lower.shape[<span class="dv">0</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> np.zeros(n)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        solution[i] <span class="op">=</span> rhs[i]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            solution[i] <span class="op">-=</span> lower[i, j] <span class="op">*</span> solution[j]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            solution[i] <span class="op">=</span> solution[i] <span class="op">/</span> lower[i, i]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> solution</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b3465d3b" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>forward_sub(np.array([</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>], </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>], </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>]]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>), np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>array([1., 0., 0.])</code></pre>
+</div>
+</div>
+<p>Die <em>Rückwärts-Substitution</em> löst <span class="math inline">\(R \cdot \mathbf{x}=\mathbf{y}\)</span>, indem wir von der letzten Zeile aus das verfahren der Vorwärts-Substitution anwenden. Die Laufzeit liegt somit ebenfalls in <span class="math inline">\(O(n^2)\)</span>.</p>
+<div id="194d3599" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward_sub(upper, rhs):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> upper.shape[<span class="dv">0</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> np.zeros(n)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        tmp <span class="op">=</span> rhs[i]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            tmp <span class="op">-=</span> upper[i, j] <span class="op">*</span> solution[j]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            solution[i] <span class="op">=</span> tmp <span class="op">/</span> upper[i, i]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> solution</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="54396cb9" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>backward_sub(np.array([</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>], </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>], </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>), np.array([<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>array([0.25, 0.  , 0.  ])</code></pre>
+</div>
+</div>
+<p>Die <span class="math inline">\(LR\)</span>-Zerlegung lässt sich mittels des Gauß-Algorithmus bestimmen, indem wir <span class="math inline">\(A\)</span> auf eine untere Dreiecksmatrix <span class="math inline">\(R\)</span> gaußen und uns die Operationen in <span class="math inline">\(L\)</span> “merken”. Sie ist eindeutig und benötigt <span class="math inline">\(O(n^3)\)</span> Operationen.</p>
+<p>Die Berechnung ist <strong>nicht</strong> stabil.</p>
+<p>Hinreichende Bedingungen für die Exsistenz einer <span class="math inline">\(LR\)</span>-Zerlegung für eine <strong>quadratische</strong> Matrix <span class="math inline">\(A\)</span>:</p>
+<ol type="1">
+<li>strikt diagonal-dominant, daher das Diagonalelement ist größer als die Summe aller anderen Elemente in der Zeile, bzw.</li>
+</ol>
+<p><span class="math display">\[
+|A[n, n]|&gt;\sum_{\substack{k=1 \\ k \neq n}}^N|A[n, k]| \quad \text { für } n=1, \ldots, N
+\]</span></p>
+<ol start="2" type="1">
+<li>positiv definit, daher <strong>alle Eigenwerte <span class="math inline">\(&gt; 0\)</span></strong>, bzw.</li>
+</ol>
+<p><span class="math display">\[
+x^{\top} A x&gt;0 \quad \text { für alle } x \in \mathbb{R}^N, x \neq 0 .
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/pos_def.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Hauptminorenkriterium für positiv definite Matrizen</figcaption>
 </figure>
 </div>
-<div id="33940135" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.0</span>],</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.0</span>, <span class="fl">4.0</span>]])</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> solve_with_lu(matrix, rhs)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"solution"</span>,solution)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> rhs <span class="op">-</span> np.dot(matrix,solution)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"test "</span>,test)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Falls diese Bedingungen nicht gegeben sind, können wir mittels <strong>Zeilenvertauschung</strong> (Permutationsmatrix <span class="math inline">\(P\)</span>) eine LR-zerlegbare Matrix <span class="math inline">\(PA\)</span> in <span class="math inline">\(O(n^3)\)</span> erzeugen.</p>
+<div id="b7dca541" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lu_decomposition(matrix):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> matrix.shape[<span class="dv">0</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> np.zeros(shape<span class="op">=</span>matrix.shape)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    upper <span class="op">=</span> np.zeros(shape<span class="op">=</span>matrix.shape)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        lower[j][j] <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(j <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            first_sum <span class="op">=</span> <span class="bu">sum</span>(upper[k][j] <span class="op">*</span> lower[i][k] <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(i))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>            upper[i][j] <span class="op">=</span> matrix[i][j] <span class="op">-</span> first_sum</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(j, n):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>            second_sum <span class="op">=</span> <span class="bu">sum</span>(upper[k][j] <span class="op">*</span> lower[i][k] <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(j))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            lower[i][j] <span class="op">=</span> (matrix[i][j] <span class="op">-</span> second_sum) <span class="op">/</span> upper[j][j]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lower, upper</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_with_lu(matrix, rhs):</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    lower, upper <span class="op">=</span> lu_decomposition(matrix)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> forward_sub(lower, rhs)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> backward_sub(upper, y)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="33940135" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.0</span>],</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.0</span>, <span class="fl">4.0</span>]])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> solve_with_lu(matrix, rhs)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"solution"</span>, solution)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> rhs <span class="op">-</span> np.dot(matrix, solution)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"test "</span>,test)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>solution [0.5 0. ]
 test  [0.  1.5]</code></pre>
 </div>
+</div>
+</section>
+<section id="choelsky-zerlegung" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="choelsky-zerlegung"><span class="header-section-number">2.2</span> Choelsky-Zerlegung</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+(2.7) Satz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sei <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span> <strong>symmetrisch</strong> und <strong>positiv definit</strong>. Dann existiert genau eine Cholesky-Zerlegung <span class="math inline">\(A=L L^{\top}\)</span> mit einer regulären unteren Dreiecksmatrix <span class="math inline">\(L\)</span>.</p>
+</div>
+</div>
+<p>Es handelt sich somit um eine Spezialisierung der LR-Zerlegung für symmetrisch, positiv definite Matrizen.</p>
+<div id="f05eb606" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cholesky_decomposition(A):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> matrix.shape[<span class="dv">0</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> np.zeros(matrix.shape)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    lower[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> np.sqrt(matrix[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> forward_sub(lower[:n, :n], matrix[n, :n]) <span class="co"># linalg.solve_triangular(lower[:n, :n], matrix[n, :n], lower=True)</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        lower[n, :n] <span class="op">=</span> y</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        lower[n, n] <span class="op">=</span> np.sqrt(matrix[n, n] <span class="op">-</span> np.dot(y, y))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lower</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_with_cholesky(matrix, rhs):</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> cholesky_decomposition(matrix)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> forward_sub(lower, rhs)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> backward_sub(lower.transpose(), y)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b1f95a62" class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.0</span>],</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.0</span>, <span class="fl">4.0</span>]])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> solve_with_cholesky(matrix, rhs)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"solution"</span>,solution)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> rhs <span class="op">-</span> np.dot(matrix, solution)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"test "</span>,test)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>solution [0.29885849 0.57735027]
+test  [-0.17506725 -0.60825957]</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/bandmatrix.png" class="img-fluid figure-img"></p>
+<figcaption>Schematische Darstellung einer Bandmatrix</figcaption>
+</figure>
+</div>
+<ul>
+<li>Die Cholesky-Zerlegung ist stabil: Es gilt <span class="math inline">\(\kappa_2(L)^2=\kappa(A)\)</span></li>
+<li>Die Berechnung der Cholesky-Zerlegung benötigt nur halbsoviele Operationen wie die Berechnung einer LR-Zerlegung.</li>
+<li>Matrizen mit einer geeigneten Hüllenstruktur (viele Nullelemente wie bei der Bandmatrix) können effizienter gelöst werden (Bandmatrix in <span class="math inline">\(O(NM^2)\)</span>)</li>
+</ul>
+</section>
+<section id="qr-zerlegung" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="qr-zerlegung"><span class="header-section-number">2.3</span> QR-Zerlegung</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+(2.14) Satz (QR-Zerlegung)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Zu <span class="math inline">\(A \in \mathbb{R}^{M \times N}\)</span> existiert eine <span class="math inline">\(Q R\)</span>-Zerlegung <span class="math inline">\(A=Q R\)</span> in eine orthogonale Matrix <span class="math inline">\(Q \in \mathbb{R}^{M \times M}\)</span> mit <span class="math inline">\(Q^{\top} Q=I_M\)</span> und eine obere Dreiecksmatrix <span class="math inline">\(R \in \mathbb{R}^{M \times N}\)</span> mit <span class="math inline">\(R[m, n]=0\)</span> für <span class="math inline">\(m&gt;n\)</span>.</p>
+</div>
+</div>
+<ul>
+<li>Das LGS <span class="math inline">\(Ax = b\)</span> kann durch die Berechnung <span class="math inline">\(y = Q^\top b\)</span> und darauf mit Rücksubstitution <span class="math inline">\(Rx = y\)</span> gelöst werden.</li>
+<li>Asymptotischer Aufwand in <span class="math inline">\(O(N^3)\)</span></li>
+</ul>
+<p>Rotationen und Drehungen sind orthogonale Matrizen <span class="math inline">\(Q \in \mathbb{R}^{N \times N}\)</span> mit</p>
+<ul>
+<li><span class="math inline">\(Q Q^{\top}=I_N, \ Q^{\top} Q=I_N\)</span>, so dass <span class="math inline">\(Q^{-1}=Q^{\top}\)</span>,</li>
+<li><span class="math inline">\(|Q v|_2=|v|_2\)</span> und <span class="math inline">\((Q v)^{\top}(Q w)=v^{\top} w\)</span> Längen und Winkel erhaltend,</li>
+<li><span class="math inline">\(\kappa_2(Q)=1\)</span>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/qr.jpeg" class="img-fluid figure-img"></p>
+<figcaption>QR-Zerlegung berechnen</figcaption>
+</figure>
 </div>
 
 

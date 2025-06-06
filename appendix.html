@@ -174,8 +174,18 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#mathematische-grundlagen" id="toc-mathematische-grundlagen" class="nav-link active" data-scroll-target="#mathematische-grundlagen">Mathematische Grundlagen</a>
+  <ul class="collapse">
+  <li><a href="#reihen-und-summen" id="toc-reihen-und-summen" class="nav-link" data-scroll-target="#reihen-und-summen">Reihen und Summen</a></li>
+  <li><a href="#lineare-algebra" id="toc-lineare-algebra" class="nav-link" data-scroll-target="#lineare-algebra">Lineare Algebra</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -199,27 +209,40 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hinweis
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<section id="mathematische-grundlagen" class="level2">
+<h2 class="anchored" data-anchor-id="mathematische-grundlagen">Mathematische Grundlagen</h2>
+<section id="reihen-und-summen" class="level3">
+<h3 class="anchored" data-anchor-id="reihen-und-summen">Reihen und Summen</h3>
+<section id="analysis" class="level4">
+<h4 class="anchored" data-anchor-id="analysis">Analysis</h4>
 <p>Für alle reellen <span class="math inline">\(q \neq 1\)</span> und für alle <span class="math inline">\(n \in \mathbb{N}_0\)</span> ist:</p>
 <p><span class="math display">\[
 \sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}
 \]</span></p>
-</div>
-</div>
+<p>Der Grenzwert ist dementsprechend:</p>
 <p><span class="math display">\[
-\sum_{k=0}^{\infty} r^k=\frac{1}{1-r}
+\sum_{k=0}^{\infty} q^k=\frac{1}{1-q}
+\]</span></p>
+</section>
+</section>
+<section id="lineare-algebra" class="level3">
+<h3 class="anchored" data-anchor-id="lineare-algebra">Lineare Algebra</h3>
+<section id="times2-matrix-invertieren" class="level4">
+<h4 class="anchored" data-anchor-id="times2-matrix-invertieren"><span class="math inline">\(2\times2\)</span>-Matrix invertieren</h4>
+<p><span class="math display">\[
+A=\left(\begin{array}{ll}
+a &amp; b \\
+c &amp; d
+\end{array}\right) \quad \text { then } \quad A^{-1}=\frac{1}{a d-b c}\left(\begin{array}{cc}
+d &amp; -b \\
+-c &amp; a
+\end{array}\right)
 \]</span></p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
