@@ -229,7 +229,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#berechnung" id="toc-berechnung" class="nav-link" data-scroll-target="#berechnung"><span class="header-section-number">2.4.1</span> Berechnung</a></li>
   </ul></li>
-  <li><a href="#qr-zerlegung" id="toc-qr-zerlegung" class="nav-link" data-scroll-target="#qr-zerlegung"><span class="header-section-number">2.5</span> QR-Zerlegung</a></li>
+  <li><a href="#qr-zerlegung" id="toc-qr-zerlegung" class="nav-link" data-scroll-target="#qr-zerlegung"><span class="header-section-number">2.5</span> QR-Zerlegung</a>
+  <ul class="collapse">
+  <li><a href="#householder-transformationen" id="toc-householder-transformationen" class="nav-link" data-scroll-target="#householder-transformationen"><span class="header-section-number">2.5.1</span> Householder Transformationen</a></li>
+  <li><a href="#givens-rotation" id="toc-givens-rotation" class="nav-link" data-scroll-target="#givens-rotation"><span class="header-section-number">2.5.2</span> Givens-Rotation</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -524,14 +528,28 @@ test  [-0.41421356  1.29289322]</code></pre>
 <li><span class="math inline">\(|Q v|_2=|v|_2\)</span> und <span class="math inline">\((Q v)^{\top}(Q w)=v^{\top} w\)</span> Längen und Winkel erhaltend,</li>
 <li><span class="math inline">\(\kappa_2(Q)=1\)</span>.</li>
 </ul>
+<section id="householder-transformationen" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="householder-transformationen"><span class="header-section-number">2.5.1</span> Householder Transformationen</h3>
+<p>Wir erhalten <span class="math inline">\(N\)</span> orthogonale Vektoren für <span class="math inline">\(A\)</span>, indem wir den ersten Spaltenvektor <span class="math inline">\(v_1\)</span> mittels einer Householder Transformation (Spiegelung) <span class="math inline">\(Q_1\)</span> auf die <span class="math inline">\(x\)</span>-Achse (<span class="math inline">\(e_1\)</span>) abbilden und dies sukzessiv für die nächsten Spaltenvektoren <span class="math inline">\(v_i\)</span> aus <span class="math inline">\(Q_1 \cdot \dots \cdot Q_{i-1} \cdot A\)</span> wiederholen (dabei vernachlässigen wir die ersten <span class="math inline">\(i\)</span> Zeilen, da wir nur einen Untervektorraum in <span class="math inline">\(\mathbb{R}^{N-i}\)</span> betrachten).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="assets/qr.jpeg" class="img-fluid figure-img"></p>
-<figcaption>QR-Zerlegung berechnen</figcaption>
+<p><img src="assets/qr_house.jpeg" class="img-fluid figure-img"></p>
+<figcaption>QR-Zerlegung mittels Householder Transformationen berechnen</figcaption>
+</figure>
+</div>
+</section>
+<section id="givens-rotation" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="givens-rotation"><span class="header-section-number">2.5.2</span> Givens-Rotation</h3>
+<p>Alternativ können wir Givens-Rotationen verwenden, um die Matrix <span class="math inline">\(A\)</span> in eine obere Dreiecksmatrix zu überführen. Eine Givens-Rotation ist eine orthogonale Matrix <span class="math inline">\(Q \in \mathbb{R}^{N \times N}\)</span>, die die <span class="math inline">\(m\)</span>-te und <span class="math inline">\(n\)</span>-te Zeile von <span class="math inline">\(A\)</span> rotiert, um die Elemente unterhalb der Hauptdiagonalen zu eliminieren.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/qr_givens.jpeg" class="img-fluid figure-img"></p>
+<figcaption>QR-Zerlegung mittels Givens-Rotation</figcaption>
 </figure>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

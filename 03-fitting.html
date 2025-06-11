@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -184,8 +213,18 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Anstatt eine extakte Lösung zu finden, können wir auch eine Näherungslösung suchen, die die Summe der Abweichungen minimiert. Dies wird als lineare Ausgleichsrechnung bezeichnet.</p>
 <section id="normalengleichung" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="normalengleichung"><span class="header-section-number">3.1</span> Normalengleichung</h2>
+<p><span class="math display">\[
+A^\top Ax = A^\top b
+\]</span></p>
+<p>ist äquivalent zur Minimierung von <span class="math inline">\(\|Ax - b\|_2\)</span></p>
+<ul>
+<li>Wenn <span class="math inline">\(A^\top A\)</span> invertierbar ist, ist die Lösung eindeutig.</li>
+<li>Wenn <span class="math inline">\(\operatorname{Kern} \{v \in \mathbb{R}^N : Av=0\} \neq \{0\}\)</span>, dann ist die Lösung nicht eindeutig. In diesem Fall ist das Problem nicht sachgemäß gestellt!</li>
+</ul>
+<p><strong>Lösungsverfahren:</strong> - Berechne <span class="math inline">\(QR\)</span>-Zerlegung von <span class="math inline">\(A\)</span> - Berechne <span class="math inline">\(A^\top A\)</span> mittels Cholesky-Zerlegung</p>
 
 
 </section>
