@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix.html" rel="next">
+<link href="./04-eigenwerte.html" rel="next">
 <link href="./02-lgs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-da7c11ca483b0b4e83beb1125ea5ed52.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-25464249d1abd2a173ec6b30e63c0103.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -167,6 +167,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./04-eigenwerte.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Eigenwertberechnung</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
@@ -188,6 +194,8 @@ window.Quarto = {
    
   <ul>
   <li><a href="#normalengleichung" id="toc-normalengleichung" class="nav-link active" data-scroll-target="#normalengleichung"><span class="header-section-number">3.1</span> Normalengleichung</a></li>
+  <li><a href="#singularitätszerlegung" id="toc-singularitätszerlegung" class="nav-link" data-scroll-target="#singularitätszerlegung"><span class="header-section-number">3.2</span> Singularitätszerlegung</a></li>
+  <li><a href="#tikhonov-regularisierung" id="toc-tikhonov-regularisierung" class="nav-link" data-scroll-target="#tikhonov-regularisierung"><span class="header-section-number">3.3</span> Tikhonov-Regularisierung</a></li>
   </ul>
 </nav>
     </div>
@@ -224,9 +232,73 @@ A^\top Ax = A^\top b
 <li>Wenn <span class="math inline">\(A^\top A\)</span> invertierbar ist, ist die Lösung eindeutig.</li>
 <li>Wenn <span class="math inline">\(\operatorname{Kern} \{v \in \mathbb{R}^N : Av=0\} \neq \{0\}\)</span>, dann ist die Lösung nicht eindeutig. In diesem Fall ist das Problem nicht sachgemäß gestellt!</li>
 </ul>
-<p><strong>Lösungsverfahren:</strong> - Berechne <span class="math inline">\(QR\)</span>-Zerlegung von <span class="math inline">\(A\)</span> - Berechne <span class="math inline">\(A^\top A\)</span> mittels Cholesky-Zerlegung</p>
+<p><strong>Lösungsverfahren:</strong></p>
+<p>Falls <span class="math inline">\(A^\top A\)</span> invertierbar und gut konditioniert:</p>
+<ul>
+<li>Berechne <span class="math inline">\(QR\)</span>-Zerlegung von <span class="math inline">\(A=QR\)</span>
+<ul>
+<li><span class="math inline">\(R[1:N, 1:N]x = (Q^T b)[1:N]\)</span> lösen</li>
+</ul></li>
+<li>Berechne <span class="math inline">\(A^\top A\)</span> mittels Cholesky-Zerlegung</li>
+</ul>
+</section>
+<section id="singularitätszerlegung" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="singularitätszerlegung"><span class="header-section-number">3.2</span> Singularitätszerlegung</h2>
+<p>(en. <em>Singular Value Decomposition</em>, SVD)</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vSczTbgc8Rc?start=317" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Falls <span class="math inline">\(A\)</span> singulär (nicht invertierbar) oder schlecht konditioniert ist, kann die Singularitätszerlegung verwendet werden um die Normalengleichung zu lösen.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+(3.4) Satz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sei <span class="math inline">\(A \in \mathbb{R}^{K \times N}\)</span> mit <span class="math inline">\(R = \text{rang} A\)</span>. Dann existieren Singulärwerte <span class="math inline">\(\sigma_1, \dots, \sigma_R &gt; 0\)</span>, Matrizen <span class="math inline">\(V \in \mathbb{R}^{K \times R}, U \in \mathbb{R}^{N \times R}\)</span> mit <span class="math inline">\(V^\top V = I_R = U^\top U\)</span> und eine Zerlegung</p>
+<p><span class="math display">\[
+A = U \Sigma V^\top
+\]</span></p>
+<p>mit <span class="math inline">\(\Sigma = \text{diag}(\sigma_1, \dots, \sigma_R)= \text{diag}(\sqrt{\lambda_1}, \dots, \sqrt{\lambda_R}) \in \mathbb{R}^{R \times R}\)</span>.</p>
+</div>
+</div>
+<p>Wir führen eine Drehung mit <span class="math inline">\(V^\top\)</span> durch, skalieren mit den Singularitätswerten und passen die Dimension von <span class="math inline">\(N\)</span> auf <span class="math inline">\(K\)</span> mit <span class="math inline">\(\Sigma\)</span> und drehen dann in <span class="math inline">\(\mathbb{R}^K\)</span> mittels <span class="math inline">\(U\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_R &gt; 0\)</span> sind die geordneten Eigenwerte von <span class="math inline">\(A^\top A\)</span> und <span class="math inline">\(A A^\top\)</span>.</li>
+<li><span class="math inline">\(U\)</span> enthält die Eigenvektoren von <span class="math inline">\(A A^\top\)</span> als Spaltenvektoren und <span class="math inline">\(V\)</span> die Eigenvektoren von <span class="math inline">\(A^\top A\)</span> als Zeilenvektoren (transponiert).</li>
+<li><mark>Es gilt</mark> <span class="math inline">\(A = \sum_{k=1}^R \sigma_k v_k u_k^\top\)</span>.</li>
+<li>Die Spalten <span class="math inline">\(v_1,...,v_R\)</span> von V bilden eine ONB von <span class="math inline">\(\operatorname{Bild} A\)</span>.</li>
+<li>Die Spalten <span class="math inline">\(u_1,...,u_R\)</span> von U lassen sich mit <span class="math inline">\(u_{R+1},...,u_N\)</span> zu einer ONB von <span class="math inline">\(\mathbb{R}^N\)</span> ergänzen. Dann ist <span class="math inline">\(u_{R+1},...,u_N\)</span> eine ONB von <span class="math inline">\(\operatorname{Kern} A\)</span>.</li>
+<li><span class="math inline">\(A^+ := \sum_{k=1}^R \frac{1}{\sigma_k} u_k v_k^T = U \Sigma^{-1} V^T\)</span> heißt Pseudo-Inverse.</li>
+<li>Ist <span class="math inline">\(A\)</span> regulär, so gilt <span class="math inline">\(A^{-1} = A^+\)</span>. Die Normalengleichung und damit <span class="math inline">\(\|Ax-b\|_2 = \min!\)</span> wird durch <span class="math inline">\(x = A^+b\)</span> gelöst.</li>
+<li><span class="math inline">\(\|A\|_2 = \sigma_1\)</span> und <span class="math inline">\(\kappa_2(A) = \frac{\sigma_1}{\sigma_R}\)</span>. Berechnung aufwendig, erfordert Eigenwertberechnung von <span class="math inline">\(S = A^T A\)</span>. Stabile Berechnung mit <span class="math inline">\(O(N^3)\)</span> Operationen!</li>
+<li>Die Berechnung von <span class="math inline">\(A^+b\)</span> ist für <span class="math inline">\(\sigma_R \ll 1\)</span> numerisch <mark>nicht stabil</mark>.</li>
+</ul>
+</section>
+<section id="tikhonov-regularisierung" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="tikhonov-regularisierung"><span class="header-section-number">3.3</span> Tikhonov-Regularisierung</h2>
+<p>Stabilisiert die Singularitätszerlegung, indem ein Regularisierungsterm hinzugefügt wird.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+(3.5) Satz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Zu <span class="math inline">\(A \in \mathbb{R}^{M \times N}, b \in \mathbb{R}^M, \alpha &gt; 0\)</span> existiert genau ein <span class="math inline">\(x^\alpha \in \mathbb{R}^N\)</span>, das die Tikhonov-Regularisierung <span class="math display">\[
+F_\alpha(x) := \frac{1}{2}|Ax-b|_2^2 + \frac{\alpha}{2}|x|_2^2
+\]</span> minimiert. Es gilt <span class="math display">\[
+x^\alpha = (A^\top A + \alpha I_N)^{-1} A^\top b.
+\]</span></p>
 
 
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -629,30 +701,35 @@ A^\top Ax = A^\top b
     }
   });
   </script>
-<script src="https://giscus.app/client.js" data-repo="nico0302/kit-num" data-repo-id="R_kgDOOzkFPw" data-category="General" data-category-id="DIC_kwDOOzkFP84CrG3_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
-</script>
-<script type="application/javascript">
-  const giscusIframeObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      mutation.addedNodes.forEach(function (addedNode) {
-        if (addedNode.matches && addedNode.matches('div.giscus')) {
-          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
-          if(giscusIframe) {
-            giscusIframe.addEventListener("load", function() {
-              window.setTimeout(() => {
-                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
-              }, 100);
-            });
-            giscusIframeObserver.disconnect();
-          }
-        }
-      });
-    });
-  });
-  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
-</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "nico0302/kit-num";
+    script.dataset.repoId = "R_kgDOOzkFPw";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOOzkFP84CrG3_";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02-lgs.html" class="pagination-link" aria-label="Direkte Lösungsverfahren für lineare Gleichungen">
@@ -660,8 +737,8 @@ A^\top Ax = A^\top b
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix.html" class="pagination-link" aria-label="Appendix">
-        <span class="nav-page-text">Appendix</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-eigenwerte.html" class="pagination-link" aria-label="Eigenwertberechnung">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Eigenwertberechnung</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
