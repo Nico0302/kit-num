@@ -2,10 +2,11 @@
 
 ## Mathematische Grundlagen
 
+### Analysis
 
-### Reihen und Summen
+#### Reihen und Summen
 
-#### Analysis
+**Geometrische Reihe**
 
 Für alle reellen $q \neq 1$ und für alle $n \in \mathbb{N}_0$ ist:
 
@@ -21,7 +22,54 @@ $$
 
 ### Lineare Algebra
 
-#### $2\times2$-Matrix invertieren
+{{< video https://www.youtube.com/watch?v=mhy-ZKSARxI >}}
+
+::: {#fig-matrix-taxonomy}
+
+```{mermaid}
+flowchart TD
+    all_matrices("all matrices") --> complex("complex") & real("real")
+    real --> non_square("non square") & square("square")
+    square --> general("general") & se_n("SE(n)") & normal("normal")
+    general -- det≠0 --> invertible("invertible / regular")
+    general -- "det=0" --> singular("singular")
+    normal --> symmetric("symmetric") & orthogonal("orthogonal O(n)") & skew_symmetric("skew-symmetric")
+    symmetric --> positive_definite("positive definite") & unnamed_sym((" "))
+    positive_definite --> diagonal("diagonal") & unnamed_posdef((" "))
+    diagonal --> identity("identity") & unnamed_diag((" "))
+    orthogonal -- "det=+1" --> so_n("SO(n)")
+    orthogonal -- "det=-1" --> unnamed_ortho((" "))
+
+     all_matrices:::greyNode
+     complex:::greyNode
+     real:::greyNode
+     non_square:::greyNode
+     square:::greyNode
+     general:::greyNode
+     se_n:::blueNode
+     normal:::greyNode
+     invertible:::blueNode
+     singular:::greyNode
+     symmetric:::greyNode
+     orthogonal:::blueNode
+     skew_symmetric:::greyNode
+     positive_definite:::blueNode
+     unnamed_sym:::greyNode
+     diagonal:::blueNode
+     unnamed_posdef:::blueNode
+     identity:::blueNode
+     unnamed_diag:::blueNode
+     so_n:::blueNode
+     unnamed_ortho:::blueNode
+    classDef greyNode fill:#e0e0e0,stroke:#333,stroke-width:2px
+    classDef blueNode fill:#cce6ff,stroke:#333,stroke-width:2px
+```
+
+Matrix Taxonomie adaptiert von @corkeRoboticsVisionControl2023. Matrizen in blau sind invertierbar. 
+
+:::
+
+**$2\times2$-Matrix invertieren**
 
 $$
 A=\left(\begin{array}{ll}

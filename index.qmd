@@ -2,4 +2,10 @@
 
 Es handelt sich hierbei um meine Vorlesungsnotizen, basierend auf den Übungsaufzeichnungen, dem offiziellen Skript [@wienersEinfuhrungNumerischeMathematik2025], sowie Passagen aus @bartelsNumerik3x9Drei2016.
 
+::: {.callout-caution}
+
 Die Notizen sind nicht vollständig und dienen lediglich als Ergänzung zu den Vorlesungsunterlagen. 
+
+Solltest du einen Fehler finden, kannst du ein [Issue](https://github.com/nico0302/kit-num/issues) anlegen.
+
+:::

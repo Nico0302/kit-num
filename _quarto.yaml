@@ -16,14 +16,23 @@ book:
     - index.qmd
     - 01-arithmetik.ipynb
     - 02-lgs.ipynb
+    - 03-fitting.ipynb
+    - 04-eigenwerte.ipynb
     - appendix.qmd
     - references.qmd
   sidebar: 
-    title: 🧮 KIT NUM
+    title: 🧮 Numerik
+    tools:
+      - icon: discord
+        href: https://discord.com/channels/501365485837877268/632976659280035893
   repo-url: https://github.com/nico0302/kit-num
   comments: 
-    utterances:
+    giscus:
       repo: nico0302/kit-num
+  site-url: https://nico0302.github.io/kit-num
+  page-footer: 
+    center: 
+      - text: "Nicolas Gres - 2025"
   
 execute:
   freeze: auto
@@ -33,5 +42,6 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    css: styles.css
   pdf:
     documentclass: scrreprt
