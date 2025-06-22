@@ -69,6 +69,32 @@ Matrix Taxonomie adaptiert von @corkeRoboticsVisionControl2023. Matrizen in blau
 
 :::
 
+#### Orthogonale Matrizen
+
+Eine Matrix $Q$ ist orthogonal, wenn:   
+
+$$
+Q^\top Q = Q Q^\top = I
+$$
+
+
+- $Q^\top = Q^{-1}$
+    - $Q$ ist daher auch **invertierbar**
+- $det(Q) = \pm 1$
+
+#### Symmetrische Matrizen
+
+Eine Matrix $S$ ist symmetrisch, wenn:
+
+$$
+S^\top = S
+$$
+
+- Die Eigenwerte von $S$ sind reell
+- $S^\top S = S S^\top$ (normal)
+- $S$ ist **nicht notwendigerweise** invertierbar
+
+
 **$2\times2$-Matrix invertieren**
 
 $$

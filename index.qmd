@@ -1,6 +1,6 @@
 # Einführung {.unnumbered}
 
-Es handelt sich hierbei um meine Vorlesungsnotizen, basierend auf den Übungsaufzeichnungen, dem offiziellen Skript [@wienersEinfuhrungNumerischeMathematik2025], sowie Passagen aus @bartelsNumerik3x9Drei2016.
+Es handelt sich hierbei um meine Vorlesungsnotizen, basierend auf den Übungsaufzeichnungen, dem offiziellen Skript von @wienersEinfuehrungNumerischeMathematik2025, sowie Passagen aus @bartelsNumerik3x9Drei2016 und dem Skript von @weissNumerischeMathematikFuer2024.
 
 ::: {.callout-caution}
 
