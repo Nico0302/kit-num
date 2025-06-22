@@ -228,7 +228,9 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#hessenberg-matrix" id="toc-hessenberg-matrix" class="nav-link active" data-scroll-target="#hessenberg-matrix"><span class="header-section-number">4.0.1</span> Hessenberg-Matrix</a></li>
+  <li><a href="#hessenberg-matrix" id="toc-hessenberg-matrix" class="nav-link active" data-scroll-target="#hessenberg-matrix"><span class="header-section-number">4.1</span> Hessenberg-Matrix</a></li>
+  <li><a href="#inverse-iteration-mit-shift" id="toc-inverse-iteration-mit-shift" class="nav-link" data-scroll-target="#inverse-iteration-mit-shift"><span class="header-section-number">4.2</span> Inverse Iteration mit Shift</a></li>
+  <li><a href="#qr-iteration-mit-shift" id="toc-qr-iteration-mit-shift" class="nav-link" data-scroll-target="#qr-iteration-mit-shift"><span class="header-section-number">4.3</span> QR-Iteration mit Shift</a></li>
   </ul>
 </nav>
     </div>
@@ -254,8 +256,15 @@ window.Quarto = {
 </header>
 
 
-<section id="hessenberg-matrix" class="level3" data-number="4.0.1">
-<h3 data-number="4.0.1" class="anchored" data-anchor-id="hessenberg-matrix"><span class="header-section-number">4.0.1</span> Hessenberg-Matrix</h3>
+<p><strong>🏁 Ziel:</strong> Suche iterativ eine zu <span class="math inline">\(A=A_0\)</span> ähnliche (gleiche Eigenwerte) Matrix <span class="math inline">\(A_k\)</span>, die wir mittels der QR-Zerlegung in eine obere Dreiecksmatrix <span class="math inline">\(R\)</span> überführen können:</p>
+<p><span class="math display">\[
+A_k \to R = \begin{pmatrix} \lambda_1 &amp; * &amp; \cdots &amp; * \\ &amp; \lambda_2 &amp; \ddots &amp; \vdots \\ &amp; &amp; \ddots &amp; * \\ &amp; &amp; &amp; \lambda_N \end{pmatrix},
+Q_k \to I_N
+\]</span></p>
+<p>Somit lassen sich die Eigenwerte von <span class="math inline">\(A_k\)</span> (<span class="math inline">\(k \to \infty\)</span>) auf der Diagonalen ablesen (bzw. approximieren).</p>
+<p><strong>⚠️ Problem:</strong> Normale QR-Zerlegung mit <span class="math inline">\(A_{k+1} = R_k Q_k\)</span> benötigt <span class="math inline">\(O(N^3)\)</span> Operationen.</p>
+<section id="hessenberg-matrix" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="hessenberg-matrix"><span class="header-section-number">4.1</span> Hessenberg-Matrix</h2>
 <p><span class="math display">\[
 H = \begin{pmatrix}
 * &amp; * &amp; * &amp; * &amp; * \\
@@ -288,7 +297,7 @@ H = QAQ^{\top}
 <figcaption>Berechnung der Hessenberg-Matrix</figcaption>
 </figure>
 </div>
-<div id="a937285e" class="cell" data-execution_count="11">
+<div id="a937285e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">8</span>, <span class="dv">12</span><span class="op">/</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">9</span><span class="op">/</span><span class="dv">5</span>],</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">12</span><span class="op">/</span><span class="dv">5</span>, <span class="dv">109</span><span class="op">/</span><span class="dv">25</span>, <span class="dv">12</span><span class="op">/</span><span class="dv">25</span>],</span>
@@ -302,6 +311,37 @@ H = QAQ^{\top}
  [0 0 5]]</code></pre>
 </div>
 </div>
+</section>
+<section id="inverse-iteration-mit-shift" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="inverse-iteration-mit-shift"><span class="header-section-number">4.2</span> Inverse Iteration mit Shift</h2>
+<p>Sei <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span> <strong>symmetrisch</strong>.</p>
+<ol start="0" type="1">
+<li>Wähle <span class="math inline">\(v^0 \in \mathbb{R}^N\)</span> mit <span class="math inline">\(|v^0| = 1\)</span>. <br> Setze <span class="math inline">\(k := 0\)</span> und wähle <span class="math inline">\(\varepsilon &gt; 0\)</span>.</li>
+<li>Berechne <span class="math display">\[
+\mu_k = r(A, v^k) = \frac{v^{\top} A v}{v^{\top} v},
+\]</span>. <br> Falls <span class="math inline">\(|Av^k - \mu_k v^k| &lt; \varepsilon\)</span>: STOP.</li>
+<li>Berechne <span class="math display">\[\begin{align*}
+w^k &amp;= (A - \mu_k I_N)^{-1}v^k, \\
+v^{k+1} &amp;= \frac{1}{|w^k|}w^k.
+\end{align*}\]</span></li>
+<li>Setze <span class="math inline">\(k := k + 1\)</span> und gehe zu <em>1.</em>.</li>
+</ol>
+<p><span class="math inline">\(r(A, w) \approx \lambda\)</span></p>
+</section>
+<section id="qr-iteration-mit-shift" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="qr-iteration-mit-shift"><span class="header-section-number">4.3</span> QR-Iteration mit Shift</h2>
+<p><strong>💡 Idee:</strong> Transformiere <span class="math inline">\(A\)</span> auf ähnliche Hessenbergform und führe die QR-Zerlegung mit Shift in <span class="math inline">\(O(N^2)\)</span> durch.</p>
+<p>Im Folgenden sei <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span> symmetrisch, tridiagonal und irreduzibel (<span class="math inline">\(A\)</span> kann z.B. eine <strong>Hessenberg-Matrix</strong> sein).</p>
+<ol start="0" type="1">
+<li>Wähle <span class="math inline">\(\varepsilon \geq 0\)</span>, setze <span class="math inline">\(A_0 = A\)</span>, <span class="math inline">\(k := 0\)</span> und <span class="math inline">\(n=N\)</span>.</li>
+<li>Falls <span class="math inline">\(|A_k[n, n-1]| \leq \varepsilon\)</span> <br> setze <span class="math inline">\(n := n - 1\)</span>, <br> falls <span class="math inline">\(n = 1\)</span>: STOP</li>
+<li>Wähle <span class="math inline">\(\mu_k = A[n, n]\)</span>.</li>
+<li>Berechne eine QR-Zerlegung <span class="math inline">\(A_k - \mu_k I_N = Q_k R_k\)</span>.</li>
+<li>Setze <br> <span class="math inline">\(A_{k+1} = R_k Q_k + \mu_k I_N\)</span>. <br> Setze <span class="math inline">\(k := k + 1\)</span>, gehe zu <em>1</em>.</li>
+</ol>
+<p>Es gilt <span class="math display">\[
+A_{k+1} = R_k Q_k + \mu_k I_N = Q_k^\top (A_k - \mu_k I_N) Q_k + \mu_k I_N = Q_k^\top A_k Q_k.
+\]</span></p>
 
 
 </section>
