@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix.html" rel="next">
+<link href="./05-iter-lgs.html" rel="next">
 <link href="./03-fitting.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-25464249d1abd2a173ec6b30e63c0103.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6204b118b395e6c217285bb8d1f6d7fe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -208,6 +208,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./05-iter-lgs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Iterationsverfahren für lineare Gleichungssysteme</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
@@ -297,18 +303,23 @@ H = QAQ^{\top}
 <figcaption>Berechnung der Hessenberg-Matrix</figcaption>
 </figure>
 </div>
-<div id="a937285e" class="cell" data-execution_count="3">
+<div id="a937285e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">8</span>, <span class="dv">12</span><span class="op">/</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">9</span><span class="op">/</span><span class="dv">5</span>],</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">12</span><span class="op">/</span><span class="dv">5</span>, <span class="dv">109</span><span class="op">/</span><span class="dv">25</span>, <span class="dv">12</span><span class="op">/</span><span class="dv">25</span>],</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    [<span class="op">-</span><span class="dv">9</span><span class="op">/</span><span class="dv">5</span>, <span class="dv">12</span><span class="op">/</span><span class="dv">25</span>, <span class="dv">116</span><span class="op">/</span><span class="dv">25</span>]</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>])</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(scipy.linalg.hessenberg(A))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(H <span class="op">:=</span> scipy.linalg.hessenberg(A))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.linalg.eig(A).eigenvalues)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.linalg.eig(H).eigenvalues)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[8 -3 0]
  [-3 4 0]
- [0 0 5]]</code></pre>
+ [0 0 5]]
+[2244241/233640 559439/233640 5]
+[2244241/233640 559439/233640 5]</code></pre>
 </div>
 </div>
 </section>
@@ -339,9 +350,11 @@ v^{k+1} &amp;= \frac{1}{|w^k|}w^k.
 <li>Berechne eine QR-Zerlegung <span class="math inline">\(A_k - \mu_k I_N = Q_k R_k\)</span>.</li>
 <li>Setze <br> <span class="math inline">\(A_{k+1} = R_k Q_k + \mu_k I_N\)</span>. <br> Setze <span class="math inline">\(k := k + 1\)</span>, gehe zu <em>1</em>.</li>
 </ol>
-<p>Es gilt <span class="math display">\[
-A_{k+1} = R_k Q_k + \mu_k I_N = Q_k^\top (A_k - \mu_k I_N) Q_k + \mu_k I_N = Q_k^\top A_k Q_k.
-\]</span></p>
+<p>Es gilt <span class="math display">\[\begin{alignat*}{2}
+A_{k+1} &amp;= R_k Q_k &amp;&amp;+ \mu_k I_N \\
+&amp;= Q_k^\top (A_k - \mu_k I_N) Q_k &amp;&amp;+ \mu_k I_N \\
+&amp;= Q_k^\top A_k Q_k
+\end{alignat*}\]</span></p>
 
 
 </section>
@@ -782,8 +795,8 @@ A_{k+1} = R_k Q_k + \mu_k I_N = Q_k^\top (A_k - \mu_k I_N) Q_k + \mu_k I_N = Q_k
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix.html" class="pagination-link" aria-label="Appendix">
-        <span class="nav-page-text">Appendix</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./05-iter-lgs.html" class="pagination-link" aria-label="Iterationsverfahren für lineare Gleichungssysteme">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Iterationsverfahren für lineare Gleichungssysteme</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
