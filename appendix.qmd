@@ -91,7 +91,9 @@ S^\top = S
 $$
 
 - Die Eigenwerte von $S$ sind reell
+    - Die Eigenvektoren von $S$ sind orthogonal zueinander
 - $S^\top S = S S^\top$ (normal)
+- Sei $A \in \mathbb{R}^{N \times N}$, dann ist $B=A^\top A$ symmetrisch
 - $S$ ist **nicht notwendigerweise** invertierbar
 
 

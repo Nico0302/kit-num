@@ -18,6 +18,7 @@ book:
     - 02-lgs.ipynb
     - 03-fitting.ipynb
     - 04-eigenwerte.ipynb
+    - 05-iter-lgs.ipynb
     - appendix.qmd
     - references.qmd
   sidebar: 
