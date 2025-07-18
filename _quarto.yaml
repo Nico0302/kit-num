@@ -19,6 +19,8 @@ book:
     - 03-fitting.ipynb
     - 04-eigenwerte.ipynb
     - 05-iter-lgs.ipynb
+    - 06-newton.ipynb
+    - 07-pol-interpol.ipynb
     - appendix.qmd
     - references.qmd
   sidebar: 
