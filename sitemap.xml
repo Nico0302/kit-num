@@ -2,34 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nico0302.github.io/kit-num/index.html</loc>
-    <lastmod>2025-07-16T13:38:43.612Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.774Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/01-arithmetik.html</loc>
-    <lastmod>2025-07-16T13:38:43.601Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.762Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/02-lgs.html</loc>
-    <lastmod>2025-07-16T13:38:43.601Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.763Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/03-fitting.html</loc>
-    <lastmod>2025-07-16T13:38:43.601Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.763Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/04-eigenwerte.html</loc>
-    <lastmod>2025-07-16T13:38:43.601Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.763Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/05-iter-lgs.html</loc>
-    <lastmod>2025-07-16T13:38:43.601Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.763Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nico0302.github.io/kit-num/06-newton.html</loc>
+    <lastmod>2025-07-18T07:55:28.763Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nico0302.github.io/kit-num/07-pol-interpol.html</loc>
+    <lastmod>2025-07-18T07:55:28.763Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/appendix.html</loc>
-    <lastmod>2025-07-16T13:38:43.601Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.763Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/references.html</loc>
-    <lastmod>2025-07-16T13:38:43.612Z</lastmod>
+    <lastmod>2025-07-18T07:55:28.774Z</lastmod>
   </url>
 </urlset>

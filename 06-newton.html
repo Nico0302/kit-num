@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Appendix – Vorlesungsnotizen zu Numerik für Informatiker</title>
+<title>6&nbsp; Iterationsverfahren für nichtlineare Gleichungen – Vorlesungsnotizen zu Numerik für Informatiker</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,8 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./07-pol-interpol.html" rel="prev">
+<link href="./07-pol-interpol.html" rel="next">
+<link href="./05-iter-lgs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -89,9 +69,6 @@ div.csl-indent {
     "search-label": "Suchen"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -135,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix.html">Appendix</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-newton.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Iterationsverfahren für nichtlineare Gleichungen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -202,7 +179,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-newton.html" class="sidebar-item-text sidebar-link">
+  <a href="./06-newton.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Iterationsverfahren für nichtlineare Gleichungen</span></span></a>
   </div>
 </li>
@@ -214,7 +191,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./appendix.html" class="sidebar-item-text sidebar-link active">
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
@@ -234,11 +211,7 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#mathematische-grundlagen" id="toc-mathematische-grundlagen" class="nav-link active" data-scroll-target="#mathematische-grundlagen">Mathematische Grundlagen</a>
-  <ul class="collapse">
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
-  <li><a href="#lineare-algebra" id="toc-lineare-algebra" class="nav-link" data-scroll-target="#lineare-algebra">Lineare Algebra</a></li>
-  </ul></li>
+  <li><a href="#newton-verfahren" id="toc-newton-verfahren" class="nav-link active" data-scroll-target="#newton-verfahren"><span class="header-section-number">6.1</span> Newton-Verfahren</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +220,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Appendix</h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Iterationsverfahren für nichtlineare Gleichungen</span></h1>
 </div>
 
 
@@ -264,134 +237,41 @@ window.Quarto = {
 </header>
 
 
-<section id="mathematische-grundlagen" class="level2">
-<h2 class="anchored" data-anchor-id="mathematische-grundlagen">Mathematische Grundlagen</h2>
-<section id="analysis" class="level3">
-<h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
-<section id="reihen-und-summen" class="level4">
-<h4 class="anchored" data-anchor-id="reihen-und-summen">Reihen und Summen</h4>
-<p><strong>Geometrische Reihe</strong></p>
-<p>Für alle reellen <span class="math inline">\(q \neq 1\)</span> und für alle <span class="math inline">\(n \in \mathbb{N}_0\)</span> ist:</p>
-<p><span class="math display">\[
-\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}
-\]</span></p>
-<p>Der Grenzwert ist dementsprechend:</p>
-<p><span class="math display">\[
-\sum_{k=0}^{\infty} q^k=\frac{1}{1-q}
-\]</span></p>
-</section>
-<section id="logarithmen" class="level4">
-<h4 class="anchored" data-anchor-id="logarithmen">Logarithmen</h4>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/SYxyemNSSm8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section>
-</section>
-<section id="lineare-algebra" class="level3">
-<h3 class="anchored" data-anchor-id="lineare-algebra">Lineare Algebra</h3>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mhy-ZKSARxI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<div id="fig-matrix-taxonomy" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-matrix-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    all_matrices("all matrices") --&gt; complex("complex") &amp; real("real")
-    real --&gt; non_square("non square") &amp; square("square")
-    square --&gt; general("general") &amp; se_n("SE(n)") &amp; normal("normal")
-    general -- det≠0 --&gt; invertible("invertible / regular")
-    general -- "det=0" --&gt; singular("singular")
-    normal --&gt; symmetric("symmetric") &amp; orthogonal("orthogonal O(n)") &amp; skew_symmetric("skew-symmetric")
-    symmetric --&gt; positive_definite("positive definite") &amp; unnamed_sym((" "))
-    positive_definite --&gt; diagonal("diagonal") &amp; unnamed_posdef((" "))
-    diagonal --&gt; identity("identity") &amp; unnamed_diag((" "))
-    orthogonal -- "det=+1" --&gt; so_n("SO(n)")
-    orthogonal -- "det=-1" --&gt; unnamed_ortho((" "))
-
-     all_matrices:::greyNode
-     complex:::greyNode
-     real:::greyNode
-     non_square:::greyNode
-     square:::greyNode
-     general:::greyNode
-     se_n:::blueNode
-     normal:::greyNode
-     invertible:::blueNode
-     singular:::greyNode
-     symmetric:::greyNode
-     orthogonal:::blueNode
-     skew_symmetric:::greyNode
-     positive_definite:::blueNode
-     unnamed_sym:::greyNode
-     diagonal:::blueNode
-     unnamed_posdef:::blueNode
-     identity:::blueNode
-     unnamed_diag:::blueNode
-     so_n:::blueNode
-     unnamed_ortho:::blueNode
-    classDef greyNode fill:#e0e0e0,stroke:#333,stroke-width:2px
-    classDef blueNode fill:#cce6ff,stroke:#333,stroke-width:2px
-</pre>
+<section id="newton-verfahren" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="newton-verfahren"><span class="header-section-number">6.1</span> Newton-Verfahren</h2>
+<ol start="0" type="1">
+<li>Wähle den Startwert <span class="math inline">\(x^0 \in D\)</span> und die Fehlertoleranz <span class="math inline">\(\varepsilon\)</span>. Setze <span class="math inline">\(k := 0\)</span>.</li>
+<li>Falls <span class="math inline">\(|F(x^k)| &lt; \varepsilon\)</span>: STOP.</li>
+<li>Berechne die Newton-Korrektur <span class="math inline">\(d^k\)</span>: Löse <span class="math display">\[
+F'(x^k) \cdot d^k = -F(x^k)
+\]</span></li>
+<li>Setze <br> <span class="math display">\[
+x^{k+1} = x^k + d^k
+\]</span> <br> und <span class="math inline">\(k := k + 1\)</span>. Gehe dann zu S1).</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p></p></figure><p></p>
+<div class="callout-title-container flex-fill">
+(6.2) Satz
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Sei <span class="math inline">\(D \subset \mathbb{R}^N\)</span> offen, <span class="math inline">\(F \in C^1(D, \mathbb{R}^N)\)</span> und <span class="math inline">\(x^* \in D\)</span> mit <span class="math inline">\(F(x^*) = 0_N\)</span>. Falls ein <span class="math inline">\(B \in \mathbb{R}^{N \times N}\)</span> mit <span class="math display">\[
+\rho(I - BF'(x^*)) &lt; 1
+\]</span> existiert, dann ist die Fixpunktiteration <span class="math display">\[
+x^{k+1} = \Phi(x^k)
+\]</span> mit <span class="math display">\[
+\Phi(x) = x - BF(x)
+\]</span> lokal linear konvergent, d.&nbsp;h. es existiert ein <span class="math inline">\(\delta &gt; 0\)</span>, <span class="math inline">\(C &gt; 0\)</span> und <span class="math inline">\(\theta \in (0,1)\)</span> mit <span class="math display">\[
+|x^k - x^*| \leq C\theta^k |x^* - x^0|
+\]</span> für alle <span class="math inline">\(x^0 \in B(x^*, \delta)\)</span>.</p>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-matrix-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;1: Matrix Taxonomie adaptiert von <span class="citation" data-cites="corkeRoboticsVisionControl2023">Corke (<a href="references.html#ref-corkeRoboticsVisionControl2023" role="doc-biblioref">2023</a>)</span>. Matrizen in blau sind invertierbar.
-</figcaption>
-</figure>
-</div>
-<section id="orthogonale-matrizen" class="level4">
-<h4 class="anchored" data-anchor-id="orthogonale-matrizen">Orthogonale Matrizen</h4>
-<p>Eine Matrix <span class="math inline">\(Q\)</span> ist orthogonal, wenn:</p>
-<p><span class="math display">\[
-Q^\top Q = Q Q^\top = I
-\]</span></p>
-<ul>
-<li><span class="math inline">\(Q^\top = Q^{-1}\)</span>
-<ul>
-<li><span class="math inline">\(Q\)</span> ist daher auch <strong>invertierbar</strong></li>
-</ul></li>
-<li><span class="math inline">\(det(Q) = \pm 1\)</span></li>
-</ul>
-</section>
-<section id="symmetrische-matrizen" class="level4">
-<h4 class="anchored" data-anchor-id="symmetrische-matrizen">Symmetrische Matrizen</h4>
-<p>Eine Matrix <span class="math inline">\(S\)</span> ist symmetrisch, wenn:</p>
-<p><span class="math display">\[
-S^\top = S
-\]</span></p>
-<ul>
-<li>Die Eigenwerte von <span class="math inline">\(S\)</span> sind reell
-<ul>
-<li>Die Eigenvektoren von <span class="math inline">\(S\)</span> sind orthogonal zueinander</li>
-</ul></li>
-<li><span class="math inline">\(S^\top S = S S^\top\)</span> (normal)</li>
-<li>Sei <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span>, dann ist <span class="math inline">\(B=A^\top A\)</span> symmetrisch</li>
-<li><span class="math inline">\(S\)</span> ist <strong>nicht notwendigerweise</strong> invertierbar</li>
-</ul>
-<p><strong><span class="math inline">\(2\times2\)</span>-Matrix invertieren</strong></p>
-<p><span class="math display">\[
-A=\left(\begin{array}{ll}
-a &amp; b \\
-c &amp; d
-\end{array}\right) \quad \text { then } \quad A^{-1}=\frac{1}{a d-b c}\left(\begin{array}{cc}
-d &amp; -b \\
--c &amp; a
-\end{array}\right)
-\]</span></p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-corkeRoboticsVisionControl2023" class="csl-entry" role="listitem">
-Corke, Peter. 2023. <em>Robotics, <span>Vision</span> and <span>Control</span>: <span>Fundamental Algorithms</span> in <span>Python</span></em>. 3. Aufl. Bd. 146. Springer <span>Tracts</span> in <span>Advanced Robotics</span>. Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-031-06469-2">https://doi.org/10.1007/978-3-031-06469-2</a>.
-</div>
-</div>
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -825,13 +705,13 @@ Corke, Peter. 2023. <em>Robotics, <span>Vision</span> and <span>Control</span>: 
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./07-pol-interpol.html" class="pagination-link" aria-label="Polynom-Interpolation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Polynom-Interpolation</span></span>
+      <a href="./05-iter-lgs.html" class="pagination-link" aria-label="Iterationsverfahren für lineare Gleichungssysteme">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Iterationsverfahren für lineare Gleichungssysteme</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="Referenzen">
-        <span class="nav-page-text">Referenzen</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-pol-interpol.html" class="pagination-link" aria-label="Polynom-Interpolation">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Polynom-Interpolation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

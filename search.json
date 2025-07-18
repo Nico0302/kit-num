@@ -230,6 +230,46 @@
     ]
   },
   {
+    "objectID": "06-newton.html",
+    "href": "06-newton.html",
+    "title": "6  Iterationsverfahren für nichtlineare Gleichungen",
+    "section": "",
+    "text": "6.1 Newton-Verfahren",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Iterationsverfahren für nichtlineare Gleichungen</span>"
+    ]
+  },
+  {
+    "objectID": "06-newton.html#newton-verfahren",
+    "href": "06-newton.html#newton-verfahren",
+    "title": "6  Iterationsverfahren für nichtlineare Gleichungen",
+    "section": "",
+    "text": "Wähle den Startwert \\(x^0 \\in D\\) und die Fehlertoleranz \\(\\varepsilon\\). Setze \\(k := 0\\).\nFalls \\(|F(x^k)| &lt; \\varepsilon\\): STOP.\nBerechne die Newton-Korrektur \\(d^k\\): Löse \\[\nF'(x^k) \\cdot d^k = -F(x^k)\n\\]\nSetze  \\[\nx^{k+1} = x^k + d^k\n\\]  und \\(k := k + 1\\). Gehe dann zu S1).\n\n\n\n\n\n\n\n(6.2) Satz\n\n\n\nSei \\(D \\subset \\mathbb{R}^N\\) offen, \\(F \\in C^1(D, \\mathbb{R}^N)\\) und \\(x^* \\in D\\) mit \\(F(x^*) = 0_N\\). Falls ein \\(B \\in \\mathbb{R}^{N \\times N}\\) mit \\[\n\\rho(I - BF'(x^*)) &lt; 1\n\\] existiert, dann ist die Fixpunktiteration \\[\nx^{k+1} = \\Phi(x^k)\n\\] mit \\[\n\\Phi(x) = x - BF(x)\n\\] lokal linear konvergent, d. h. es existiert ein \\(\\delta &gt; 0\\), \\(C &gt; 0\\) und \\(\\theta \\in (0,1)\\) mit \\[\n|x^k - x^*| \\leq C\\theta^k |x^* - x^0|\n\\] für alle \\(x^0 \\in B(x^*, \\delta)\\).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Iterationsverfahren für nichtlineare Gleichungen</span>"
+    ]
+  },
+  {
+    "objectID": "07-pol-interpol.html",
+    "href": "07-pol-interpol.html",
+    "title": "7  Polynom-Interpolation",
+    "section": "",
+    "text": "7.1 Lagrange-Darstellung\nKonstruktion des Interpolationspolynoms Zum Lösen der Interpolationsaufgabe muss der Koeffizientenvektor \\(a = [a₀;a₁; \\ldots ;a_N] \\in \\mathbb{R}^{N+1}\\) bestimmt werden, welcher \\[a₀+a₁ξ_n + a₂ξ_n^2 + \\ldots + a_Nξ_n^N = f_n\\] für \\(n = 0, \\ldots, N\\) genügt. Dies führt auf ein lineares Gleichungssystem \\(Ta = f\\) mit \\(f = [f₀; \\ldots; f_N] \\in \\mathbb{R}^{N+1}\\) und der Vandermonde-Matrix \\[T = (ξ_n^k)_{n,k=0,\\ldots,N} = \\begin{pmatrix} 1 & ξ_0 & ξ_0^2 & \\ldots & ξ_0^N \\\\ 1 & ξ_1 & ξ_1^2 & \\ldots & ξ_1^N \\\\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\ 1 & ξ_N & ξ_N^2 & \\ldots & ξ_N^N \\end{pmatrix} \\in \\mathbb{R}^{(N+1) \\times (N+1)}.\\] Diese Matrix ist zwar regulär (da die \\(ξ_n\\) paarweise verschieden sind), hat aber in der Regel eine sehr schlechte Kondition. Eine andere Möglichkeit ist die Darstellung über die Lagrange Basispolynome \\(L_k \\in \\mathbb{P}_N\\) mit \\[L_n(t) = \\prod_{\\substack{k=0 \\\\ k \\neq n}}^N \\frac{t - ξ_k}{ξ_n - ξ_k}.\\] Dadruch, dass \\(t-ξ_k\\) für \\(k \\neq n\\) Nullstellen aufweist und \\(ξ_n - ξ_k\\) das Polynom bei \\(t = ξ_n\\) auf \\(1\\) normiert, ergibt sich die Bedingung \\[L_n(ξ_k) = \\begin{cases} 1, & k = n, \\\\ 0, & k \\neq n. \\end{cases}\\] Damit erhalten wir die Lagrange-Darstellung des Interpolationspolynoms \\[P(t) = \\sum_{n=0}^N f_nL_n(t)\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Polynom-Interpolation</span>"
+    ]
+  },
+  {
+    "objectID": "07-pol-interpol.html#newton-darstellung",
+    "href": "07-pol-interpol.html#newton-darstellung",
+    "title": "7  Polynom-Interpolation",
+    "section": "7.2 Newton-Darstellung",
+    "text": "7.2 Newton-Darstellung\nWir betrachten Stützstellen \\(\\xi_1, \\ldots, \\xi_n\\) und die zugehörigen Funktionswerte \\(f(\\xi_1), \\ldots, f(\\xi_n)\\). Nach Newton-Schema rechnen wir die Koeffizienten \\(c_k\\) aus und erhalten die Newton-Polynome \\(N_k(t)\\):\n\\[\nP_n(t) = \\sum_{k=0}^{n} c_k \\cdot N_k(t) \\quad \\text{mit} \\quad N_k(t) = \\prod_{j=0}^{k-1} (t - \\xi_j)\n\\]\n\n\n\n\n\n\n\n(7.3) Satz\n\n\n\nSei \\(f \\in C^{N+1}[a,b]\\) mit \\(a &lt; b\\) und \\(a \\le t \\le b\\). Zu \\(a \\le \\xi_0 \\le \\xi_1 \\le \\dots \\le \\xi_N \\le b\\) definiere \\[\nf_n = \\frac{1}{e_n!} \\left(\\frac{d}{dt}\\right)^{e_n} f(\\xi_n).\n\\]\nFür den Interpolationsfehler gilt dann \\[\nf(t) - P_N(t) = \\frac{\\omega_{N+1}(t)}{(N+1)!} \\left(\\frac{d}{dt}\\right)^{N+1} f(\\tau_t)\n\\] mit \\(\\tau_t \\in I := [\\min\\{\\xi_0, t\\}, \\max\\{t, \\xi_N\\}]\\).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Polynom-Interpolation</span>"
+    ]
+  },
+  {
     "objectID": "appendix.html",
     "href": "appendix.html",
     "title": "Appendix",
