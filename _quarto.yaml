@@ -21,6 +21,7 @@ book:
     - 05-iter-lgs.ipynb
     - 06-newton.ipynb
     - 07-pol-interpol.ipynb
+    - 08-splines.ipynb
     - appendix.qmd
     - references.qmd
   sidebar: 
