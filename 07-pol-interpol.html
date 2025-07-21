@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix.html" rel="next">
+<link href="./08-splines.html" rel="next">
 <link href="./06-newton.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -191,6 +191,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-splines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
@@ -245,9 +251,9 @@ window.Quarto = {
 </section>
 <section id="newton-darstellung" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="newton-darstellung"><span class="header-section-number">7.2</span> Newton-Darstellung</h2>
-<p>Wir betrachten Stützstellen <span class="math inline">\(\xi_1, \ldots, \xi_n\)</span> und die zugehörigen Funktionswerte <span class="math inline">\(f(\xi_1), \ldots, f(\xi_n)\)</span>. Nach Newton-Schema rechnen wir die Koeffizienten <span class="math inline">\(c_k\)</span> aus und erhalten die Newton-Polynome <span class="math inline">\(N_k(t)\)</span>:</p>
+<p>Wir betrachten Stützstellen <span class="math inline">\(\xi_1, \ldots, \xi_n\)</span> und die zugehörigen Funktionswerte <span class="math inline">\(f(\xi_1), \ldots, f(\xi_n)\)</span>. Nach Newton-Schema rechnen wir die Koeffizienten <span class="math inline">\(c_n\)</span> und bilden das Produkt mit dem jeweiligen <mark>Newton-Polynom</mark> <span class="math inline">\(\omega_n(t)\)</span>:</p>
 <p><span class="math display">\[
-P_n(t) = \sum_{k=0}^{n} c_k \cdot N_k(t) \quad \text{mit} \quad N_k(t) = \prod_{j=0}^{k-1} (t - \xi_j)
+P_N(t) = \sum_{n=0}^{N} c_n \cdot \omega_n(t) \quad \text{mit} \quad \omega_n(t) = \prod_{k=0}^{n-1} (t - \xi_k)
 \]</span></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/4O5drXe5bOQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -708,8 +714,8 @@ f(t) - P_N(t) = \frac{\omega_{N+1}(t)}{(N+1)!} \left(\frac{d}{dt}\right)^{N+1} f
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix.html" class="pagination-link" aria-label="Appendix">
-        <span class="nav-page-text">Appendix</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-splines.html" class="pagination-link" aria-label="Splines">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Splines</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

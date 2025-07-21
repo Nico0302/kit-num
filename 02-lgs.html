@@ -226,6 +226,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-splines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
@@ -371,6 +377,7 @@ Warnung
 </div>
 </div>
 <p>Die <span class="math inline">\(LR\)</span>-Zerlegung lässt sich mittels des Gauß-Algorithmus bestimmen, indem wir <span class="math inline">\(A\)</span> auf eine untere Dreiecksmatrix <span class="math inline">\(R\)</span> gaußen und uns die Operationen in <span class="math inline">\(L\)</span> “merken”. Sie ist eindeutig und benötigt <span class="math inline">\(O(n^3)\)</span> Operationen.</p>
+<p>Darauf lässt sich die Lösung mittels Vorwärtssubsitution von <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span> (oder <span class="math inline">\(L\cdot\mathbf{y}=P \cdot \mathbf{b}\)</span> mit <span class="math inline">\(P\)</span> als Permutationsmatrix) und Rückwärtssubstitution von <span class="math inline">\(R\cdot\mathbf{x}=\mathbf{y}\)</span> aufbauen.</p>
 <p>Die Berechnung ist <strong>nicht</strong> stabil.</p>
 <p>Hinreichende Bedingungen für die Exsistenz einer <span class="math inline">\(LR\)</span>-Zerlegung für eine <strong>quadratische</strong> Matrix <span class="math inline">\(A\)</span>:</p>
 <ol type="1">

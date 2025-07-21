@@ -191,6 +191,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-splines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
@@ -284,7 +290,7 @@ A = U \Sigma V^\top
 </div>
 <p>Wir führen eine Drehung mit <span class="math inline">\(V^\top\)</span> durch, skalieren mit den Singularitätswerten und passen die Dimension von <span class="math inline">\(N\)</span> auf <span class="math inline">\(K\)</span> mit <span class="math inline">\(\Sigma\)</span> und drehen dann in <span class="math inline">\(\mathbb{R}^K\)</span> mittels <span class="math inline">\(U\)</span>.</p>
 <ul>
-<li><span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_R &gt; 0\)</span> sind die geordneten Eigenwerte von <span class="math inline">\(A^\top A\)</span> und <span class="math inline">\(A A^\top\)</span>.</li>
+<li><span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_R &gt; 0\)</span> sind die <mark>geordneten</mark> Eigenwerte von <span class="math inline">\(A^\top A\)</span> und <span class="math inline">\(A A^\top\)</span>.</li>
 <li><span class="math inline">\(U\)</span> enthält die Eigenvektoren von <span class="math inline">\(A A^\top\)</span> als Spaltenvektoren und <span class="math inline">\(V\)</span> die Eigenvektoren von <span class="math inline">\(A^\top A\)</span> als Zeilenvektoren (transponiert).</li>
 <li><mark>Es gilt</mark> <span class="math inline">\(A = \sum_{k=1}^R \sigma_k v_k u_k^\top\)</span>.</li>
 <li>Die Spalten <span class="math inline">\(v_1,...,v_R\)</span> von V bilden eine ONB von <span class="math inline">\(\operatorname{Bild} A\)</span>.</li>
