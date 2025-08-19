@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a374d4ecdd7cc341f9d45268abe210fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6c7eb20ae93b188cfd9810e7b74453a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -359,17 +359,17 @@ v^{k+1} &amp;= \frac{1}{|w^k|}w^k.
 </section>
 <section id="qr-iteration-mit-shift" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="qr-iteration-mit-shift"><span class="header-section-number">4.3</span> QR-Iteration mit Shift</h2>
-<p><strong>💡 Idee:</strong> Transformiere <span class="math inline">\(A\)</span> auf ähnliche Hessenbergform und führe die QR-Zerlegung mit Shift in <span class="math inline">\(O(N^2)\)</span> durch.</p>
-<p>Im Folgenden sei <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span> symmetrisch, tridiagonal und irreduzibel (<span class="math inline">\(A\)</span> kann z.B. eine <strong>Hessenberg-Matrix</strong> sein).</p>
+<p><strong>💡 Idee:</strong> Transformiere <span class="math inline">\(A\)</span> auf ähnliche Hessenbergform <span class="math inline">\(H\)</span> und führe die QR-Zerlegung mit Shift in <span class="math inline">\(O(N^2)\)</span> durch.</p>
+<p>Im Folgenden sei <span class="math inline">\(H \in \mathbb{R}^{N \times N}\)</span> symmetrisch, tridiagonal und irreduzibel (<span class="math inline">\(H\)</span> kann z.B. eine <strong>Hessenberg-Matrix</strong> sein).</p>
 <ol start="0" type="1">
-<li>Wähle <span class="math inline">\(\varepsilon \geq 0\)</span>, setze <span class="math inline">\(A_0 = A\)</span>, <span class="math inline">\(k := 0\)</span> und <span class="math inline">\(n=N\)</span>.</li>
-<li>Falls <span class="math inline">\(|A_k[n, n-1]| \leq \varepsilon\)</span> <br> setze <span class="math inline">\(n := n - 1\)</span>, <br> falls <span class="math inline">\(n = 1\)</span>: STOP</li>
-<li>Wähle <span class="math inline">\(\mu_k = A[n, n]\)</span>.</li>
-<li>Berechne eine QR-Zerlegung <span class="math inline">\(A_k - \mu_k I_N = Q_k R_k\)</span>.</li>
-<li>Setze <br> <span class="math inline">\(A_{k+1} = R_k Q_k + \mu_k I_N\)</span>. <br> Setze <span class="math inline">\(k := k + 1\)</span>, gehe zu <em>1</em>.</li>
+<li>Wähle <span class="math inline">\(\varepsilon \geq 0\)</span>, setze <span class="math inline">\(H_0 = H\)</span>, <span class="math inline">\(k := 0\)</span> und <span class="math inline">\(n=N\)</span>.</li>
+<li>Falls <span class="math inline">\(|H_k[n, n-1]| \leq \varepsilon\)</span> <br> setze <span class="math inline">\(n := n - 1\)</span>, <br> falls <span class="math inline">\(n = 1\)</span>: STOP</li>
+<li>Wähle <span class="math inline">\(\mu_k = H[n, n]\)</span>.</li>
+<li>Berechne eine QR-Zerlegung <span class="math inline">\(H_k - \mu_k I_N = Q_k R_k\)</span>.</li>
+<li>Setze <br> <span class="math inline">\(H_{k+1} = R_k Q_k + \mu_k I_N\)</span>. <br> Setze <span class="math inline">\(k := k + 1\)</span>, gehe zu <em>1</em>.</li>
 </ol>
 <p>Es gilt <span class="math display">\[\begin{alignat*}{2}
-A_{k+1} &amp;= R_k Q_k &amp;&amp;+ \mu_k I_N \\
+H_{k+1} &amp;= R_k Q_k &amp;&amp;+ \mu_k I_N \\
 &amp;= Q_k^\top (A_k - \mu_k I_N) Q_k &amp;&amp;+ \mu_k I_N \\
 &amp;= Q_k^\top A_k Q_k
 \end{alignat*}\]</span></p>
