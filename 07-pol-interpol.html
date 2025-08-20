@@ -251,10 +251,20 @@ window.Quarto = {
 </section>
 <section id="newton-darstellung" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="newton-darstellung"><span class="header-section-number">7.2</span> Newton-Darstellung</h2>
-<p>Wir betrachten Stützstellen <span class="math inline">\(\xi_1, \ldots, \xi_n\)</span> und die zugehörigen Funktionswerte <span class="math inline">\(f(\xi_1), \ldots, f(\xi_n)\)</span>. Nach Newton-Schema rechnen wir die Koeffizienten <span class="math inline">\(c_n\)</span> und bilden das Produkt mit dem jeweiligen <mark>Newton-Polynom</mark> <span class="math inline">\(\omega_n(t)\)</span>:</p>
+<p>Wir betrachten Stützstellen <span class="math inline">\(\xi_1, \ldots, \xi_N\)</span> und die zugehörigen Funktionswerte <span class="math inline">\(f(\xi_1), \ldots, f(\xi_N)\)</span>. Nach Newton-Schema rechnen wir die Koeffizienten <span class="math inline">\(c_n\)</span> und bilden das Produkt mit dem jeweiligen <mark>Newton-Polynom</mark> <span class="math inline">\(\omega_n(t)\)</span>:</p>
 <p><span class="math display">\[
 P_N(t) = \sum_{n=0}^{N} c_n \cdot \omega_n(t) \quad \text{mit} \quad \omega_n(t) = \prod_{k=0}^{n-1} (t - \xi_k)
 \]</span></p>
+<p>Alternativ lässt sich dieses auch rekursiv definieren:</p>
+<p><span class="math display">\[
+\omega_0(t) = 1, \quad \omega_n(t) = \omega_{n-1}(t) \cdot (t - \xi_{n-1}) \quad \text{für} \quad n = 1, \ldots, N.
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/newton-interpolation.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Beispiel für Newton-Darstellung</figcaption>
+</figure>
+</div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/4O5drXe5bOQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
