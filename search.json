@@ -224,7 +224,7 @@
     "href": "05-iter-lgs.html#cg-verfahren",
     "title": "5  Iterationsverfahren für lineare Gleichungssysteme",
     "section": "5.4 CG-Verfahren",
-    "text": "5.4 CG-Verfahren\n\n\n\nCG Algorithmus",
+    "text": "5.4 CG-Verfahren\nIst unsere Matrix \\(A\\) symmetrisch und positiv definit, so können wir das CG-Verfahren verwenden. Dieses ist ein iteratives Verfahren, welches die Lösung des LGS \\(Ax = b\\) approximiert.\n\n\n\nCG Algorithmus",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Iterationsverfahren für lineare Gleichungssysteme</span>"
     ]
@@ -264,7 +264,7 @@
     "href": "07-pol-interpol.html#newton-darstellung",
     "title": "7  Polynom-Interpolation",
     "section": "7.2 Newton-Darstellung",
-    "text": "7.2 Newton-Darstellung\nWir betrachten Stützstellen \\(\\xi_1, \\ldots, \\xi_N\\) und die zugehörigen Funktionswerte \\(f(\\xi_1), \\ldots, f(\\xi_N)\\). Nach Newton-Schema rechnen wir die Koeffizienten \\(c_n\\) und bilden das Produkt mit dem jeweiligen Newton-Polynom \\(\\omega_n(t)\\):\n\\[\nP_N(t) = \\sum_{n=0}^{N} c_n \\cdot \\omega_n(t) \\quad \\text{mit} \\quad \\omega_n(t) = \\prod_{k=0}^{n-1} (t - \\xi_k)\n\\]\nAlternativ lässt sich dieses auch rekursiv definieren:\n\\[\n\\omega_0(t) = 1, \\quad \\omega_n(t) = \\omega_{n-1}(t) \\cdot (t - \\xi_{n-1}) \\quad \\text{für} \\quad n = 1, \\ldots, N.\n\\]\n\n\n\nBeispiel für Newton-Darstellung\n\n\n\n\n\n\n\n\n\n(7.3) Satz\n\n\n\nSei \\(f \\in C^{N+1}[a,b]\\) mit \\(a &lt; b\\) und \\(a \\le t \\le b\\). Zu \\(a \\le \\xi_0 \\le \\xi_1 \\le \\dots \\le \\xi_N \\le b\\) definiere \\[\nf_n = \\frac{1}{e_n!} \\left(\\frac{d}{dt}\\right)^{e_n} f(\\xi_n).\n\\]\nFür den Interpolationsfehler gilt dann \\[\nf(t) - P_N(t) = \\frac{\\omega_{N+1}(t)}{(N+1)!} \\left(\\frac{d}{dt}\\right)^{N+1} f(\\tau_t)\n\\] mit \\(\\tau_t \\in I := [\\min\\{\\xi_0, t\\}, \\max\\{t, \\xi_N\\}]\\).",
+    "text": "7.2 Newton-Darstellung\nWir betrachten Stützstellen \\(\\xi_1, \\ldots, \\xi_N\\) und die zugehörigen Funktionswerte \\(f(\\xi_1), \\ldots, f(\\xi_N)\\). Nach Newton-Schema rechnen wir die Koeffizienten \\(c_n\\) und bilden das Produkt mit dem jeweiligen Newton-Polynom \\(\\omega_n(t)\\):\n\\[\nP_N(t) = \\sum_{n=0}^{N} c_n \\cdot \\omega_n(t) \\quad \\text{mit} \\quad \\omega_n(t) = \\prod_{k=0}^{n-1} (t - \\xi_k)\n\\]\nAlternativ lässt sich das Newton-Polynom \\(\\omega_n(t)\\) auch rekursiv definieren:\n\\[\n\\omega_0(t) = 1, \\quad \\omega_n(t) = \\omega_{n-1}(t) \\cdot (t - \\xi_{n-1}) \\quad \\text{für} \\quad n = 1, \\ldots, N.\n\\]\n\n\n\nBeispiel für Newton-Darstellung\n\n\n\n\n\n\n\n\n\n(7.3) Satz\n\n\n\nSei \\(f \\in C^{N+1}[a,b]\\) mit \\(a &lt; b\\) und \\(a \\le t \\le b\\). Zu \\(a \\le \\xi_0 \\le \\xi_1 \\le \\dots \\le \\xi_N \\le b\\) definiere \\[\nf_n = \\frac{1}{e_n!} \\left(\\frac{d}{dt}\\right)^{e_n} f(\\xi_n).\n\\]\nFür den Interpolationsfehler gilt dann \\[\nf(t) - P_N(t) = \\frac{\\omega_{N+1}(t)}{(N+1)!} \\left(\\frac{d}{dt}\\right)^{N+1} f(\\tau_t)\n\\] mit \\(\\tau_t \\in I := [\\min\\{\\xi_0, t\\}, \\max\\{t, \\xi_N\\}]\\).",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Polynom-Interpolation</span>"
     ]
