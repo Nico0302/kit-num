@@ -217,8 +217,9 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#lagrange-darstellung" id="toc-lagrange-darstellung" class="nav-link active" data-scroll-target="#lagrange-darstellung"><span class="header-section-number">7.1</span> Lagrange-Darstellung</a></li>
-  <li><a href="#newton-darstellung" id="toc-newton-darstellung" class="nav-link" data-scroll-target="#newton-darstellung"><span class="header-section-number">7.2</span> Newton-Darstellung</a></li>
+  <li><a href="#monomenbasis" id="toc-monomenbasis" class="nav-link active" data-scroll-target="#monomenbasis"><span class="header-section-number">7.1</span> Monomenbasis</a></li>
+  <li><a href="#lagrange-darstellung" id="toc-lagrange-darstellung" class="nav-link" data-scroll-target="#lagrange-darstellung"><span class="header-section-number">7.2</span> Lagrange-Darstellung</a></li>
+  <li><a href="#newton-darstellung" id="toc-newton-darstellung" class="nav-link" data-scroll-target="#newton-darstellung"><span class="header-section-number">7.3</span> Newton-Darstellung</a></li>
   </ul>
 </nav>
     </div>
@@ -244,13 +245,28 @@ window.Quarto = {
 </header>
 
 
-<section id="lagrange-darstellung" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="lagrange-darstellung"><span class="header-section-number">7.1</span> Lagrange-Darstellung</h2>
-<p>Konstruktion des Interpolationspolynoms Zum Lösen der Interpolationsaufgabe muss der Koeffizientenvektor <span class="math inline">\(a = [a₀;a₁; \ldots ;a_N] \in \mathbb{R}^{N+1}\)</span> bestimmt werden, welcher <span class="math display">\[a₀+a₁ξ_n + a₂ξ_n^2 + \ldots + a_Nξ_n^N = f_n\]</span> für <span class="math inline">\(n = 0, \ldots, N\)</span> genügt. Dies führt auf ein lineares Gleichungssystem <span class="math inline">\(Ta = f\)</span> mit <span class="math inline">\(f = [f₀; \ldots; f_N] \in \mathbb{R}^{N+1}\)</span> und der Vandermonde-Matrix <span class="math display">\[T = (ξ_n^k)_{n,k=0,\ldots,N} = \begin{pmatrix} 1 &amp; ξ_0 &amp; ξ_0^2 &amp; \ldots &amp; ξ_0^N \\ 1 &amp; ξ_1 &amp; ξ_1^2 &amp; \ldots &amp; ξ_1^N \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; ξ_N &amp; ξ_N^2 &amp; \ldots &amp; ξ_N^N \end{pmatrix} \in \mathbb{R}^{(N+1) \times (N+1)}.\]</span> Diese Matrix ist zwar regulär (da die <span class="math inline">\(ξ_n\)</span> paarweise verschieden sind), hat aber in der Regel eine sehr schlechte Kondition. Eine andere Möglichkeit ist die Darstellung über die Lagrange Basispolynome <span class="math inline">\(L_k \in \mathbb{P}_N\)</span> mit <span class="math display">\[L_n(t) = \prod_{\substack{k=0 \\ k \neq n}}^N \frac{t - ξ_k}{ξ_n - ξ_k}.\]</span> Dadruch, dass <span class="math inline">\(t-ξ_k\)</span> für <span class="math inline">\(k \neq n\)</span> Nullstellen aufweist und <span class="math inline">\(ξ_n - ξ_k\)</span> das Polynom bei <span class="math inline">\(t = ξ_n\)</span> auf <span class="math inline">\(1\)</span> normiert, ergibt sich die Bedingung <span class="math display">\[L_n(ξ_k) = \begin{cases} 1, &amp; k = n, \\ 0, &amp; k \neq n. \end{cases}\]</span> Damit erhalten wir die Lagrange-Darstellung des Interpolationspolynoms <span class="math display">\[P(t) = \sum_{n=0}^N f_nL_n(t)\]</span></p>
+<p>Gegeben sei eine Menge von Stützstellen <span class="math inline">\(\xi_0, \ldots, \xi_N\)</span> und die zugehörigen Funktionswerte <span class="math inline">\(f_0, \ldots, f_N\)</span>.</p>
+<p><strong>🏁 Ziel:</strong> Finde eine Funktion <span class="math inline">\(f(\xi_n) = f_n\)</span> für alle <span class="math inline">\(n = 0, \ldots, N\)</span>.</p>
+<p>Im Folgenden betrachten wir verschiedene Darstellungsformen der Polynomen-Basis.</p>
+<section id="monomenbasis" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="monomenbasis"><span class="header-section-number">7.1</span> Monomenbasis</h2>
+<p><span class="math display">\[
+P(t) = \sum_{n=0}^N a_n \cdot t^n
+\]</span></p>
+<p>Zum Lösen der Interpolationsaufgabe muss der Koeffizientenvektor <span class="math inline">\(a = [a₀;a₁; \ldots ;a_N] \in \mathbb{R}^{N+1}\)</span> bestimmt werden, welcher <span class="math display">\[a₀+a₁ξ_n + a₂ξ_n^2 + \ldots + a_Nξ_n^N = f_n\]</span> für <span class="math inline">\(n = 0, \ldots, N\)</span> genügt. Dies führt auf ein lineares Gleichungssystem <span class="math inline">\(Ta = f\)</span> mit <span class="math inline">\(f = [f₀; \ldots; f_N] \in \mathbb{R}^{N+1}\)</span> und der <em>Vandermonde-Matrix</em> <span class="math display">\[T = (ξ_n^k)_{n,k=0,\ldots,N} = \begin{pmatrix} 1 &amp; ξ_0 &amp; ξ_0^2 &amp; \ldots &amp; ξ_0^N \\ 1 &amp; ξ_1 &amp; ξ_1^2 &amp; \ldots &amp; ξ_1^N \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; ξ_N &amp; ξ_N^2 &amp; \ldots &amp; ξ_N^N \end{pmatrix} \in \mathbb{R}^{(N+1) \times (N+1)}.\]</span> Diese Matrix ist zwar regulär (da die <span class="math inline">\(ξ_n\)</span> paarweise verschieden sind), hat aber in der Regel eine <mark>sehr schlechte Kondition</mark>.</p>
+</section>
+<section id="lagrange-darstellung" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="lagrange-darstellung"><span class="header-section-number">7.2</span> Lagrange-Darstellung</h2>
+<p>Eine andere Möglichkeit ist die Darstellung über die <strong>Lagrange Basispolynome</strong> <span class="math inline">\(L_k \in \mathbb{P}_N\)</span> mit <span class="math display">\[L_n(t) = \prod_{\substack{k=0 \\ k \neq n}}^N \frac{t - ξ_k}{ξ_n - ξ_k}.\]</span> Dadruch, dass <span class="math inline">\(t-ξ_k\)</span> für <span class="math inline">\(k \neq n\)</span> Nullstellen aufweist und <span class="math inline">\(ξ_n - ξ_k\)</span> das Polynom bei <span class="math inline">\(t = ξ_n\)</span> auf <span class="math inline">\(1\)</span> normiert, ergibt sich die Bedingung <span class="math display">\[L_n(ξ_k) = \begin{cases} 1, &amp; k = n, \\ 0, &amp; k \neq n. \end{cases}\]</span> Damit erhalten wir die Lagrange-Darstellung des Interpolationspolynoms <span class="math display">\[P(t) = \sum_{n=0}^N f_nL_n(t)\]</span></p>
+<p><strong>Nachteile:</strong></p>
+<ul>
+<li>Zusätzliche Stützstellen erfordern eine Neukonstruktion des gesamten Polynoms.</li>
+<li>Basis <em>oszilliert</em> stark</li>
+</ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/bzp_q7NDdd4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
-<section id="newton-darstellung" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="newton-darstellung"><span class="header-section-number">7.2</span> Newton-Darstellung</h2>
+<section id="newton-darstellung" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="newton-darstellung"><span class="header-section-number">7.3</span> Newton-Darstellung</h2>
 <p>Wir betrachten Stützstellen <span class="math inline">\(\xi_1, \ldots, \xi_N\)</span> und die zugehörigen Funktionswerte <span class="math inline">\(f(\xi_1), \ldots, f(\xi_N)\)</span>. Nach Newton-Schema rechnen wir die Koeffizienten <span class="math inline">\(c_n\)</span> und bilden das Produkt mit dem jeweiligen <mark>Newton-Polynom</mark> <span class="math inline">\(\omega_n(t)\)</span>:</p>
 <p><span class="math display">\[
 P_N(t) = \sum_{n=0}^{N} c_n \cdot \omega_n(t) \quad \text{mit} \quad \omega_n(t) = \prod_{k=0}^{n-1} (t - \xi_k)
@@ -265,7 +281,6 @@ P_N(t) = \sum_{n=0}^{N} c_n \cdot \omega_n(t) \quad \text{mit} \quad \omega_n(t)
 <figcaption>Beispiel für Newton-Darstellung</figcaption>
 </figure>
 </div>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/4O5drXe5bOQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -284,6 +299,7 @@ f(t) - P_N(t) = \frac{\omega_{N+1}(t)}{(N+1)!} \left(\frac{d}{dt}\right)^{N+1} f
 \]</span> mit <span class="math inline">\(\tau_t \in I := [\min\{\xi_0, t\}, \max\{t, \xi_N\}]\)</span>.</p>
 </div>
 </div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/4O5drXe5bOQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
 </section>

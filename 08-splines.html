@@ -238,8 +238,22 @@ window.Quarto = {
 
 
 <p><strong>🏁 Ziel:</strong> Finde eine Interpolation für eine Menge von Punkten <span class="math inline">\(y_0, \dots y_M \in \mathbb{R}^2\)</span></p>
-<p><strong>⚠️ Problem:</strong> Polynom-Interpolation gibt nur ein einziges Polynom zurück und ist durch die <em>Runge-Phänomen</em> anfällig für große Fehler bei großen Grad.</p>
-<p><strong>💡 Idee:</strong> Kombiniere mehrere Polynome zu einem Stückweise definierten Polynom (Spline).</p>
+<p><strong>⚠️ Problem:</strong> Polynom-Interpolation gibt nur ein einziges Polynom zurück und ist durch das <em>Runge-Phänomen</em> anfällig für große Fehler bei großen Grad.</p>
+<p><strong>💡 Idee:</strong> Kombiniere mehrere Polynome zu einem Stückweise definierten Polynom (Spline <span class="math inline">\(S\)</span>).</p>
+<p><strong>Eigenschaften vom kubischen Splines:</strong></p>
+<ol type="1">
+<li><span class="math inline">\(S \in \mathbb{P}_3\)</span> ist ein Polynom <span class="math inline">\(3\)</span>-ten Grades</li>
+<li><strong>Glattheit:</strong> <span class="math display">\[S_n(\xi_n)=S_{n+1}(\xi_n) \\
+S'_n(\xi_n)=S'_{n+1}(\xi_n) \\
+S''_n(\xi_n)=S''_{n+1}(\xi_n) \\
+\]</span></li>
+<li><strong>Randbedingungen:</strong>
+<ul>
+<li><em>natürlich:</em> <span class="math inline">\(S''(a) = S''(b) = 0\)</span></li>
+<li><em>hermite:</em> <span class="math inline">\(S'(a) = f'_0, \quad S'(b) = f'_M\)</span></li>
+<li>periodisch: <span class="math inline">\(S(a) = S(b), \quad S'(a) = S'(b)\)</span></li>
+</ul></li>
+</ol>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/pBtqaK0PzrA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
