@@ -1,0 +1,3 @@
+# Trigonometrische Interpolation und FFT
+
+Nicht klausurrelevant 🥳

@@ -22,6 +22,8 @@ book:
     - 06-newton.ipynb
     - 07-pol-interpol.ipynb
     - 08-splines.ipynb
+    - 09-fft.qmd
+    - 10-integration.qmd
     - appendix.qmd
     - references.qmd
   sidebar: 
