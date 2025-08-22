@@ -2,46 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nico0302.github.io/kit-num/index.html</loc>
-    <lastmod>2025-08-21T09:51:50.367Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.395Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/01-arithmetik.html</loc>
-    <lastmod>2025-08-21T09:51:50.354Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/02-lgs.html</loc>
-    <lastmod>2025-08-21T09:51:50.354Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/03-fitting.html</loc>
-    <lastmod>2025-08-21T09:51:50.355Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/04-eigenwerte.html</loc>
-    <lastmod>2025-08-21T09:51:50.355Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/05-iter-lgs.html</loc>
-    <lastmod>2025-08-21T09:51:50.355Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/06-newton.html</loc>
-    <lastmod>2025-08-21T09:51:50.355Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/07-pol-interpol.html</loc>
-    <lastmod>2025-08-21T09:51:50.355Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/08-splines.html</loc>
-    <lastmod>2025-08-21T09:51:50.355Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.382Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nico0302.github.io/kit-num/09-fft.html</loc>
+    <lastmod>2025-08-22T06:43:38.383Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nico0302.github.io/kit-num/10-integration.html</loc>
+    <lastmod>2025-08-22T06:43:38.383Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/appendix.html</loc>
-    <lastmod>2025-08-21T09:51:50.355Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.383Z</lastmod>
   </url>
   <url>
     <loc>https://nico0302.github.io/kit-num/references.html</loc>
-    <lastmod>2025-08-21T09:51:50.368Z</lastmod>
+    <lastmod>2025-08-22T06:43:38.395Z</lastmod>
   </url>
 </urlset>

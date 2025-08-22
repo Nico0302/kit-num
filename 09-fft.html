@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Lineare Ausgleichsrechnung – Vorlesungsnotizen zu Numerik für Informatiker</title>
+<title>9&nbsp; Trigonometrische Interpolation und FFT – Vorlesungsnotizen zu Numerik für Informatiker</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./04-eigenwerte.html" rel="next">
-<link href="./02-lgs.html" rel="prev">
+<link href="./10-integration.html" rel="next">
+<link href="./08-splines.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -70,35 +70,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -112,7 +83,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-fitting.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-fft.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Trigonometrische Interpolation und FFT</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -161,7 +132,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-fitting.html" class="sidebar-item-text sidebar-link active">
+  <a href="./03-fitting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></span></a>
   </div>
 </li>
@@ -197,7 +168,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-fft.html" class="sidebar-item-text sidebar-link">
+  <a href="./09-fft.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Trigonometrische Interpolation und FFT</span></span></a>
   </div>
 </li>
@@ -224,23 +195,15 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Inhaltsverzeichnis</h2>
-   
-  <ul>
-  <li><a href="#normalengleichung" id="toc-normalengleichung" class="nav-link active" data-scroll-target="#normalengleichung"><span class="header-section-number">3.1</span> Normalengleichung</a></li>
-  <li><a href="#singularitätszerlegung" id="toc-singularitätszerlegung" class="nav-link" data-scroll-target="#singularitätszerlegung"><span class="header-section-number">3.2</span> Singularitätszerlegung</a></li>
-  <li><a href="#tikhonov-regularisierung" id="toc-tikhonov-regularisierung" class="nav-link" data-scroll-target="#tikhonov-regularisierung"><span class="header-section-number">3.3</span> Tikhonov-Regularisierung</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lineare Ausgleichsrechnung</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Trigonometrische Interpolation und FFT</span></h1>
 </div>
 
 
@@ -257,82 +220,9 @@ window.Quarto = {
 </header>
 
 
-<p>Anstatt eine extakte Lösung zu finden, können wir auch eine Näherungslösung suchen, die die Summe der Abweichungen minimiert. Dies wird als lineare Ausgleichsrechnung bezeichnet.</p>
-<section id="normalengleichung" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="normalengleichung"><span class="header-section-number">3.1</span> Normalengleichung</h2>
-<p><span class="math display">\[
-A^\top Ax = A^\top b
-\]</span></p>
-<p>ist äquivalent zur Minimierung von <span class="math inline">\(\|Ax - b\|_2\)</span></p>
-<ul>
-<li>Wenn <span class="math inline">\(A^\top A\)</span> invertierbar ist, ist die Lösung eindeutig.</li>
-<li>Wenn <span class="math inline">\(\operatorname{Kern} \{v \in \mathbb{R}^N : Av=0\} \neq \{0\}\)</span>, dann ist die Lösung nicht eindeutig. In diesem Fall ist das Problem nicht sachgemäß gestellt!</li>
-</ul>
-<p><strong>Lösungsverfahren:</strong></p>
-<p>Falls <span class="math inline">\(A^\top A\)</span> invertierbar und gut konditioniert:</p>
-<p>Berechne <span class="math inline">\(QR\)</span>-Zerlegung (<a href="02-lgs.html#sec-qr" class="quarto-xref"><span>Kapitel 2.5</span></a>) von <span class="math inline">\(A=QR\)</span></p>
-<p><span class="math display">\[R[1:N, 1:N]x = (Q^T b)[1:N]\]</span> lösen</p>
-<p><em>-oder-</em></p>
-<p>Berechne <span class="math inline">\(A^\top A\)</span> mittels Cholesky-Zerlegung (<a href="02-lgs.html#sec-cholesky" class="quarto-xref"><span>Kapitel 2.4</span></a>).</p>
-</section>
-<section id="singularitätszerlegung" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="singularitätszerlegung"><span class="header-section-number">3.2</span> Singularitätszerlegung</h2>
-<p>(en. <em>Singular Value Decomposition</em>, SVD)</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vSczTbgc8Rc?start=317" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Falls <span class="math inline">\(A\)</span> singulär (nicht invertierbar) oder schlecht konditioniert ist, kann die Singularitätszerlegung verwendet werden um die Normalengleichung zu lösen.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-(3.4) Satz
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Sei <span class="math inline">\(A \in \mathbb{R}^{K \times N}\)</span> mit <span class="math inline">\(R = \text{rang} A\)</span>. Dann existieren Singulärwerte <span class="math inline">\(\sigma_1, \dots, \sigma_R &gt; 0\)</span>, Matrizen <span class="math inline">\(V \in \mathbb{R}^{K \times R}, U \in \mathbb{R}^{N \times R}\)</span> mit <span class="math inline">\(V^\top V = I_R = U^\top U\)</span> und eine Zerlegung</p>
-<p><span class="math display">\[
-A = U \Sigma V^\top
-\]</span></p>
-<p>mit <span class="math inline">\(\Sigma = \text{diag}(\sigma_1, \dots, \sigma_R)= \text{diag}(\sqrt{\lambda_1}, \dots, \sqrt{\lambda_R}) \in \mathbb{R}^{R \times R}\)</span>.</p>
-</div>
-</div>
-<p>Wir führen eine Drehung mit <span class="math inline">\(V^\top\)</span> durch, skalieren mit den Singularitätswerten und passen die Dimension von <span class="math inline">\(N\)</span> auf <span class="math inline">\(K\)</span> mit <span class="math inline">\(\Sigma\)</span> und drehen dann in <span class="math inline">\(\mathbb{R}^K\)</span> mittels <span class="math inline">\(U\)</span>.</p>
-<ul>
-<li><span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_R &gt; 0\)</span> sind die <mark>geordneten</mark> Eigenwerte von <span class="math inline">\(A^\top A\)</span> und <span class="math inline">\(A A^\top\)</span>.</li>
-<li><span class="math inline">\(U\)</span> enthält die Eigenvektoren von <span class="math inline">\(A A^\top\)</span> als Spaltenvektoren und <span class="math inline">\(V\)</span> die Eigenvektoren von <span class="math inline">\(A^\top A\)</span> als Zeilenvektoren (transponiert).</li>
-<li><mark>Es gilt</mark> <span class="math inline">\(A = \sum_{k=1}^R \sigma_k v_k u_k^\top\)</span>.</li>
-<li>Die Spalten <span class="math inline">\(v_1,...,v_R\)</span> von V bilden eine ONB von <span class="math inline">\(\operatorname{Bild} A\)</span>.</li>
-<li>Die Spalten <span class="math inline">\(u_1,...,u_R\)</span> von U lassen sich mit <span class="math inline">\(u_{R+1},...,u_N\)</span> zu einer ONB von <span class="math inline">\(\mathbb{R}^N\)</span> ergänzen. Dann ist <span class="math inline">\(u_{R+1},...,u_N\)</span> eine ONB von <span class="math inline">\(\operatorname{Kern} A\)</span>.</li>
-<li><span class="math inline">\(A^+ := \sum_{k=1}^R \frac{1}{\sigma_k} u_k v_k^T = U \Sigma^{-1} V^T\)</span> heißt Pseudo-Inverse.</li>
-<li>Ist <span class="math inline">\(A\)</span> regulär, so gilt <span class="math inline">\(A^{-1} = A^+\)</span>. Die Normalengleichung und damit <span class="math inline">\(\|Ax-b\|_2 = \min!\)</span> wird durch <span class="math inline">\(x = A^+b\)</span> gelöst.</li>
-<li><span class="math inline">\(\|A\|_2 = \sigma_1\)</span> und <span class="math inline">\(\kappa_2(A) = \frac{\sigma_1}{\sigma_R}\)</span>. Berechnung aufwendig, erfordert Eigenwertberechnung von <span class="math inline">\(S = A^T A\)</span>. Stabile Berechnung mit <span class="math inline">\(O(N^3)\)</span> Operationen!</li>
-<li>Die Berechnung von <span class="math inline">\(A^+b\)</span> ist für <span class="math inline">\(\sigma_R \ll 1\)</span> numerisch <mark>nicht stabil</mark>.</li>
-</ul>
-</section>
-<section id="tikhonov-regularisierung" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="tikhonov-regularisierung"><span class="header-section-number">3.3</span> Tikhonov-Regularisierung</h2>
-<p>Stabilisiert die Singularitätszerlegung, indem ein Regularisierungsterm hinzugefügt wird.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-(3.5) Satz
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Zu <span class="math inline">\(A \in \mathbb{R}^{M \times N}, b \in \mathbb{R}^M, \alpha &gt; 0\)</span> existiert genau ein <span class="math inline">\(x^\alpha \in \mathbb{R}^N\)</span>, das die Tikhonov-Regularisierung <span class="math display">\[
-F_\alpha(x) := \frac{1}{2}|Ax-b|_2^2 + \frac{\alpha}{2}|x|_2^2
-\]</span> minimiert. Es gilt <span class="math display">\[
-x^\alpha = (A^\top A + \alpha I_N)^{-1} A^\top b.
-\]</span></p>
-</div>
-</div>
+<p>Nicht klausurrelevant 🥳</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -765,13 +655,13 @@ x^\alpha = (A^\top A + \alpha I_N)^{-1} A^\top b.
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02-lgs.html" class="pagination-link" aria-label="Direkte Lösungsverfahren für lineare Gleichungen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Direkte Lösungsverfahren für lineare Gleichungen</span></span>
+      <a href="./08-splines.html" class="pagination-link" aria-label="Splines">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Splines</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04-eigenwerte.html" class="pagination-link" aria-label="Eigenwertberechnung">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Eigenwertberechnung</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10-integration.html" class="pagination-link" aria-label="Numerische Integration">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Numerische Integration</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -284,9 +284,49 @@
     "href": "08-splines.html",
     "title": "8  Splines",
     "section": "",
-    "text": "🏁 Ziel: Finde eine Interpolation für eine Menge von Punkten \\(y_0, \\dots y_M \\in \\mathbb{R}^2\\)\n⚠️ Problem: Polynom-Interpolation gibt nur ein einziges Polynom zurück und ist durch das Runge-Phänomen anfällig für große Fehler bei großen Grad.\n💡 Idee: Kombiniere mehrere Polynome zu einem Stückweise definierten Polynom (Spline \\(S\\)).\nEigenschaften vom kubischen Splines:\n\n\\(S \\in \\mathbb{P}_3\\) ist ein Polynom \\(3\\)-ten Grades\nGlattheit: \\[S_n(\\xi_n)=S_{n+1}(\\xi_n) \\\\\nS'_n(\\xi_n)=S'_{n+1}(\\xi_n) \\\\\nS''_n(\\xi_n)=S''_{n+1}(\\xi_n) \\\\\n\\]\nRandbedingungen:\n\nnatürlich: \\(S''(a) = S''(b) = 0\\)\nhermite: \\(S'(a) = f'_0, \\quad S'(b) = f'_M\\)\nperiodisch: \\(S(a) = S(b), \\quad S'(a) = S'(b)\\)",
+    "text": "🏁 Ziel: Finde eine Interpolation für eine Menge von Punkten \\(y_0, \\dots y_M \\in \\mathbb{R}^2\\)\n⚠️ Problem: Polynom-Interpolation gibt nur ein einziges Polynom zurück und ist durch das Runge-Phänomen anfällig für große Fehler bei großen Grad.\n💡 Idee: Kombiniere mehrere Polynome zu einem Stückweise definierten Polynom (Spline \\(S\\)).\nEigenschaften vom kubischen Splines:\n\n\\(S \\in \\mathbb{P}_3\\) ist ein Polynom \\(3\\)-ten Grades\nGlattheit: \\[\nS_n(\\xi_n)=S_{n+1}(\\xi_n) \\\\\nS'_n(\\xi_n)=S'_{n+1}(\\xi_n) \\\\\nS''_n(\\xi_n)=S''_{n+1}(\\xi_n) \\\\\n\\]\nRandbedingungen:\n\nnatürlich: \\(S''(a) = S''(b) = 0\\)\nhermite: \\(S'(a) = f'_0, \\quad S'(b) = f'_M\\)\nperiodisch: \\(S(a) = S(b), \\quad S'(a) = S'(b)\\)",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Splines</span>"
+    ]
+  },
+  {
+    "objectID": "09-fft.html",
+    "href": "09-fft.html",
+    "title": "9  Trigonometrische Interpolation und FFT",
+    "section": "",
+    "text": "Nicht klausurrelevant 🥳",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Trigonometrische Interpolation und FFT</span>"
+    ]
+  },
+  {
+    "objectID": "10-integration.html",
+    "href": "10-integration.html",
+    "title": "10  Numerische Integration",
+    "section": "",
+    "text": "10.1 Quadraturformeln\n🏁 Ziel: Approximiere \\(\\int_a^b f(x) \\, dx\\) für eine Funktion \\(f\\).\nSei \\(\\Xi = \\{\\xi_0, \\xi_1, \\ldots, \\xi_N\\} \\subset [a,b]\\) eine Menge von Stützstellen und \\(w_\\xi\\) die zugehörigen Gewichte. Dann ist die Quadraturformel:\n\\[\nQ_\\Xi(f)=\\sum_{\\xi \\in \\Xi} w_\\xi f(\\xi)\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Numerische Integration</span>"
+    ]
+  },
+  {
+    "objectID": "10-integration.html#quadraturformeln",
+    "href": "10-integration.html#quadraturformeln",
+    "title": "10  Numerische Integration",
+    "section": "",
+    "text": "10.1.1 Ordnung\n\\(Q_\\Xi\\) hat Ordnung \\(k\\), wenn für alle Polynome \\(P\\) mit \\(\\deg(P) \\leq k\\) gilt:\n\\[\n\\int_a^b P(x) \\, dx = Q_\\Xi(P) \\quad Q_\\Xi \\text{ ist exakt}\n\\]\n\n\n10.1.2 Bemerkungen\n\nEs gibt zu allen Zerlegungen \\(\\Xi \\subset [a,b]\\) mit \\(\\#\\Xi=N+1\\) eine Quadraturformel \\(Q_\\Xi\\), welche exakt ist für alle Polynome \\(P\\) mit \\(\\deg(P) \\leq N\\).\n\nLagrarge Polynom: \\[\n  w_\\xi = \\int_a^b L_\\xi(t) \\, dt \\quad \\text{mit} \\quad L_\\xi(t) = \\prod_{\\eta \\in \\Xi, \\ \\eta \\neq \\xi} \\frac{t - \\eta}{\\xi - \\eta}\n  \\]\n\nDie Quadraturformel hat maximale Ordnung \\(2N-1\\) (Gauß-Quadratur)\n⚠️ Probleme:\n\nÄquidistante Stützstellen (Newton-Cotes) führen für \\(N&gt;5\\) teilweise zu negativen Gewichten\nGauß-Quadratur benötigt spezielle Stüzstellen. Keine adaptive “Wiederverwertung” möglich.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Numerische Integration</span>"
+    ]
+  },
+  {
+    "objectID": "10-integration.html#summierte-quadraturformel",
+    "href": "10-integration.html#summierte-quadraturformel",
+    "title": "10  Numerische Integration",
+    "section": "10.2 Summierte Quadraturformel",
+    "text": "10.2 Summierte Quadraturformel\n💡 Idee: Zerlege Intervall \\([a,b]=\\omega_1 \\cup \\dots \\cup \\omega_N\\)",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Numerische Integration</span>"
     ]
   },
   {
@@ -304,7 +344,7 @@
     "href": "appendix.html#mathematische-grundlagen",
     "title": "Appendix",
     "section": "",
-    "text": "Analysis\n\nReihen und Summen\nGeometrische Reihe\nFür alle reellen \\(q \\neq 1\\) und für alle \\(n \\in \\mathbb{N}_0\\) ist:\n\\[\n\\sum_{k=0}^n q^k=\\frac{1-q^{n+1}}{1-q}\n\\]\nDer Grenzwert ist dementsprechend:\n\\[\n\\sum_{k=0}^{\\infty} q^k=\\frac{1}{1-q}\n\\]\n\n\nLogarithmen\n\n\n\n\nLineare Algebra\n\n\n\n\n\n\n\n\n\nflowchart TD\n    all_matrices(\"all matrices\") --&gt; complex(\"complex\") & real(\"real\")\n    real --&gt; non_square(\"non square\") & square(\"square\")\n    square --&gt; general(\"general\") & se_n(\"SE(n)\") & normal(\"normal\")\n    general -- det≠0 --&gt; invertible(\"invertible / regular\")\n    general -- \"det=0\" --&gt; singular(\"singular\")\n    normal --&gt; symmetric(\"symmetric\") & orthogonal(\"orthogonal O(n)\") & skew_symmetric(\"skew-symmetric\")\n    symmetric --&gt; positive_definite(\"positive definite\") & unnamed_sym((\" \"))\n    positive_definite --&gt; diagonal(\"diagonal\") & unnamed_posdef((\" \"))\n    diagonal --&gt; identity(\"identity\") & unnamed_diag((\" \"))\n    orthogonal -- \"det=+1\" --&gt; so_n(\"SO(n)\")\n    orthogonal -- \"det=-1\" --&gt; unnamed_ortho((\" \"))\n\n     all_matrices:::greyNode\n     complex:::greyNode\n     real:::greyNode\n     non_square:::greyNode\n     square:::greyNode\n     general:::greyNode\n     se_n:::blueNode\n     normal:::greyNode\n     invertible:::blueNode\n     singular:::greyNode\n     symmetric:::greyNode\n     orthogonal:::blueNode\n     skew_symmetric:::greyNode\n     positive_definite:::blueNode\n     unnamed_sym:::greyNode\n     diagonal:::blueNode\n     unnamed_posdef:::blueNode\n     identity:::blueNode\n     unnamed_diag:::blueNode\n     so_n:::blueNode\n     unnamed_ortho:::blueNode\n    classDef greyNode fill:#e0e0e0,stroke:#333,stroke-width:2px\n    classDef blueNode fill:#cce6ff,stroke:#333,stroke-width:2px\n\n\n\n\n\n\n\n\nAbbildung 1: Matrix Taxonomie adaptiert von Corke (2023). Matrizen in blau sind invertierbar.\n\n\n\n\nOrthogonale Matrizen\nEine Matrix \\(Q\\) ist orthogonal, wenn:\n\\[\nQ^\\top Q = Q Q^\\top = I\n\\]\n\n\\(Q^\\top = Q^{-1}\\)\n\n\\(Q\\) ist daher auch invertierbar\n\n\\(det(Q) = \\pm 1\\)\n\n\n\nSymmetrische Matrizen\nEine Matrix \\(S\\) ist symmetrisch, wenn:\n\\[\nS^\\top = S\n\\]\n\nDie Eigenwerte von \\(S\\) sind reell\n\nDie Eigenvektoren von \\(S\\) sind orthogonal zueinander\n\n\\(S^\\top S = S S^\\top\\) (normal)\nSei \\(A \\in \\mathbb{R}^{N \\times N}\\), dann ist \\(B=A^\\top A\\) symmetrisch\n\\(S\\) ist nicht notwendigerweise invertierbar\n\n\\(2\\times2\\)-Matrix invertieren\n\\[\nA=\\left(\\begin{array}{ll}\na & b \\\\\nc & d\n\\end{array}\\right) \\quad \\text { then } \\quad A^{-1}=\\frac{1}{a d-b c}\\left(\\begin{array}{cc}\nd & -b \\\\\n-c & a\n\\end{array}\\right)\n\\]\n\n\n\n\nCorke, Peter. 2023. Robotics, Vision and Control: Fundamental Algorithms in Python. 3. Aufl. Bd. 146. Springer Tracts in Advanced Robotics. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-06469-2.",
+    "text": "Analysis\n\nReihen und Summen\nGeometrische Reihe\nFür alle reellen \\(q \\neq 1\\) und für alle \\(n \\in \\mathbb{N}_0\\) ist:\n\\[\n\\sum_{k=0}^n q^k=\\frac{1-q^{n+1}}{1-q}\n\\]\nDer Grenzwert ist dementsprechend:\n\\[\n\\sum_{k=0}^{\\infty} q^k=\\frac{1}{1-q}\n\\]\n\n\nLogarithmen\n\n\n\n\nLineare Algebra\n\n\nOrthogonale Matrizen\nEine Matrix \\(Q\\) ist orthogonal, wenn:\n\\[\nQ^\\top Q = Q Q^\\top = I\n\\]\n\n\\(Q^\\top = Q^{-1}\\)\n\n\\(Q\\) ist daher auch invertierbar\n\n\\(det(Q) = \\pm 1\\)\n\n\n\nSymmetrische Matrizen\nEine Matrix \\(S\\) ist symmetrisch, wenn:\n\\[\nS^\\top = S\n\\]\n\nDie Eigenwerte von \\(S\\) sind reell\n\nDie Eigenvektoren von \\(S\\) sind orthogonal zueinander\n\n\\(S^\\top S = S S^\\top\\) (normal)\nSei \\(A \\in \\mathbb{R}^{N \\times N}\\), dann ist \\(B=A^\\top A\\) symmetrisch\n\\(S\\) ist nicht notwendigerweise invertierbar\n\n\\(2\\times2\\)-Matrix invertieren\n\\[\nA=\\left(\\begin{array}{ll}\na & b \\\\\nc & d\n\\end{array}\\right) \\quad \\text { then } \\quad A^{-1}=\\frac{1}{a d-b c}\\left(\\begin{array}{cc}\nd & -b \\\\\n-c & a\n\\end{array}\\right)\n\\]",
     "crumbs": [
       "Appendix"
     ]
@@ -314,7 +354,7 @@
     "href": "references.html",
     "title": "Referenzen",
     "section": "",
-    "text": "Bartels, Sören. 2016. Numerik 3x9: Drei Themengebiete in\njeweils neun kurzen Kapiteln. 1. Aufl. 2016.\nSpringer-Lehrbuch. Berlin Heidelberg: Springer Spektrum. https://doi.org/10.1007/978-3-662-48203-2.\n\n\nCorke, Peter. 2023. Robotics, Vision and\nControl: Fundamental Algorithms in\nPython. 3rd ed. Vol. 146. Springer Tracts\nin Advanced Robotics. Cham: Springer International\nPublishing. https://doi.org/10.1007/978-3-031-06469-2.\n\n\nWeiß, Daniel. 2024. “Numerische Mathematik für\ndie Fachrichtungen Informatik und Ingenieurwesen.”\nKarlsruher Institut für Technologie.\n\n\nWieners, Christian. 2025. “Einführung in die\nNumerische Mathematik.” Karlsruher Institut\nfür Technologie.",
+    "text": "Bartels, Sören. 2016. Numerik 3x9: Drei Themengebiete in\njeweils neun kurzen Kapiteln. 1. Aufl. 2016.\nSpringer-Lehrbuch. Berlin Heidelberg: Springer Spektrum. https://doi.org/10.1007/978-3-662-48203-2.\n\n\nWeiß, Daniel. 2024. “Numerische Mathematik für\ndie Fachrichtungen Informatik und Ingenieurwesen.”\nKarlsruher Institut für Technologie.\n\n\nWieners, Christian. 2025. “Einführung in die\nNumerische Mathematik.” Karlsruher Institut\nfür Technologie.",
     "crumbs": [
       "Referenzen"
     ]
