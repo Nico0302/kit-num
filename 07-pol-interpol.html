@@ -270,12 +270,12 @@ P(t) = \sum_{n=0}^N a_n \cdot t^n
 <section id="lagrange-darstellung" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="lagrange-darstellung"><span class="header-section-number">7.2</span> Lagrange-Darstellung</h2>
 <p>Eine andere Möglichkeit ist die Darstellung über die <strong>Lagrange Basispolynome</strong> <span class="math inline">\(L_k \in \mathbb{P}_N\)</span> mit <span class="math display">\[L_n(t) = \prod_{\substack{k=0 \\ k \neq n}}^N \frac{t - ξ_k}{ξ_n - ξ_k}.\]</span> Dadruch, dass <span class="math inline">\(t-ξ_k\)</span> für <span class="math inline">\(k \neq n\)</span> Nullstellen aufweist und <span class="math inline">\(ξ_n - ξ_k\)</span> das Polynom bei <span class="math inline">\(t = ξ_n\)</span> auf <span class="math inline">\(1\)</span> normiert, ergibt sich die Bedingung <span class="math display">\[L_n(ξ_k) = \begin{cases} 1, &amp; k = n, \\ 0, &amp; k \neq n. \end{cases}\]</span> Damit erhalten wir die Lagrange-Darstellung des Interpolationspolynoms <span class="math display">\[P(t) = \sum_{n=0}^N f_nL_n(t)\]</span></p>
-<p><strong>Nachteile:</strong></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/bzp_q7NDdd4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>⚠️ Probleme:</strong></p>
 <ul>
 <li>Zusätzliche Stützstellen erfordern eine Neukonstruktion des gesamten Polynoms.</li>
 <li>Basis <em>oszilliert</em> stark</li>
 </ul>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/bzp_q7NDdd4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="newton-darstellung" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="newton-darstellung"><span class="header-section-number">7.3</span> Newton-Darstellung</h2>

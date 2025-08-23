@@ -264,7 +264,7 @@
     "href": "07-pol-interpol.html#lagrange-darstellung",
     "title": "7  Polynom-Interpolation",
     "section": "7.2 Lagrange-Darstellung",
-    "text": "7.2 Lagrange-Darstellung\nEine andere Möglichkeit ist die Darstellung über die Lagrange Basispolynome \\(L_k \\in \\mathbb{P}_N\\) mit \\[L_n(t) = \\prod_{\\substack{k=0 \\\\ k \\neq n}}^N \\frac{t - ξ_k}{ξ_n - ξ_k}.\\] Dadruch, dass \\(t-ξ_k\\) für \\(k \\neq n\\) Nullstellen aufweist und \\(ξ_n - ξ_k\\) das Polynom bei \\(t = ξ_n\\) auf \\(1\\) normiert, ergibt sich die Bedingung \\[L_n(ξ_k) = \\begin{cases} 1, & k = n, \\\\ 0, & k \\neq n. \\end{cases}\\] Damit erhalten wir die Lagrange-Darstellung des Interpolationspolynoms \\[P(t) = \\sum_{n=0}^N f_nL_n(t)\\]\nNachteile:\n\nZusätzliche Stützstellen erfordern eine Neukonstruktion des gesamten Polynoms.\nBasis oszilliert stark",
+    "text": "7.2 Lagrange-Darstellung\nEine andere Möglichkeit ist die Darstellung über die Lagrange Basispolynome \\(L_k \\in \\mathbb{P}_N\\) mit \\[L_n(t) = \\prod_{\\substack{k=0 \\\\ k \\neq n}}^N \\frac{t - ξ_k}{ξ_n - ξ_k}.\\] Dadruch, dass \\(t-ξ_k\\) für \\(k \\neq n\\) Nullstellen aufweist und \\(ξ_n - ξ_k\\) das Polynom bei \\(t = ξ_n\\) auf \\(1\\) normiert, ergibt sich die Bedingung \\[L_n(ξ_k) = \\begin{cases} 1, & k = n, \\\\ 0, & k \\neq n. \\end{cases}\\] Damit erhalten wir die Lagrange-Darstellung des Interpolationspolynoms \\[P(t) = \\sum_{n=0}^N f_nL_n(t)\\]\n\n⚠️ Probleme:\n\nZusätzliche Stützstellen erfordern eine Neukonstruktion des gesamten Polynoms.\nBasis oszilliert stark",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Polynom-Interpolation</span>"
     ]
