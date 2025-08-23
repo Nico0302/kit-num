@@ -20,6 +20,21 @@ $$
 \sum_{k=0}^{\infty} q^k=\frac{1}{1-q}
 $$
 
+**Taylor-Formel**
+
+Sei $f \in C^{k+1}([a, b])$ und $x_0 \in [a, b]$. Dann gilt für jedes $x \in [a, b]$:
+
+\begin{align*}
+f(x) &=f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \ldots + \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + R_{k+1}(x_0) \\
+&= \sum_{j=0}^k \frac{f^{(j)}(x_0)}{j!}(x-x_0)^j + R_{k+1}(x_0)
+\end{align*}
+
+wobei der *Restglied* $R_{k+1}(x_0)$ in der *Lagrange-Form* gegeben ist durch:
+
+$$
+R_{k+1}(x_0)=\frac{1}{(k+1)!}f^{(k+1)}(\xi)(x-x_0)^{k+1}
+$$
+
 #### Logarithmen
 
 {{< video https://www.youtube.com/watch?v=SYxyemNSSm8 >}}
