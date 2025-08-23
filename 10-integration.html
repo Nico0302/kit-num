@@ -232,9 +232,13 @@ window.Quarto = {
   <li><a href="#quadraturformeln" id="toc-quadraturformeln" class="nav-link active" data-scroll-target="#quadraturformeln"><span class="header-section-number">10.1</span> Quadraturformeln</a>
   <ul class="collapse">
   <li><a href="#ordnung" id="toc-ordnung" class="nav-link" data-scroll-target="#ordnung"><span class="header-section-number">10.1.1</span> Ordnung</a></li>
-  <li><a href="#bemerkungen" id="toc-bemerkungen" class="nav-link" data-scroll-target="#bemerkungen"><span class="header-section-number">10.1.2</span> Bemerkungen</a></li>
+  <li><a href="#newton-cotes-formeln" id="toc-newton-cotes-formeln" class="nav-link" data-scroll-target="#newton-cotes-formeln"><span class="header-section-number">10.1.2</span> Newton-Cotes-Formeln</a></li>
+  <li><a href="#bemerkungen" id="toc-bemerkungen" class="nav-link" data-scroll-target="#bemerkungen"><span class="header-section-number">10.1.3</span> Bemerkungen</a></li>
   </ul></li>
-  <li><a href="#summierte-quadraturformel" id="toc-summierte-quadraturformel" class="nav-link" data-scroll-target="#summierte-quadraturformel"><span class="header-section-number">10.2</span> Summierte Quadraturformel</a></li>
+  <li><a href="#summierte-quadraturformel" id="toc-summierte-quadraturformel" class="nav-link" data-scroll-target="#summierte-quadraturformel"><span class="header-section-number">10.2</span> Summierte Quadraturformel</a>
+  <ul class="collapse">
+  <li><a href="#summierte-trapezregel" id="toc-summierte-trapezregel" class="nav-link" data-scroll-target="#summierte-trapezregel"><span class="header-section-number">10.2.1</span> Summierte Trapezregel</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -261,6 +265,7 @@ window.Quarto = {
 
 
 <p><strong>🏁 Ziel:</strong> Approximiere <span class="math inline">\(\int_a^b f(x) \, dx\)</span> für eine Funktion <span class="math inline">\(f\)</span>.</p>
+<p><strong>💡 Idee:</strong> Funktion zunächst interpolieren und dann dieses Interpolationspolynom integrieren</p>
 <section id="quadraturformeln" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="quadraturformeln"><span class="header-section-number">10.1</span> Quadraturformeln</h2>
 <p>Sei <span class="math inline">\(\Xi = \{\xi_0, \xi_1, \ldots, \xi_N\} \subset [a,b]\)</span> eine Menge von Stützstellen und <span class="math inline">\(w_\xi\)</span> die zugehörigen Gewichte. Dann ist die Quadraturformel:</p>
@@ -274,8 +279,20 @@ Q_\Xi(f)=\sum_{\xi \in \Xi} w_\xi f(\xi)
 \int_a^b P(x) \, dx = Q_\Xi(P) \quad Q_\Xi \text{ ist exakt}
 \]</span></p>
 </section>
-<section id="bemerkungen" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="bemerkungen"><span class="header-section-number">10.1.2</span> Bemerkungen</h3>
+<section id="newton-cotes-formeln" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="newton-cotes-formeln"><span class="header-section-number">10.1.2</span> Newton-Cotes-Formeln</h3>
+<p>(<em>Quadratur zu äquidistanten Stützstellen</em>)</p>
+<p><span class="math display">\[
+\begin{aligned}
+N = 1: \quad &amp; I_1(f) = \frac{b-a}{2} \left( f(a) + f(b) \right) \hspace{2cm} &amp; \textit{Trapezregel} \\[1.5em]
+N = 2: \quad &amp; I_2(f) = \frac{b-a}{6} \left( f(a) + 4f\left(\frac{a+b}{2}\right) + f(b) \right) \hspace{1.2cm} &amp; \textit{Simpsonregel} \\[1.5em]
+N = 3: \quad &amp; w_0 = w_3 = \frac{b-a}{8},\quad w_1 = w_2 = \frac{3(b-a)}{8} \hspace{2cm} &amp; \textit{Newton’sche } \frac{3}{8}\text{-Regel} \\[1.5em]
+N = 4: \quad &amp; w_0 = w_4 = \frac{7(b-a)}{90},\quad w_1 = w_3 = \frac{32(b-a)}{90},\quad w_2 = \frac{12(b-a)}{90} \hspace{0.5cm} &amp; \textit{Milne-Regel}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="bemerkungen" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="bemerkungen"><span class="header-section-number">10.1.3</span> Bemerkungen</h3>
 <ul>
 <li>Es gibt zu allen Zerlegungen <span class="math inline">\(\Xi \subset [a,b]\)</span> mit <span class="math inline">\(\#\Xi=N+1\)</span> eine Quadraturformel <span class="math inline">\(Q_\Xi\)</span>, welche exakt ist für alle Polynome <span class="math inline">\(P\)</span> mit <span class="math inline">\(\deg(P) \leq N\)</span>.
 <ul>
@@ -294,9 +311,35 @@ Q_\Xi(f)=\sum_{\xi \in \Xi} w_\xi f(\xi)
 </section>
 <section id="summierte-quadraturformel" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="summierte-quadraturformel"><span class="header-section-number">10.2</span> Summierte Quadraturformel</h2>
-<p><strong>💡 Idee:</strong> Zerlege Intervall <span class="math inline">\([a,b]=\omega_1 \cup \dots \cup \omega_N\)</span></p>
+<p><strong>💡 Idee:</strong> Zerlege Intervall <span class="math inline">\([a,b]=\omega_1 \cup \dots \cup \omega_N\)</span>, <span class="math inline">\(\omega_n=[a+(n-1)h, \ a + nh]\)</span> mit äquidistanter Schrittweite <span class="math inline">\(h=\frac{b-a}N\)</span> und verwende die Quadraturformel in jedem Intervall <span class="math inline">\(\omega_N\)</span>.</p>
+<div id="cell-fig-quadratur" class="cell" data-execution_count="37">
+<div class="cell-output cell-output-display">
+<div id="fig-quadratur" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quadratur-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-integration_files/figure-html/fig-quadratur-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quadratur-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;10.1: Verschiedene Quadraturformeln
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="summierte-trapezregel" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="summierte-trapezregel"><span class="header-section-number">10.2.1</span> Summierte Trapezregel</h3>
+<p>Für <span class="math inline">\(N \in \mathbb{N}\)</span> seien <span class="math inline">\(h := \frac{b-a}{N}\)</span> und</p>
+<p><span class="math display">\[
+\Xi := \{\xi_n = a + n h : n = 0, \ldots, N\}.
+\]</span></p>
+<p>Definiere dann zu <span class="math inline">\(f \in C[a,b]\)</span> die <em>Quadraturformel</em>:</p>
+<p><span class="math display">\[
+T_N(f) := \sum_{n=1}^N \frac{h}{2} \left( f(\xi_{n-1}) + f(\xi_n) \right)
+= \frac{h}{2} f(a) + h \sum_{n=1}^{N-1} f(\xi_n) + \frac{h}{2} f(b)
+\]</span></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
