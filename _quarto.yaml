@@ -23,7 +23,7 @@ book:
     - 07-pol-interpol.ipynb
     - 08-splines.ipynb
     - 09-fft.qmd
-    - 10-integration.qmd
+    - 10-integration.ipynb
     - appendix.qmd
     - references.qmd
   sidebar: 
