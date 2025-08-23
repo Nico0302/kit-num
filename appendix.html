@@ -274,6 +274,16 @@ window.Quarto = {
 <p><span class="math display">\[
 \sum_{k=0}^{\infty} q^k=\frac{1}{1-q}
 \]</span></p>
+<p><strong>Taylor-Formel</strong></p>
+<p>Sei <span class="math inline">\(f \in C^{k+1}([a, b])\)</span> und <span class="math inline">\(x_0 \in [a, b]\)</span>. Dann gilt für jedes <span class="math inline">\(x \in [a, b]\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+f(x) &amp;=f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \ldots + \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + R_{k+1}(x_0) \\
+&amp;= \sum_{j=0}^k \frac{f^{(j)}(x_0)}{j!}(x-x_0)^j + R_{k+1}(x_0)
+\end{align*}\]</span></p>
+<p>wobei der <em>Restglied</em> <span class="math inline">\(R_{k+1}(x_0)\)</span> in der <em>Lagrange-Form</em> gegeben ist durch:</p>
+<p><span class="math display">\[
+R_{k+1}(x_0)=\frac{1}{(k+1)!}f^{(k+1)}(\xi)(x-x_0)^{k+1}
+\]</span></p>
 </section>
 <section id="logarithmen" class="level4">
 <h4 class="anchored" data-anchor-id="logarithmen">Logarithmen</h4>
