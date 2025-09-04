@@ -264,7 +264,10 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#gleitkommazahlen" id="toc-gleitkommazahlen" class="nav-link active" data-scroll-target="#gleitkommazahlen"><span class="header-section-number">1.1</span> Gleitkommazahlen</a></li>
+  <li><a href="#gleitkommazahlen" id="toc-gleitkommazahlen" class="nav-link active" data-scroll-target="#gleitkommazahlen"><span class="header-section-number">1.1</span> Gleitkommazahlen</a>
+  <ul class="collapse">
+  <li><a href="#maschienengenauigkeit" id="toc-maschienengenauigkeit" class="nav-link" data-scroll-target="#maschienengenauigkeit"><span class="header-section-number">1.1.1</span> Maschienengenauigkeit</a></li>
+  </ul></li>
   <li><a href="#auslöschung" id="toc-auslöschung" class="nav-link" data-scroll-target="#auslöschung"><span class="header-section-number">1.2</span> Auslöschung</a></li>
   <li><a href="#kondition-und-stabilität" id="toc-kondition-und-stabilität" class="nav-link" data-scroll-target="#kondition-und-stabilität"><span class="header-section-number">1.3</span> Kondition und Stabilität</a></li>
   <li><a href="#vektor--und-matrixnormen" id="toc-vektor--und-matrixnormen" class="nav-link" data-scroll-target="#vektor--und-matrixnormen"><span class="header-section-number">1.4</span> Vektor- und Matrixnormen</a></li>
@@ -297,12 +300,30 @@ window.Quarto = {
 <h2 data-number="1.1" class="anchored" data-anchor-id="gleitkommazahlen"><span class="header-section-number">1.1</span> Gleitkommazahlen</h2>
 <p>Wir betrachten für eine gegebene Basis <span class="math inline">\(B \geq 2\)</span>, einen minimalen Exponent <span class="math inline">\(E^{-}\)</span> und Längen <span class="math inline">\(M\)</span> und <span class="math inline">\(E\)</span> die endliche Menge der normalisierten Gleitpunktzahlen <span class="math inline">\(\mathrm{FL}\)</span>.</p>
 <p><span class="math display">\[
-\mathrm{FL}:=\{ \pm B^e \underbrace{\sum_{l=1}^M a_l B^{-l}}_{=m} \; | \; e=E^{-}+\sum_{k=0}^{E-1} c_k B^k, \  a_l, c_k \in\{0, \ldots, B-1\}, \ a_1 \neq 0\} \cup\{0\}
+\mathrm{FL}:= \{0\} \cup \{ \pm B^e \underbrace{\sum_{l=1}^M a_l B^{-l}}_{=m} \; | \; e=E^{-}+\sum_{k=0}^{E-1} c_k B^k, \  a_l, c_k \in\{0, \ldots, B-1\}, \ a_1 \neq 0\}
 \]</span></p>
-<p><strong>Maschienengenauigkeit</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Beispiel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sei <span class="math inline">\(B=2\)</span> und <span class="math inline">\(E^{-}=0\)</span>.</p>
+<p><span class="math display">\[
+42 = 2^1 + 2^3 + 2^5 = 2^6 (2^{-1} + 2^{-3} + 2^{-5}) = 2^{(\text{110})_2} (\text{0.10101})_2
+\]</span></p>
+</div>
+</div>
+<section id="maschienengenauigkeit" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="maschienengenauigkeit"><span class="header-section-number">1.1.1</span> Maschienengenauigkeit</h3>
 <p><span class="math display">\[
 \text{eps} := \sup \left\{ \frac{|x - fl(x)|}{|x|} \ | \ 1 &lt; x &lt; 2 \right\} = \frac{B^{1-M}}{2}
 \]</span></p>
+</section>
 </section>
 <section id="auslöschung" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="auslöschung"><span class="header-section-number">1.2</span> Auslöschung</h2>

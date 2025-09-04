@@ -14,7 +14,17 @@
     "href": "01-arithmetik.html",
     "title": "1  Arithmetik",
     "section": "",
-    "text": "1.1 Gleitkommazahlen\nWir betrachten für eine gegebene Basis \\(B \\geq 2\\), einen minimalen Exponent \\(E^{-}\\) und Längen \\(M\\) und \\(E\\) die endliche Menge der normalisierten Gleitpunktzahlen \\(\\mathrm{FL}\\).\n\\[\n\\mathrm{FL}:=\\{ \\pm B^e \\underbrace{\\sum_{l=1}^M a_l B^{-l}}_{=m} \\; | \\; e=E^{-}+\\sum_{k=0}^{E-1} c_k B^k, \\  a_l, c_k \\in\\{0, \\ldots, B-1\\}, \\ a_1 \\neq 0\\} \\cup\\{0\\}\n\\]\nMaschienengenauigkeit\n\\[\n\\text{eps} := \\sup \\left\\{ \\frac{|x - fl(x)|}{|x|} \\ | \\ 1 &lt; x &lt; 2 \\right\\} = \\frac{B^{1-M}}{2}\n\\]",
+    "text": "1.1 Gleitkommazahlen\nWir betrachten für eine gegebene Basis \\(B \\geq 2\\), einen minimalen Exponent \\(E^{-}\\) und Längen \\(M\\) und \\(E\\) die endliche Menge der normalisierten Gleitpunktzahlen \\(\\mathrm{FL}\\).\n\\[\n\\mathrm{FL}:= \\{0\\} \\cup \\{ \\pm B^e \\underbrace{\\sum_{l=1}^M a_l B^{-l}}_{=m} \\; | \\; e=E^{-}+\\sum_{k=0}^{E-1} c_k B^k, \\  a_l, c_k \\in\\{0, \\ldots, B-1\\}, \\ a_1 \\neq 0\\}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Arithmetik</span>"
+    ]
+  },
+  {
+    "objectID": "01-arithmetik.html#gleitkommazahlen",
+    "href": "01-arithmetik.html#gleitkommazahlen",
+    "title": "1  Arithmetik",
+    "section": "",
+    "text": "Beispiel\n\n\n\nSei \\(B=2\\) und \\(E^{-}=0\\).\n\\[\n42 = 2^1 + 2^3 + 2^5 = 2^6 (2^{-1} + 2^{-3} + 2^{-5}) = 2^{(\\text{110})_2} (\\text{0.10101})_2\n\\]\n\n\n\n1.1.1 Maschienengenauigkeit\n\\[\n\\text{eps} := \\sup \\left\\{ \\frac{|x - fl(x)|}{|x|} \\ | \\ 1 &lt; x &lt; 2 \\right\\} = \\frac{B^{1-M}}{2}\n\\]",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Arithmetik</span>"
     ]
