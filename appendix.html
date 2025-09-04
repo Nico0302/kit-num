@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6c7eb20ae93b188cfd9810e7b74453a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-58f5b18a35ee6396d30b35e440339389.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -268,17 +268,17 @@ window.Quarto = {
 <p><strong>Geometrische Reihe</strong></p>
 <p>Für alle reellen <span class="math inline">\(q \neq 1\)</span> und für alle <span class="math inline">\(n \in \mathbb{N}_0\)</span> ist:</p>
 <p><span class="math display">\[
-\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}
+\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}=\frac{q^{n+1}-1}{q-1}
 \]</span></p>
 <p>Der Grenzwert ist dementsprechend:</p>
 <p><span class="math display">\[
 \sum_{k=0}^{\infty} q^k=\frac{1}{1-q}
 \]</span></p>
 <p><strong>Taylor-Formel</strong></p>
-<p>Sei <span class="math inline">\(f \in C^{k+1}([a, b])\)</span> und <span class="math inline">\(x_0 \in [a, b]\)</span>. Dann gilt für jedes <span class="math inline">\(x \in [a, b]\)</span>:</p>
+<p>Sei <span class="math inline">\(\xi \in (a, b)\)</span>, <span class="math inline">\(f \in C^{k+1}([a, b])\)</span> und <span class="math inline">\(x_0 \in [a, b]\)</span>. Dann gilt für jedes <span class="math inline">\(x \in [a, b]\)</span>:</p>
 <p><span class="math display">\[\begin{align*}
 f(x) &amp;=f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \ldots + \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + R_{k+1}(x_0) \\
-&amp;= \sum_{j=0}^k \frac{f^{(j)}(x_0)}{j!}(x-x_0)^j + R_{k+1}(x_0)
+&amp;= \sum_{j=0}^k \frac{1}{j!}f^{(j)}(x_0)(x-x_0)^j + R_{k+1}(x_0)
 \end{align*}\]</span></p>
 <p>wobei der <em>Restglied</em> <span class="math inline">\(R_{k+1}(x_0)\)</span> in der <em>Lagrange-Form</em> gegeben ist durch:</p>
 <p><span class="math display">\[
