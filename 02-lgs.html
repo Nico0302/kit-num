@@ -375,7 +375,14 @@ Die Laufzeit liegt somit ebenfalls in <span class="math inline">\(O(n^2)\)</span
 <section id="lr-zerlegung" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="lr-zerlegung"><span class="header-section-number">2.3</span> LR-Zerlegung</h2>
 <p><em>(en. LU-Decomposition)</em></p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/BFYFkn-eOQk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Die <span class="math inline">\(LR\)</span>-Zerlegung lässt sich mittels des Gauß-Algorithmus bestimmen, indem wir <span class="math inline">\(A\)</span> auf eine untere Dreiecksmatrix <span class="math inline">\(R\)</span> gaußen und uns die Operationen in <span class="math inline">\(L\)</span> “merken”. Sie ist eindeutig und benötigt <span class="math inline">\(O(n^3)\)</span> Operationen.</p>
+<p>Darauf lässt sich die Lösung mittels Vorwärtssubsitution von <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span> (oder <span class="math inline">\(L\cdot\mathbf{y}=P \cdot \mathbf{b}\)</span> mit <span class="math inline">\(P\)</span> als Permutationsmatrix) und Rückwärtssubstitution von <span class="math inline">\(R\cdot\mathbf{x}=\mathbf{y}\)</span> aufbauen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/ex-lu.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Beispiel einer LR-Zerlegung</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -389,8 +396,6 @@ Warnung
 <p>Die <span class="math inline">\(1\)</span>-en auf der Diagonalen der <span class="math inline">\(L\)</span>-Matrix bleiben beim Zeilentauschen <strong>unverändert</strong></p>
 </div>
 </div>
-<p>Die <span class="math inline">\(LR\)</span>-Zerlegung lässt sich mittels des Gauß-Algorithmus bestimmen, indem wir <span class="math inline">\(A\)</span> auf eine untere Dreiecksmatrix <span class="math inline">\(R\)</span> gaußen und uns die Operationen in <span class="math inline">\(L\)</span> “merken”. Sie ist eindeutig und benötigt <span class="math inline">\(O(n^3)\)</span> Operationen.</p>
-<p>Darauf lässt sich die Lösung mittels Vorwärtssubsitution von <span class="math inline">\(L\cdot\mathbf{y}=\mathbf{b}\)</span> (oder <span class="math inline">\(L\cdot\mathbf{y}=P \cdot \mathbf{b}\)</span> mit <span class="math inline">\(P\)</span> als Permutationsmatrix) und Rückwärtssubstitution von <span class="math inline">\(R\cdot\mathbf{x}=\mathbf{y}\)</span> aufbauen.</p>
 <p>Die Berechnung ist <strong>nicht</strong> stabil.</p>
 <p>Hinreichende Bedingungen für die Exsistenz einer <span class="math inline">\(LR\)</span>-Zerlegung für eine <strong>quadratische</strong> Matrix <span class="math inline">\(A\)</span>:</p>
 <ol type="1">
