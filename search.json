@@ -194,7 +194,7 @@
     "href": "05-iter-lgs.html",
     "title": "5  Iterationsverfahren für lineare Gleichungssysteme",
     "section": "",
-    "text": "5.1 Allgemeine lineare Iteration\n🏁 Ziel: Approximierung eines LGS \\(Ax = b\\) mittels einer iterativen Methode und einer Genauigkeit \\(\\varepsilon\\)\n⚠️ Problem: \\(A\\) ggf. schlecht konditioniert\n💡 Idee: Löse \\(BAx=Bb\\) mit \\(B\\) invertierbar und \\(BA\\) kleinere Kondition als \\(A\\)\nSei \\(B \\in \\mathbb{R}^{N \\times N}\\) ein Vorkonditionierer.\nSomit erhalten wir für \\(x\\) eine Fixpunktaufgabe:\n\\[\nx = (I - BA)x + Bb = x + B(b - Ax)\n\\]\nZur Bestimmung von \\(B\\) zerlegen wir\n\\[\nA = L + D + R\n\\]\nmit der strikt unteren Dreiecksmatrix \\(L=\\text{lower}(A)\\), der Diagonalmatrix \\(D=\\text{diag}(A)\\) und der strikt oberen Dreiecksmatrix \\(R=\\text{upper}(A)\\). Damit erhalten wir die folgenden Verfahren:\nAlgorithmus\nBemerkungen",
+    "text": "5.1 Allgemeine lineare Iteration\n🏁 Ziel: Approximierung eines LGS \\(Ax = b\\) mittels einer iterativen Methode und einer Genauigkeit \\(\\varepsilon\\)\n⚠️ Problem: \\(A\\) ggf. schlecht konditioniert\n💡 Idee: Löse \\(BAx=Bb\\) mit \\(B\\) invertierbar und \\(BA\\) kleinere Kondition als \\(A\\)\nSei \\(B \\in \\mathbb{R}^{N \\times N}\\) ein Vorkonditionierer.\nSomit erhalten wir für \\(x\\) eine Fixpunktaufgabe:\n\\[\nx = (I - BA)x + Bb = x + B(b - Ax)\n\\]\nZur Bestimmung von \\(B\\) zerlegen wir\n\\[\nA = L + D + R\n\\]\nmit der strikt unteren Dreiecksmatrix \\(L=\\text{lower}(A)\\), der Diagonalmatrix \\(D=\\text{diag}(A)\\) und der strikt oberen Dreiecksmatrix \\(R=\\text{upper}(A)\\). Damit erhalten wir die folgenden Verfahren:\nAlgorithmus\nBemerkungen\n⚠️ Problem: Matrix-Inverse für \\(B\\) ggf. schwer zu berechnen",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Iterationsverfahren für lineare Gleichungssysteme</span>"
     ]
@@ -224,7 +224,7 @@
     "href": "05-iter-lgs.html#krylovraum",
     "title": "5  Iterationsverfahren für lineare Gleichungssysteme",
     "section": "5.3 Krylovraum",
-    "text": "5.3 Krylovraum\nSei \\(A \\in \\mathbb{R}^{N \\times N}\\), \\(b \\in \\mathbb{R}^N\\) und \\(x^0 \\in \\mathbb{R}^N\\).\n\\[\n    V_k = \\text{span}\\{r^0, Ar^0, A^2r^0, \\dots, A^{k-1}r^0\\} \\quad \\text{mit } r^0 = b - Ax^0\n\\]\nbezeichnet den Krylovraum der Ordnung \\(k\\).",
+    "text": "5.3 Krylovraum\nSei \\(A,B \\in \\mathbb{R}^{N \\times N}\\), \\(b \\in \\mathbb{R}^N\\) und \\(x^0 \\in \\mathbb{R}^N\\).\n\\[\n    V_k = \\text{span}\\{Br^0, BABr^0, BA^2Br^0, \\dots, (BA)^{k-1}Br^0\\} \\quad \\text{mit } r^0 = b - Ax^0\n\\]\nbezeichnet den Krylovraum der Ordnung \\(k\\).\nNach unserer allgemeinen Iterationsvorschrift \\(x^{k+1}=x^k + B(b-Ax^k)\\) liegt \\(x^k \\in \\text{span}\\{x^0 + V_k\\}\\).\n💡 Idee: Krylovraum-Verfahren können LGS-Lösungen finden, ohne Matrixinverse zu berechnen.\n\nWähle geeignetes Skalarprodukt \\(\\langle \\cdot, \\cdot \\rangle_*\\) in \\(V=\\mathbb R^N\\).\nKonstruiere eine Orthonormalbasis \\(v^1, \\dots, v^k\\) von \\(V_k\\) bzgl. \\(\\langle \\cdot, \\cdot \\rangle_*\\).\nBestimme \\(v^k\\in V_k\\), sodass für \\(x^{k+1}=x^0+v^k\\) der Fehler \\(x-x^k\\) (bzw. das Residium \\(r^k\\)) minimiert wird.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Iterationsverfahren für lineare Gleichungssysteme</span>"
     ]
@@ -234,7 +234,7 @@
     "href": "05-iter-lgs.html#cg-verfahren",
     "title": "5  Iterationsverfahren für lineare Gleichungssysteme",
     "section": "5.4 CG-Verfahren",
-    "text": "5.4 CG-Verfahren\nIst unsere Matrix \\(A\\) symmetrisch und positiv definit, so können wir das CG-Verfahren verwenden. Dieses ist ein iteratives Verfahren, welches die Lösung des LGS \\(Ax = b\\) approximiert.\n\n\n\n\n\n\nTipp(Satz 5.4) Minimalitätseigenschaft\n\n\n\n\\[\n|x^k - x|_A = \\min_{z \\in x^0 + V_k} |z - x|_A\n\\]\n\n\n\n\n\nCG Algorithmus",
+    "text": "5.4 CG-Verfahren\nIst unsere Matrix \\(A\\) symmetrisch und positiv definit, so können wir das CG-Verfahren verwenden.\nEs handelt sich um ein Krylovraum-Verfahren mit \\(B=I_N\\) und dem Skalarprodukt \\(\\langle x, y \\rangle_A = x^{\\top}Ay\\).\n\n\n\n\n\n\nTipp(Satz 5.4) Minimalitätseigenschaft\n\n\n\n\\[\n|x^k - x|_A = \\min_{z \\in x^0 + V_k} |z - x|_A\n\\]\n\n\n\n\n\nCG Algorithmus",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Iterationsverfahren für lineare Gleichungssysteme</span>"
     ]

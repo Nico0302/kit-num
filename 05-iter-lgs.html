@@ -267,9 +267,9 @@ window.Quarto = {
 
 <p><strong>🏁 Ziel:</strong> Approximierung eines LGS <span class="math inline">\(Ax = b\)</span> mittels einer iterativen Methode und einer Genauigkeit <span class="math inline">\(\varepsilon\)</span></p>
 <p><strong>⚠️ Problem:</strong> <span class="math inline">\(A\)</span> ggf. schlecht konditioniert</p>
-<p><strong>💡 Idee:</strong> Löse <span class="math inline">\(BAx=Bb\)</span> mit <span class="math inline">\(B\)</span> invertierbar und <span class="math inline">\(BA\)</span> kleinere Kondition als <span class="math inline">\(A\)</span></p>
 <section id="allgemeine-lineare-iteration" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="allgemeine-lineare-iteration"><span class="header-section-number">5.1</span> Allgemeine lineare Iteration</h2>
+<p><strong>💡 Idee:</strong> Löse <span class="math inline">\(BAx=Bb\)</span> mit <span class="math inline">\(B\)</span> invertierbar und <span class="math inline">\(BA\)</span> kleinere Kondition als <span class="math inline">\(A\)</span></p>
 <p>Sei <span class="math inline">\(B \in \mathbb{R}^{N \times N}\)</span> ein <em>Vorkonditionierer</em>.</p>
 <p>Somit erhalten wir für <span class="math inline">\(x\)</span> eine <em>Fixpunktaufgabe</em>:</p>
 <p><span class="math display">\[
@@ -335,6 +335,7 @@ A^{-1} &amp;=  (BA)^{-1}B \\
 \end{align*}\]</span></p>
 </div>
 </div>
+<p><strong>⚠️ Problem:</strong> Matrix-Inverse für <span class="math inline">\(B\)</span> ggf. schwer zu berechnen</p>
 </section>
 <section id="cr-speicherformat" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="cr-speicherformat"><span class="header-section-number">5.2</span> CR-Speicherformat</h2>
@@ -362,16 +363,23 @@ A^{-1} &amp;=  (BA)^{-1}B \\
 </section>
 <section id="krylovraum" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="krylovraum"><span class="header-section-number">5.3</span> Krylovraum</h2>
-<p>Sei <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span>, <span class="math inline">\(b \in \mathbb{R}^N\)</span> und <span class="math inline">\(x^0 \in \mathbb{R}^N\)</span>.</p>
+<p>Sei <span class="math inline">\(A,B \in \mathbb{R}^{N \times N}\)</span>, <span class="math inline">\(b \in \mathbb{R}^N\)</span> und <span class="math inline">\(x^0 \in \mathbb{R}^N\)</span>.</p>
 <p><span class="math display">\[
-    V_k = \text{span}\{r^0, Ar^0, A^2r^0, \dots, A^{k-1}r^0\} \quad \text{mit } r^0 = b - Ax^0
+    V_k = \text{span}\{Br^0, BABr^0, BA^2Br^0, \dots, (BA)^{k-1}Br^0\} \quad \text{mit } r^0 = b - Ax^0
 \]</span></p>
 <p>bezeichnet den <em>Krylovraum</em> der Ordnung <span class="math inline">\(k\)</span>.</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/2Y1ZDQw_2zw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Nach unserer allgemeinen Iterationsvorschrift <span class="math inline">\(x^{k+1}=x^k + B(b-Ax^k)\)</span> liegt <span class="math inline">\(x^k \in \text{span}\{x^0 + V_k\}\)</span>.</p>
+<p><strong>💡 Idee:</strong> Krylovraum-Verfahren können LGS-Lösungen finden, ohne Matrixinverse zu berechnen.</p>
+<ol type="1">
+<li>Wähle geeignetes Skalarprodukt <span class="math inline">\(\langle \cdot, \cdot \rangle_*\)</span> in <span class="math inline">\(V=\mathbb R^N\)</span>.</li>
+<li>Konstruiere eine Orthonormalbasis <span class="math inline">\(v^1, \dots, v^k\)</span> von <span class="math inline">\(V_k\)</span> bzgl. <span class="math inline">\(\langle \cdot, \cdot \rangle_*\)</span>.</li>
+<li>Bestimme <span class="math inline">\(v^k\in V_k\)</span>, sodass für <span class="math inline">\(x^{k+1}=x^0+v^k\)</span> der Fehler <span class="math inline">\(x-x^k\)</span> (bzw. das Residium <span class="math inline">\(r^k\)</span>) minimiert wird.</li>
+</ol>
 </section>
 <section id="cg-verfahren" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="cg-verfahren"><span class="header-section-number">5.4</span> CG-Verfahren</h2>
-<p>Ist unsere Matrix <span class="math inline">\(A\)</span> <mark>symmetrisch und positiv definit</mark>, so können wir das CG-Verfahren verwenden. Dieses ist ein iteratives Verfahren, welches die Lösung des LGS <span class="math inline">\(Ax = b\)</span> approximiert.</p>
+<p>Ist unsere Matrix <span class="math inline">\(A\)</span> <mark>symmetrisch und positiv definit</mark>, so können wir das CG-Verfahren verwenden.</p>
+<p>Es handelt sich um ein Krylovraum-Verfahren mit <span class="math inline">\(B=I_N\)</span> und dem Skalarprodukt <span class="math inline">\(\langle x, y \rangle_A = x^{\top}Ay\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
