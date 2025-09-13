@@ -234,7 +234,7 @@
     "href": "05-iter-lgs.html#cg-verfahren",
     "title": "5  Iterationsverfahren für lineare Gleichungssysteme",
     "section": "5.4 CG-Verfahren",
-    "text": "5.4 CG-Verfahren\nIst unsere Matrix \\(A\\) symmetrisch und positiv definit, so können wir das CG-Verfahren verwenden.\nEs handelt sich um ein Krylovraum-Verfahren mit \\(B=I_N\\) und dem Skalarprodukt \\(\\langle x, y \\rangle_A = x^{\\top}Ay\\).\n\n\n\n\n\n\nTipp(Satz 5.4) Minimalitätseigenschaft\n\n\n\n\\[\n|x^k - x|_A = \\min_{z \\in x^0 + V_k} |z - x|_A\n\\]\n\n\n\n\n\nCG Algorithmus",
+    "text": "5.4 CG-Verfahren\nIst unsere Matrix \\(A\\) symmetrisch und positiv definit, so können wir das CG-Verfahren verwenden.\nEs handelt sich um ein Krylovraum-Verfahren mit dem Skalarprodukt \\(\\langle x, y \\rangle_A = x^{\\top}Ay\\).\n\n\n\n\n\n\nTipp(Satz 5.4) Minimalitätseigenschaft\n\n\n\n\\[\n|x^k - x|_A = \\min_{z \\in x^0 + V_k} |z - x|_A\n\\]\n\n\n\n\n\nCG Algorithmus",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Iterationsverfahren für lineare Gleichungssysteme</span>"
     ]
@@ -244,7 +244,7 @@
     "href": "06-newton.html",
     "title": "6  Iterationsverfahren für nichtlineare Gleichungen",
     "section": "",
-    "text": "6.1 Newton-Verfahren",
+    "text": "6.1 Newton-Verfahren\nSomit handelt es sich um eine Fixpunktiteration mit \\[\n\\Phi(x) = x - F'(x)^{-1} F(x).\n\\] wobei \\(F'(x)=DF=\\nabla F\\) die Jacobi-Matrix von \\(F\\) in \\(x\\) ist.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Iterationsverfahren für nichtlineare Gleichungen</span>"
     ]
@@ -254,7 +254,7 @@
     "href": "06-newton.html#newton-verfahren",
     "title": "6  Iterationsverfahren für nichtlineare Gleichungen",
     "section": "",
-    "text": "Wähle den Startwert \\(x^0 \\in D\\) und die Fehlertoleranz \\(\\varepsilon\\). Setze \\(k := 0\\).\nFalls \\(|F(x^k)| &lt; \\varepsilon\\): STOP.\nBerechne die Newton-Korrektur \\(d^k\\): Löse \\[\nF'(x^k) \\cdot d^k = -F(x^k)\n\\]\nSetze  \\[\nx^{k+1} = x^k + d^k\n\\]  und \\(k := k + 1\\). Gehe dann zu S1).\n\n\n\n\n\n\n\nTipp(6.2) Satz\n\n\n\nSei \\(D \\subset \\mathbb{R}^N\\) offen, \\(F \\in C^1(D, \\mathbb{R}^N)\\) und \\(x^* \\in D\\) mit \\(F(x^*) = 0_N\\). Falls ein \\(B \\in \\mathbb{R}^{N \\times N}\\) mit \\[\n\\rho(I - BF'(x^*)) &lt; 1\n\\] existiert, dann ist die Fixpunktiteration \\[\nx^{k+1} = \\Phi(x^k)\n\\] mit \\[\n\\Phi(x) = x - BF(x)\n\\] lokal linear konvergent, d. h. es existiert ein \\(\\delta &gt; 0\\), \\(C &gt; 0\\) und \\(\\theta \\in (0,1)\\) mit \\[\n|x^k - x^*| \\leq C\\theta^k |x^* - x^0|\n\\] für alle \\(x^0 \\in B(x^*, \\delta)\\).\n\n\n\nDas Newton-Verfahren ist lokal quadratisch konvergent, falls \\(F'(x^*)\\) regulär ist.\nDas Newton-Verfahren konvergiert nur in der Nähe der Lösung.",
+    "text": "Wähle den Startwert \\(x^0 \\in D\\) und die Fehlertoleranz \\(\\varepsilon\\). Setze \\(k := 0\\).\nFalls \\(|F(x^k)| &lt; \\varepsilon\\): STOP.\nBerechne die Newton-Korrektur \\(d^k\\): Löse \\[\nF'(x^k) \\cdot d^k = -F(x^k)\n\\]\nSetze  \\[\nx^{k+1} = x^k + d^k\n\\]  und \\(k := k + 1\\). Gehe dann zu S1).\n\n\n\n\n\n\n\n\nTipp(6.2) Satz\n\n\n\nSei \\(D \\subset \\mathbb{R}^N\\) offen, \\(F \\in C^1(D, \\mathbb{R}^N)\\) und \\(x^* \\in D\\) mit \\(F(x^*) = 0_N\\). Falls ein \\(B \\in \\mathbb{R}^{N \\times N}\\) mit \\[\n\\rho(I - BF'(x^*)) &lt; 1\n\\] existiert, dann ist die Fixpunktiteration \\[\nx^{k+1} = \\Phi(x^k)\n\\] mit \\[\n\\Phi(x) = x - BF(x)\n\\] lokal linear konvergent, d. h. es existiert ein \\(\\delta &gt; 0\\), \\(C &gt; 0\\) und \\(\\theta \\in (0,1)\\) mit \\[\n|x^k - x^*| \\leq C\\theta^k |x^* - x^0|\n\\] für alle \\(x^0 \\in B(x^*, \\delta)\\).\n\n\n\nDas Newton-Verfahren ist lokal quadratisch konvergent, falls \\(F'(x^*)\\) regulär ist.\nDas Newton-Verfahren konvergiert nur in der Nähe der Lösung.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Iterationsverfahren für nichtlineare Gleichungen</span>"
     ]
