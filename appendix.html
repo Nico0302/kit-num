@@ -329,12 +329,23 @@ S^\top = S
 <li>Sei <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span>, dann ist <span class="math inline">\(B=A^\top A\)</span> symmetrisch</li>
 <li><span class="math inline">\(S\)</span> ist <strong>nicht notwendigerweise</strong> invertierbar</li>
 </ul>
+<p><strong>Positiv definit</strong></p>
+<p>Eine symmetrische Matrix <span class="math inline">\(S\)</span> ist positiv definit, wenn:</p>
+<p><span class="math display">\[
+x^\top S x &gt; 0 \quad \forall x \in \mathbb{R}^N \backslash\{0\}
+\]</span></p>
+<p>bzw. äquivalent:</p>
+<ul>
+<li>Alle Eigenwerte von <span class="math inline">\(S\)</span> sind positiv</li>
+<li>Alle Hauptminoren von <span class="math inline">\(S\)</span> sind positiv</li>
+<li><span class="math inline">\(S\)</span> ist invertierbar und <span class="math inline">\(S^{-1}\)</span> ist positiv definit</li>
+</ul>
 <p><strong><span class="math inline">\(2\times2\)</span>-Matrix invertieren</strong></p>
 <p><span class="math display">\[
 A=\left(\begin{array}{ll}
 a &amp; b \\
 c &amp; d
-\end{array}\right) \quad \text { then } \quad A^{-1}=\frac{1}{a d-b c}\left(\begin{array}{cc}
+\end{array}\right) \quad \text { dann } \quad A^{-1}=\frac{1}{a d-b c}\left(\begin{array}{cc}
 d &amp; -b \\
 -c &amp; a
 \end{array}\right)
