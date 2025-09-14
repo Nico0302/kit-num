@@ -71,6 +71,19 @@ $$
 - Sei $A \in \mathbb{R}^{N \times N}$, dann ist $B=A^\top A$ symmetrisch
 - $S$ ist **nicht notwendigerweise** invertierbar
 
+**Positiv definit**
+
+Eine symmetrische Matrix $S$ ist positiv definit, wenn:
+
+$$
+x^\top S x > 0 \quad \forall x \in \mathbb{R}^N \backslash\{0\}
+$$
+
+bzw. äquivalent:
+
+- Alle Eigenwerte von $S$ sind positiv
+- Alle Hauptminoren von $S$ sind positiv
+- $S$ ist invertierbar und $S^{-1}$ ist positiv definit
 
 **$2\times2$-Matrix invertieren**
 
@@ -78,8 +91,9 @@ $$
 A=\left(\begin{array}{ll}
 a & b \\
 c & d
-\end{array}\right) \quad \text { then } \quad A^{-1}=\frac{1}{a d-b c}\left(\begin{array}{cc}
+\end{array}\right) \quad \text { dann } \quad A^{-1}=\frac{1}{a d-b c}\left(\begin{array}{cc}
 d & -b \\
 -c & a
 \end{array}\right)
 $$
+
