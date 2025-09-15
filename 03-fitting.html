@@ -278,7 +278,10 @@ A^\top Ax = A^\top b
 <p><strong>Lösungsverfahren:</strong></p>
 <p>Falls <span class="math inline">\(A^\top A\)</span> invertierbar und gut konditioniert:</p>
 <p>Berechne <span class="math inline">\(QR\)</span>-Zerlegung (<a href="02-lgs.html#sec-qr" class="quarto-xref"><span>Kapitel 2.5</span></a>) von <span class="math inline">\(A=QR\)</span></p>
-<p><span class="math display">\[R[1:N, 1:N]x = (Q^T b)[1:N]\]</span> lösen</p>
+<p><span class="math display">\[
+R[1:N, 1:N]x = (Q^T b)[1:N]
+\]</span></p>
+<p>lösen</p>
 <p><em>-oder-</em></p>
 <p>Berechne <span class="math inline">\(A^\top A\)</span> mittels Cholesky-Zerlegung (<a href="02-lgs.html#sec-cholesky" class="quarto-xref"><span>Kapitel 2.4</span></a>).</p>
 </section>
@@ -286,7 +289,7 @@ A^\top Ax = A^\top b
 <h2 data-number="3.2" class="anchored" data-anchor-id="singularitätszerlegung"><span class="header-section-number">3.2</span> Singularitätszerlegung</h2>
 <p>(en. <em>Singular Value Decomposition</em>, SVD)</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vSczTbgc8Rc?start=317" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Falls <span class="math inline">\(A\)</span> singulär (nicht invertierbar) oder schlecht konditioniert ist, kann die Singularitätszerlegung verwendet werden um die Normalengleichung zu lösen.</p>
+<p>Falls <span class="math inline">\(A\)</span> singulär (nicht invertierbar) oder schlecht konditioniert ist, kann die Singularitätszerlegung verwendet werden um die Normalengleichung zu lösen, indem wir das Pseudoinverse <span class="math inline">\(A^{+}=U\Sigma^{-1}V^T\)</span> bestimmen und <span class="math inline">\(x=A^{+}b\)</span> berechnen.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
